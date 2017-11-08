@@ -20,7 +20,11 @@ entity RAT_wrapper is
            --SWITCHES : in    STD_LOGIC_VECTOR (7 downto 0);
            RESET    : in    STD_LOGIC;
            INT      : in    STD_LOGIC;
-           CLK      : in    STD_LOGIC);
+           CLK      : in    STD_LOGIC;
+           --VGA IO
+           VGA_RGB  : out std_logic_vector(7 downto 0);
+           VGA_HS   : out std_logic;
+           VGA_VS   : out std_logic);
 end RAT_wrapper;
 
 architecture Behavioral of RAT_wrapper is

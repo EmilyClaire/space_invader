@@ -379,12 +379,12 @@ my_FlagReg_Z: FlagReg_Z
               OUT_FLAG  => s_z_flag); --flag output
        
 
-my_int_input: int_input
-     Port map(INT_in => INT,
-           I_set => s_i_flag_set,
-           I_clr => s_i_flag_clr,
-           clk => clk,
-           INT_out => s_int_out);
+--my_int_input: int_input
+--     Port map(INT_in => INT,
+--           I_set => s_i_flag_set,
+--           I_clr => s_i_flag_clr,
+--           clk => clk,
+--           INT_out => s_int_out);
   
 my_FlagReg_C: FlagReg_C
     Port map( IN_FLAG   => s_c_mux_out, --flag input
