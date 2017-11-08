@@ -237,11 +237,12 @@ begin
                    r_vga_we <= '0';
                 end if;
                  
-            end if;
+            
        else
         if s_port_id = VGA_READ_ID then
            s_output_port <= r_vgaData;
-  
+           
+           end if;
         end if;
           
    end if;
