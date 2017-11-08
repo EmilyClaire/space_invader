@@ -1,0 +1,1 @@
+-wto "675eb680438444a6998d7745b31e49a9" --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" --snapshot "EXP8_wrapper_tb_behav" "xil_defaultlib.EXP8_wrapper_tb" -log "elaborate.log" 
