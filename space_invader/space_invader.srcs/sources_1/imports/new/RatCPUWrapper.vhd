@@ -219,16 +219,16 @@ begin
 --            if (s_port_id = LEDS_ID) then
 --               r_LEDS <= s_output_port;
             if(s_port_id = SSEG_CNTR_ID) then
-                s_sseg_CNTR <= s_output_port;
-                
+                s_sseg_CNTR <= s_input_port;
+
             elsif(s_port_id = SSEG_VAL_ID) then
-                s_sseg_VAL <= s_output_port;
+                s_sseg_VAL <= s_input_port;
                      elsif (s_port_id = VGA_HADDR_ID) then
-                   r_vga_wa(10 downto 6) <= s_output_port(4 downto 0);
+                   r_vga_wa(10 downto 6) <= s_input_port(4 downto 0);
                 elsif (s_port_id = VGA_LADDR_ID) then
-                   r_vga_wa(5 downto 0) <= s_output_port(5 downto 0);
+                   r_vga_wa(5 downto 0) <= s_input_port(5 downto 0);
                 elsif (s_port_id = VGA_WRITE_ID) then
-                   r_vga_wd <= s_output_port;
+                   r_vga_wd <= s_input_port;
                 end if;   
                 
          if( s_port_id = VGA_WRITE_ID ) then
