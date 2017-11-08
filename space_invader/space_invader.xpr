@@ -44,25 +44,25 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
       <Filter Type="Srcs"/>
-      <File Path="$PPRDIR/../../../Downloads/ETCHASKETCH_BASYS3_F2015/Peripherals/VGA/ram2k_8.vhd">
+      <File Path="$PSRCDIR/sources_1/new/vga_clk_div.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../../Downloads/ETCHASKETCH_BASYS3_F2015/Peripherals/VGA/vga_clk_div.vhd">
+      <File Path="$PSRCDIR/sources_1/new/VGAdrive.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../../Downloads/ETCHASKETCH_BASYS3_F2015/Peripherals/VGA/VGAdrive.vhd">
+      <File Path="$PSRCDIR/sources_1/new/ram2k_8.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../../Downloads/ETCHASKETCH_BASYS3_F2015/Peripherals/VGA/vgaDriverBuffer.vhd">
+      <File Path="$PSRCDIR/sources_1/new/vgaDriverBuffer.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
