@@ -18,15 +18,15 @@ end vga_clk_div;
 
 architecture Behavioral of vga_clk_div is
 
-signal tmp_clkf : std_logic;
+signal tmp_clkf : std_logic := '0';
 
 begin
 
    my_div_fast: process (clk,tmp_clkf)              
-      variable div_cnt : integer := 0;   
+      variable div_cnt : integer := 4;   
    begin
       if (rising_edge(clk)) then   
-         if (div_cnt = 0) then 
+         if (div_cnt = 4) then 
             tmp_clkf <= not tmp_clkf; 
             div_cnt := 0; 
          else

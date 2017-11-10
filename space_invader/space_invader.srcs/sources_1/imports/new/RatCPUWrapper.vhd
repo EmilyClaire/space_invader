@@ -144,7 +144,7 @@ begin
               RST    => RESET,
               IO_STRB  => s_load,
               INT   => INT,  -- s_interrupt
-              CLK      => s_CLK);
+              CLK      => CLK);
               
      
     s_cnt1_assign <= "000000" & s_SSEG_val;
@@ -207,45 +207,48 @@ begin
    -- Register updates depend on rising clock edge and asserted load signal
    -- add conditions and connections for any added PORT IDs
    -------------------------------------------------------------------------------
-   outputs: process(s_CLK, RESET)
+   outputs: process(CLK, RESET)
    begin
       if(RESET = '1') then
         s_sseg_val <= x"00";
       end if;
-      if (rising_edge(s_CLK)) then
+      if (rising_edge(CLK)) then
+
+         if( s_port_id = VGA_WRITE_ID and s_load = '1') then
+                   r_vga_we <= '1';
+                else
+                   r_vga_we <= '0';
+                end if;
+
          if (s_load = '1') then
           
             -- the register definition for the LEDS
 --            if (s_port_id = LEDS_ID) then
 --               r_LEDS <= s_output_port;
-            if(s_port_id = SSEG_CNTR_ID) then
-                s_sseg_CNTR <= s_input_port;
+--            if(s_port_id = SSEG_CNTR_ID) then
+--                s_sseg_CNTR <= s_input_port;
 
-            elsif(s_port_id = SSEG_VAL_ID) then
+            if(s_port_id = SSEG_VAL_ID) then
                 s_sseg_VAL <= s_input_port;
                      elsif (s_port_id = VGA_HADDR_ID) then
-                   r_vga_wa(10 downto 6) <= s_input_port(4 downto 0);
+                   r_vga_wa(10 downto 6) <= s_output_port(4 downto 0);
                 elsif (s_port_id = VGA_LADDR_ID) then
-                   r_vga_wa(5 downto 0) <= s_input_port(5 downto 0);
+                   r_vga_wa(5 downto 0) <= s_output_port(5 downto 0);
                 elsif (s_port_id = VGA_WRITE_ID) then
-                   r_vga_wd <= s_input_port;
+                   r_vga_wd <= s_output_port;
                 end if;   
                 
-         if( s_port_id = VGA_WRITE_ID ) then
-                   r_vga_we <= '1';
-                else
-                   r_vga_we <= '0';
-                end if;
+
                  
             
-       else
-        if s_port_id = VGA_READ_ID then
-           s_output_port <= r_vgaData;
+--       else
+--        if s_port_id = VGA_READ_ID then
+--           s_output_port <= r_vgaData;
            
            end if;
         end if;
-          
-   end if;
+     
+   
    end process outputs;
    -------------------------------------------------------------------------------
  -- Register Interface Assignments ---------------------------------------------
