@@ -15,13 +15,8 @@
 .EQU VGA_HADD = 0x90
 .EQU VGA_LADD = 0x91
 .EQU VGA_COLOR = 0x92
-.EQU KEYBOARD = 0x25
 .EQU SSEG = 0x81
 .EQU LEDS = 0x40
-.EQU UP = 0x1D ; 'W' 
-.EQU LEFT = 0x1C; 'A'
-.EQU RIGHT = 0x23; 'D'
-.EQU DOWN =  0x1B; 'S'
 
 
 ;R0 is for status
@@ -45,13 +40,8 @@ init:
       
 main:
    CMP  R0, 0x01
-   BREQ CheckKeyboard
    BRN  main   ; continuous loop waiting for interrupts
    
-  
-CheckKeyboard:
-
-
 
 ; --------------------------------------------------------------------
 ; function draw_dot
