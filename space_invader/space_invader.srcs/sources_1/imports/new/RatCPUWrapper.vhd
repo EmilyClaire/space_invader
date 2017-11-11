@@ -181,7 +181,7 @@ begin
               
     my_db_1shot_FSM : db_1shot_FSM 
         port map ( A    => INTERRUPT,
-                   CLK  => s_clk,
+                   CLK  => clk,
                    A_DB => s_dbn_int);
                                    
    -------------------------------------------------------------------------------
