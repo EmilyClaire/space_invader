@@ -23,10 +23,10 @@ signal tmp_clkf : std_logic := '0';
 begin
 
    my_div_fast: process (clk,tmp_clkf)              
-      variable div_cnt : integer := 4;   
+      variable div_cnt : integer := 1;   
    begin
       if (rising_edge(clk)) then   
-         if (div_cnt = 4) then 
+         if (div_cnt = 1) then 
             tmp_clkf <= not tmp_clkf; 
             div_cnt := 0; 
          else
