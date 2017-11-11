@@ -57,7 +57,7 @@ C5:  Raw line from source code.
 (0041)  CS-0x013  0x36814         ||    MOV  R8, 0x14
 (0042)  CS-0x014  0x04439         ||    MOV  R4, R7   ;y coordin
 (0043)  CS-0x015  0x04541         ||    MOV  R5, R8   ;x coordin
-(0044)  CS-0x016  0x366E0         ||    MOV  R6, 0xE0
+(0044)  CS-0x016  0x366FF         ||    MOV  R6, 0xFF
 (0045)  CS-0x017  0x08159         ||    CALL draw_dot   ;draw red square at origin
 (0046)                            || 
 (0047)                            || 
@@ -79,7 +79,7 @@ C5:  Raw line from source code.
 (0063)  CS-0x024  0x36814         ||    MOV  R8, 0x14
 (0064)  CS-0x025  0x04439         ||    MOV  R4, R7   ;y coordin
 (0065)  CS-0x026  0x04541         ||    MOV  R5, R8   ;x coordin
-(0066)  CS-0x027  0x36603         ||    MOV  R6, 0x03
+(0066)  CS-0x027  0x366FF         ||    MOV  R6, 0xFF
 (0067)  CS-0x028  0x08159         ||    CALL draw_dot   ;draw red square at origin
 (0068)                            || 
 (0069)  CS-0x029  0x081D1         || 	call pause;

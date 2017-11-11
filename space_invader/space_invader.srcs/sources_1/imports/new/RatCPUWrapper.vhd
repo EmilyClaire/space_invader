@@ -19,7 +19,7 @@ entity RAT_wrapper is
              seg    : out   STD_LOGIC_VECTOR (7 downto 0);
            --SWITCHES : in    STD_LOGIC_VECTOR (7 downto 0);
            RESET    : in    STD_LOGIC;
-           INT      : in    STD_LOGIC;
+           INTERRUPT : in    STD_LOGIC;
            CLK      : in    STD_LOGIC;
            --VGA IO
            VGA_RGB  : out std_logic_vector(7 downto 0);
@@ -39,7 +39,7 @@ architecture Behavioral of RAT_wrapper is
    -------------------------------------------------------------------------------
    -- OUTPUT PORT IDS ------------------------------------------------------------
    -- In future labs you can add more port IDs
-   --CONSTANT LEDS_ID       : STD_LOGIC_VECTOR (7 downto 0) := X"40";
+   CONSTANT LEDS_ID       : STD_LOGIC_VECTOR (7 downto 0) := X"40";
    CONSTANT SSEG_CNTR_ID : STD_LOGIC_VECTOR (7 downto 0) := x"60";
    CONSTANT SSEG_VAL_ID:    STD_LOGIC_VECTOR (7 downto 0) := x"80";
    
@@ -130,7 +130,7 @@ architecture Behavioral of RAT_wrapper is
    
    -- Register definitions for output devices ------------------------------------
    -- add signals for any added outputs
-   --signal r_LEDS        : std_logic_vector (7 downto 0);
+   signal r_LEDS        : std_logic_vector (7 downto 0);
    -------------------------------------------------------------------------------
 
 begin
@@ -143,8 +143,8 @@ begin
               PORT_ID  => s_port_id,
               RST    => RESET,
               IO_STRB  => s_load,
-              INT   => INT,  -- s_interrupt
-              CLK      => CLK);
+              INT   => s_dbn_int,  -- s_interrupt
+              CLK      => s_CLK);
               
      
     s_cnt1_assign <= "000000" & s_SSEG_val;
@@ -180,7 +180,7 @@ begin
               
               
     my_db_1shot_FSM : db_1shot_FSM 
-        port map ( A    => INT,
+        port map ( A    => INTERRUPT,
                    CLK  => s_clk,
                    A_DB => s_dbn_int);
                                    
@@ -222,14 +222,15 @@ begin
 
          if (s_load = '1') then
           
-            -- the register definition for the LEDS
---            if (s_port_id = LEDS_ID) then
---               r_LEDS <= s_output_port;
---            if(s_port_id = SSEG_CNTR_ID) then
---                s_sseg_CNTR <= s_input_port;
+             --the register definition for the LEDS
+            if (s_port_id = LEDS_ID) then
+               r_LEDS <= s_output_port;
+            elsif(s_port_id = SSEG_CNTR_ID) then
+                s_sseg_CNTR <= s_output_port;
+            
 
-            if(s_port_id = SSEG_VAL_ID) then
-                s_sseg_VAL <= s_input_port;
+            elsif(s_port_id = SSEG_VAL_ID) then
+                s_sseg_VAL <= s_output_port;
                      elsif (s_port_id = VGA_HADDR_ID) then
                    r_vga_wa(10 downto 6) <= s_output_port(4 downto 0);
                 elsif (s_port_id = VGA_LADDR_ID) then

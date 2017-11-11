@@ -41,32 +41,15 @@ main:
    MOV  R8, 0x14
    MOV  R4, R7   ;y coordin
    MOV  R5, R8   ;x coordin
-   MOV  R6, 0xE0
+   MOV  R6, 0xFF
    CALL draw_dot   ;draw red square at origin
 
 
 	CALL pause ;
 
-   MOV  R0, 0x00
-   MOV  R1, 0x00
-   MOV  R7, 0x0F
-   MOV  R8, 0x14
-   MOV  R4, R7   ;y coordin
-   MOV  R5, R8   ;x coordin
-   MOV  R6, 0x00
-   CALL draw_dot   ;draw red square at origin
 
 
-   MOV  R0, 0x00
-   MOV  R1, 0x00
-   MOV  R7, 0x10
-   MOV  R8, 0x14
-   MOV  R4, R7   ;y coordin
-   MOV  R5, R8   ;x coordin
-   MOV  R6, 0x03
-   CALL draw_dot   ;draw red square at origin
 
-	call pause;
 
 
 	   BRN  main   ; continuous loop waiting for interrupts
