@@ -19,6 +19,12 @@
 .EQU LEDS = 0x40
 
 
+;- Looping Constants: --------------------------------------------------|
+.EQU INSIDE_FOR_COUNT    = 0xff ;
+.EQU MIDDLE_FOR_COUNT    = 0xff ;
+.EQU OUTSIDE_FOR_COUNT   = 0xff ;
+;-----------------------------------------------------------------------|
+
 ;R0 is for status
 ;R1 is for interrupt count
 ;r2 is keyboard input
@@ -28,7 +34,7 @@
 ;r7 temp y
 ;r8 temp x
 
-init:
+main:
    MOV  R0, 0x00
    MOV  R1, 0x00
    MOV  R7, 0x0F
@@ -37,18 +43,33 @@ init:
    MOV  R5, R8   ;x coordin
    MOV  R6, 0xE0
    CALL draw_dot   ;draw red square at origin
+
+
+	CALL pause ;
+
+   MOV  R0, 0x00
+   MOV  R1, 0x00
+   MOV  R7, 0x0F
+   MOV  R8, 0x14
+   MOV  R4, R7   ;y coordin
+   MOV  R5, R8   ;x coordin
+   MOV  R6, 0x00
+   CALL draw_dot   ;draw red square at origin
+
+
    MOV  R0, 0x00
    MOV  R1, 0x00
    MOV  R7, 0x10
-   MOV  R8, 0x15
+   MOV  R8, 0x14
    MOV  R4, R7   ;y coordin
    MOV  R5, R8   ;x coordin
-   MOV  R6, 0xE0
+   MOV  R6, 0x03
    CALL draw_dot   ;draw red square at origin
-      
-main:
-   CMP  R0, 0x01
-   BRN  main   ; continuous loop waiting for interrupts
+
+	call pause;
+
+
+	   BRN  main   ; continuous loop waiting for interrupts
    
 
 ; --------------------------------------------------------------------
@@ -70,4 +91,24 @@ dd_add40: OR r5, 0x40
         BRN t1
 dd_add80: OR r5, 0x80
         BRN dd_out
+
+pause: 
+;-HOLD-DELAY-1-----------------------------------------------------------
+		MOV     R1, OUTSIDE_FOR_COUNT
+OUTSIDE_FOR1: 	SUB     R1, 0x01
+ 
+		MOV     R2, MIDDLE_FOR_COUNT
+MIDDLE_FOR1:  	SUB     R2, 0x01
+             
+		MOV     R3, INSIDE_FOR_COUNT
+INSIDE_FOR1:  	SUB     R3, 0x01
+		BRNE    INSIDE_FOR1
+
+		OR      R2, 0x00
+		BRNE    MIDDLE_FOR1
+
+		OR      R1, 0x00
+		BRNE    OUTSIDE_FOR1
+
+		ret
 
