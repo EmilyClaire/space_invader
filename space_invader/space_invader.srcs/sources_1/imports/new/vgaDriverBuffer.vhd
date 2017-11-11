@@ -74,7 +74,7 @@ end component;
 begin
 
 
-frameBuffer : ram2k_8      port map (  clk => vgaclk,       --CLK
+frameBuffer : ram2k_8      port map (  clk => clk,       --CLK
                                        we => we,
                                        ra => ra,
                                        wa => wa,
