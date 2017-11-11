@@ -20,9 +20,9 @@
 
 
 ;- Looping Constants: --------------------------------------------------|
-.EQU INSIDE_FOR_COUNT    = 0xff ;
-.EQU MIDDLE_FOR_COUNT    = 0xff ;
-.EQU OUTSIDE_FOR_COUNT   = 0xff ;
+.EQU INSIDE_FOR_COUNT    = 0xB0 ;
+.EQU MIDDLE_FOR_COUNT    = 0xB0 ;
+.EQU OUTSIDE_FOR_COUNT   = 0xB0 ;
 ;-----------------------------------------------------------------------|
 
 ;R0 is for status
@@ -35,6 +35,17 @@
 ;r8 temp x
 
 main:
+
+   MOV  R0, 0x00
+   MOV  R1, 0x00
+   MOV  R7, 0x0f
+   MOV  R8, 0x15
+   MOV  R4, R7   ;y coordin
+   MOV  R5, R8   ;x coordin
+   MOV  R6, 0x00 ; clear
+   CALL draw_dot   
+
+
    MOV  R0, 0x00
    MOV  R1, 0x00
    MOV  R7, 0x0F
@@ -44,17 +55,18 @@ main:
    MOV  R6, 0xE0
    CALL draw_dot   ;draw red square at origin
 
-
-	CALL pause ;
-
    MOV  R0, 0x00
    MOV  R1, 0x00
-   MOV  R7, 0x0F
+   MOV  R7, 0x0E
    MOV  R8, 0x14
    MOV  R4, R7   ;y coordin
    MOV  R5, R8   ;x coordin
-   MOV  R6, 0x00
+   MOV  R6, 0xFF
    CALL draw_dot   ;draw red square at origin
+
+
+
+	CALL pause ;
 
 
    MOV  R0, 0x00
@@ -63,10 +75,67 @@ main:
    MOV  R8, 0x14
    MOV  R4, R7   ;y coordin
    MOV  R5, R8   ;x coordin
-   MOV  R6, 0x03
-   CALL draw_dot   ;draw red square at origin
+   MOV  R6, 0xF0 ;draw
+   CALL draw_dot  
 
 	call pause;
+
+   MOV  R0, 0x00
+   MOV  R1, 0x00
+   MOV  R7, 0x10
+   MOV  R8, 0x15
+   MOV  R4, R7   ;y coordin
+   MOV  R5, R8   ;x coordin
+   MOV  R6, 0xF0 ; draw
+   CALL draw_dot  
+
+   MOV  R0, 0x00
+   MOV  R1, 0x00
+   MOV  R7, 0x0F
+   MOV  R8, 0x14
+   MOV  R4, R7   ;y coordin
+   MOV  R5, R8   ;x coordin
+   MOV  R6, 0x00 ;clear
+   CALL draw_dot   
+
+
+	call pause;
+
+
+   MOV  R0, 0x00
+   MOV  R1, 0x00
+   MOV  R7, 0x0f
+   MOV  R8, 0x15
+   MOV  R4, R7   ;y coordin
+   MOV  R5, R8   ;x coordin
+   MOV  R6, 0xe0 ; draw
+   CALL draw_dot  
+
+
+   MOV  R0, 0x00
+   MOV  R1, 0x00
+   MOV  R7, 0x10
+   MOV  R8, 0x14
+   MOV  R4, R7   ;y coordin
+   MOV  R5, R8   ;x coordin
+   MOV  R6, 0x00 ;clear
+   CALL draw_dot   
+
+
+	call pause;
+
+
+   MOV  R0, 0x00
+   MOV  R1, 0x00
+   MOV  R7, 0x10
+   MOV  R8, 0x15
+   MOV  R4, R7   ;y coordin
+   MOV  R5, R8   ;x coordin
+   MOV  R6, 0x00 ;clear
+   CALL draw_dot   
+
+
+
 
 
 	   BRN  main   ; continuous loop waiting for interrupts
@@ -78,19 +147,11 @@ main:
 draw_dot: 
         AND r5, 0x3F ; make sure top 2 bits cleared
         AND r4, 0x1F ; make sure top 3 bits cleared
-        LSR r4 ;need to get the bot 2 bits of s4 into sA
-        BRCS dd_add40
-t1:     LSR r4
-        BRCS dd_add80
+
 dd_out: OUT r5, VGA_LADD ; write bot 8 address bits to register
         OUT r4, VGA_HADD ; write top 3 address bits to register
         OUT r6, VGA_COLOR ; write data to frame buffer
         RET
-dd_add40: OR r5, 0x40
-        CLC
-        BRN t1
-dd_add80: OR r5, 0x80
-        BRN dd_out
 
 pause: 
 ;-HOLD-DELAY-1-----------------------------------------------------------
