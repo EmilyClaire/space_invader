@@ -231,7 +231,7 @@ begin
 
             elsif(s_port_id = SSEG_VAL_ID) then
                 s_sseg_VAL <= s_output_port;
-                     elsif (s_port_id = VGA_HADDR_ID) then
+            elsif (s_port_id = VGA_HADDR_ID) then
                    r_vga_wa(10 downto 6) <= s_output_port(4 downto 0);
                 elsif (s_port_id = VGA_LADDR_ID) then
                    r_vga_wa(5 downto 0) <= s_output_port(5 downto 0);
