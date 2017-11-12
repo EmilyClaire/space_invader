@@ -20,133 +20,144 @@ C5:  Raw line from source code.
 (0004)                       000  || .ORG 0x00
 (0005)                            || 
 (0006)                            || 
-(0007)                            || 
-(0008)                            || 
-(0009)                       144  || .EQU VGA_HADD = 0x90
-(0010)                       145  || .EQU VGA_LADD = 0x91
-(0011)                       146  || .EQU VGA_COLOR = 0x92
-(0012)                       129  || .EQU SSEG = 0x81
-(0013)                       064  || .EQU LEDS = 0x40
-(0014)                       255  || .equ loop_count = 0xFF     ; extend the loop count
-(0015)                            || 
-(0016)                            || 
-(0017)                            || .CSEG
-(0018)                       016  || .ORG 0x10
-(0019)                            || 
-(0020)  CS-0x010  0x1A000         ||    SEI
-(0021)  CS-0x011  0x36000         ||    MOV  R0, 0x00
-(0022)  CS-0x012  0x36100         ||    MOV  R1, 0x00
-(0023)  CS-0x013  0x3670F         ||    MOV  R7, 0x0F
-(0024)  CS-0x014  0x36814         ||    MOV  R8, 0x14 
-(0025)                            || 
-(0026)                            || 
-(0027)                            ||               ;illuminate LD7 when interrupts are on
-(0028)                     0x015  || MAIN:        
-(0029)  CS-0x015  0x04439         ||  MOV  R4, R7   ;y coordin
-(0030)  CS-0x016  0x04541         ||    MOV  R5, R8   ;x coordin
-(0031)  CS-0x017  0x366FF         ||    MOV  R6, 0xFF
-(0032)  CS-0x018  0x081C9         ||    CALL draw_dot   ;draw red square at origin
-(0033)                            || 
+(0007)                       036  || .EQU INSIDE_FOR_COUNT    = 0x24 ;
+(0008)                       036  || .EQU MIDDLE_FOR_COUNT    = 0x24 ;
+(0009)                       036  || .EQU OUTSIDE_FOR_COUNT   = 0x24 ;
+(0010)                            || 
+(0011)                       144  || .EQU VGA_HADD = 0x90
+(0012)                       145  || .EQU VGA_LADD = 0x91
+(0013)                       146  || .EQU VGA_COLOR = 0x92
+(0014)                       129  || .EQU SSEG = 0x81
+(0015)                       064  || .EQU LEDS = 0x40
+(0016)                       037  || .equ loop_count = 0x25     ; extend the loop count
+(0017)                            || 
+(0018)                            || 
+(0019)                            || .CSEG
+(0020)                       016  || .ORG 0x10
+(0021)                            || 
+(0022)  CS-0x010  0x1A000         ||    SEI
+(0023)                            || 
+(0024)  CS-0x011  0x36000         ||    MOV  R0, 0x00
+(0025)  CS-0x012  0x36100         ||    MOV  R1, 0x00
+(0026)  CS-0x013  0x3671D         ||    MOV  R7, 0x1D
+(0027)                            || 
+(0028)                            || 
+(0029)                            || 
+(0030)  CS-0x014  0x36828         ||    MOV R8, 0x28
+(0031)                            || 
+(0032)                            || 
+(0033)                     0x015  || clear_row:
 (0034)                            || 
-(0035)                            || 
-(0036)  CS-0x019  0x080E8         || 	          BRN  FOR
-(0037)                            || 
-(0038)                            ||               ;LD7 is off when interrutps are disabled
-(0039)                     0x01A  || BACK1:        
-(0040)                            || 			  
-(0041)  CS-0x01A  0x36BFF         || 	          MOV  R11, loop_count  ;set outside for loop count
-(0042)  CS-0x01B  0x08170         ||               BRN FOR2
-(0043)  CS-0x01C  0x080A8         ||               BRN MAIN
-(0044)                            || 
-(0045)                     0x01D  || FOR:
-(0046)  CS-0x01D  0x2CB01  0x01D  || outside_for1: SUB     R11, 0x01
-(0047)  CS-0x01E  0x36CFF         ||               MOV     R12, loop_count   ;set middle for loop count
-(0048)  CS-0x01F  0x2CC01  0x01F  || middle_for1:  SUB     R12, 0x01
-(0049)                            ||              
-(0050)  CS-0x020  0x36DFF         ||               MOV     R13, loop_count   ;set inside for loop count
-(0051)  CS-0x021  0x2CD01  0x021  || inside_for1:  SUB     R13, 0x01
-(0052)                            ||               
-(0053)  CS-0x022  0x37FFF         ||               MOV     R31,0xFF          ;empty instructions to slow things down
-(0054)  CS-0x023  0x37FFF         || 	          MOV     R31,0xFF          ;when interrupts are enabled to allow
-(0055)  CS-0x024  0x37FFF         ||               MOV     R31,0xFF          ;button presses
-(0056)  CS-0x025  0x37FFF         ||               MOV     R31,0xFF
-(0057)  CS-0x026  0x37FFF         ||               MOV     R31,0xFF
-(0058)  CS-0x027  0x37FFF         ||               MOV     R31,0xFF
-(0059)                            || 
-(0060)  CS-0x028  0x0810B         ||               BRNE    inside_for1
-(0061)                            ||              
-(0062)  CS-0x029  0x22C00         ||               OR      R12, 0x00         ;load flags for middle for counter
-(0063)  CS-0x02A  0x080FB         ||               BRNE    middle_for1
-(0064)                            ||              
-(0065)  CS-0x02B  0x22B00         ||               OR      R11, 0x00         ;load flags for outsde for counter value
-(0066)  CS-0x02C  0x080EB         ||               BRNE    outside_for1
-(0067)  CS-0x02D  0x080D0         || BRN BACK1
-(0068)                            || 
-(0069)                     0x02E  || FOR2:
-(0070)  CS-0x02E  0x2CB01  0x02E  || outside_for: SUB     R11, 0x01
-(0071)  CS-0x02F  0x36CFF         ||              MOV     R12, loop_count   ;set middle for loop count
-(0072)  CS-0x030  0x2CC01  0x030  || middle_for:  SUB     R12, 0x01
-(0073)                            ||              
-(0074)  CS-0x031  0x36DFF         ||              MOV     R13, loop_count   ;set inside for loop count
-(0075)  CS-0x032  0x2CD01  0x032  || inside_for:  SUB     R13, 0x01
-(0076)  CS-0x033  0x08193         ||              BRNE    inside_for
-(0077)                            ||              
-(0078)  CS-0x034  0x22C00         ||              OR      R12, 0x00         ;load flags for middle for counter
-(0079)  CS-0x035  0x08183         ||              BRNE    middle_for
-(0080)                            ||              
-(0081)  CS-0x036  0x22B00         ||              OR      R11, 0x00         ;load flags for outsde for counter value
-(0082)  CS-0x037  0x08173         ||              BRNE    outside_for
-(0083)  CS-0x038  0x080A8         ||              BRN MAIN
-(0084)                            || 
-(0085)                            || 
-(0086)                            || 
-(0087)                     0x039  || draw_dot: 
-(0088)  CS-0x039  0x2053F         ||         AND r5, 0x3F ; make sure top 2 bits cleared
-(0089)  CS-0x03A  0x2041F         ||         AND r4, 0x1F ; make sure top 3 bits cleared
-(0090)  CS-0x03B  0x10401         ||         LSR r4 ;need to get the bot 2 bits of s4 into sA
-(0091)  CS-0x03C  0x0A218         ||         BRCS dd_add40
-(0092)  CS-0x03D  0x10401  0x03D  || t1:     LSR r4
-(0093)  CS-0x03E  0x0A230         ||         BRCS dd_add80
-(0094)  CS-0x03F  0x34591  0x03F  || dd_out: OUT r5, VGA_LADD ; write bot 8 address bits to register
-(0095)  CS-0x040  0x34490         ||         OUT r4, VGA_HADD ; write top 3 address bits to register
-(0096)  CS-0x041  0x34692         ||         OUT r6, VGA_COLOR ; write data to frame buffer
-(0097)  CS-0x042  0x18002         ||         RET
-(0098)  CS-0x043  0x22540  0x043  || dd_add40: OR r5, 0x40
-(0099)  CS-0x044  0x18000         ||         CLC
-(0100)  CS-0x045  0x081E8         ||         BRN t1
-(0101)  CS-0x046  0x22580  0x046  || dd_add80: OR r5, 0x80
-(0102)  CS-0x047  0x081F8         ||         BRN dd_out
-(0103)                            || 
-(0104)                            || 
-(0105)                            || 
+(0035)                            ||    
+(0036)  CS-0x015  0x081A9         ||    CALL clear_square
+(0037)  CS-0x016  0x2C801         ||    SUB R8, 0x01
+(0038)  CS-0x017  0x308FF         ||    CMP R8, 0xFF
+(0039)  CS-0x018  0x080AB         ||    BRNE clear_row
+(0040)                            || 
+(0041)                            || 
+(0042)                            || 
+(0043)                            || 
+(0044)  CS-0x019  0x36814         ||    MOV  R8, 0x14
+(0045)                            || 
+(0046)                            || 
+(0047)                            ||              
+(0048)                     0x01A  || MAIN:        
+(0049)  CS-0x01A  0x04439         ||    MOV  R4, R7   ;y coordin
+(0050)  CS-0x01B  0x04541         ||    MOV  R5, R8   ;x coordin
+(0051)  CS-0x01C  0x366FF         ||    MOV  R6, 0xFF
+(0052)  CS-0x01D  0x08159         ||    CALL draw_dot   ;draw red square at origin
+(0053)                            || 
+(0054)                            || 
+(0055)  CS-0x01E  0x08238         ||    BRN DONE
+(0056)                            || 	;CALL pause
+(0057)                            || 
+(0058)                            || 
+(0059)                     0x01F  || pause: 
+(0060)                            || ;-HOLD-DELAY-1-----------------------------------------------------------
+(0061)  CS-0x01F  0x36124         || 		MOV     R1, OUTSIDE_FOR_COUNT
+(0062)  CS-0x020  0x2C101  0x020  || OUTSIDE_FOR1: 	SUB     R1, 0x01
+(0063)                            ||  
+(0064)  CS-0x021  0x36224         || 		MOV     R2, MIDDLE_FOR_COUNT
+(0065)  CS-0x022  0x2C201  0x022  || MIDDLE_FOR1:  	SUB     R2, 0x01
+(0066)                            ||              
+(0067)  CS-0x023  0x36324         || 		MOV     R3, INSIDE_FOR_COUNT
+(0068)  CS-0x024  0x2C301  0x024  || INSIDE_FOR1:  	SUB     R3, 0x01
+(0069)  CS-0x025  0x08123         || 		BRNE    INSIDE_FOR1
+(0070)                            || 
+(0071)  CS-0x026  0x22200         || 		OR      R2, 0x00
+(0072)  CS-0x027  0x08113         || 		BRNE    MIDDLE_FOR1
+(0073)                            || 
+(0074)  CS-0x028  0x22100         || 		OR      R1, 0x00
+(0075)  CS-0x029  0x08103         || 		BRNE    OUTSIDE_FOR1
+(0076)                            || 
+(0077)  CS-0x02A  0x18002         || 		RET
+(0078)                            || 
+(0079)                            || 
+(0080)                            || 
+(0081)                     0x02B  || draw_dot: 
+(0082)  CS-0x02B  0x2053F         ||         AND r5, 0x3F ; make sure top 2 bits cleared
+(0083)  CS-0x02C  0x2041F         ||         AND r4, 0x1F ; make sure top 3 bits cleared
+(0084)                            ||         ;LSR r4 ;need to get the bot 2 bits of s4 into sA
+(0085)                            ||         ;BRCS dd_add40
+(0086)                     0x02D  || t1:     ;LSR r4
+(0087)                            ||         ;BRCS dd_add80
+(0088)  CS-0x02D  0x34591  0x02D  || dd_out: OUT r5, VGA_LADD ; write bot 8 address bits to register
+(0089)  CS-0x02E  0x34490         ||         OUT r4, VGA_HADD ; write top 3 address bits to register
+(0090)  CS-0x02F  0x34692         ||         OUT r6, VGA_COLOR ; write data to frame buffer
+(0091)  CS-0x030  0x18002         ||         RET
+(0092)  CS-0x031  0x22540  0x031  || dd_add40: OR r5, 0x40
+(0093)  CS-0x032  0x18000         ||         CLC
+(0094)                            ||         ;BRN t1
+(0095)  CS-0x033  0x22580  0x033  || dd_add80: OR r5, 0x80
+(0096)  CS-0x034  0x08168         ||         BRN dd_out
+(0097)                            || 
+(0098)                            || 
+(0099)                     0x035  || clear_square:
+(0100)                            || 
+(0101)  CS-0x035  0x04439         ||    MOV  R4, R7   ;y coordin
+(0102)  CS-0x036  0x04541         ||    MOV  R5, R8   ;x coordin
+(0103)  CS-0x037  0x36600         ||    MOV  R6, 0x00
+(0104)  CS-0x038  0x08159         ||    CALL draw_dot   ;clears dot at the origin
+(0105)  CS-0x039  0x18002         ||    RET
 (0106)                            || 
 (0107)                            || 
-(0108)  CS-0x048  0x04439  0x048  || ISR:            MOV  R4, R7   ;y coordin
-(0109)  CS-0x049  0x04541         ||    MOV  R5, R8   ;x coordin
-(0110)  CS-0x04A  0x36600         ||    MOV  R6, 0x00
-(0111)  CS-0x04B  0x081C9         ||    CALL draw_dot   ;draw red square at origin
-(0112)                            || 
-(0113)                            || 
-(0114)  CS-0x04C  0x080E8         ||    BRN FOR ;
-(0115)                            ||     
-(0116)  CS-0x04D  0x04439         ||    MOV  R4, R7   ;y coordin
-(0117)  CS-0x04E  0x04541         ||    MOV  R5, R8   ;x coordin
-(0118)  CS-0x04F  0x36603         ||    MOV  R6, 0x03
-(0119)  CS-0x050  0x081C9         ||    CALL draw_dot   ;draw red square at origin
-(0120)                            || 
+(0108)                     0x03A  || ISR:            
+(0109)  CS-0x03A  0x081A9         ||    CALL clear_square
+(0110)                            || 
+(0111)                            || 
+(0112)                            ||   ;CALL pause
+(0113)                            ||    
+(0114)  CS-0x03B  0x2C801         ||    SUB  R8, 0x01  
+(0115)                            || 
+(0116)                            || 
+(0117)  CS-0x03C  0x04439         ||    MOV  R4, R7   ;y coordin
+(0118)  CS-0x03D  0x04541         ||    MOV  R5, R8   ;x coordin
+(0119)  CS-0x03E  0x366FF         ||    MOV  R6, 0xFF
+(0120)  CS-0x03F  0x08159         ||    CALL draw_dot   ;draw red square at origin
 (0121)                            || 
-(0122)  CS-0x051  0x080E8         ||    BRN FOR ;
-(0123)                            || 
-(0124)  CS-0x052  0x1A003         ||    RETIE
-(0125)                            || 	   
+(0122)                            || 
+(0123)                            ||    
+(0124)  CS-0x040  0x30800         ||    CMP R8, 0x00
+(0125)  CS-0x041  0x0823A         ||    BREQ DONE
 (0126)                            || 
-(0127)                            || 
-(0128)  CS-0x053  0x08298  0x053  || DONE:        BRN DONE                  ;ALL DONE, NO MORE INTERRUPTS!
-(0129)                            || 
-(0130)                            || .CSEG
-(0131)                       1023  || .ORG 0x3FF
-(0132)  CS-0x3FF  0x08240  0x3FF  || VECTOR:      BRN ISR
-(0133)                            || 
+(0127)                            ||    ;CALL pause
+(0128)                            || 
+(0129)  CS-0x042  0x1A003         ||    RETIE
+(0130)                            || 	   
+(0131)                            || 
+(0132)                            || 
+(0133)                     0x043  || clear_end:
+(0134)  CS-0x043  0x080A9         || 	CALL clear_row
+(0135)  CS-0x044  0x36800         ||     MOV R8, 0x00
+(0136)  CS-0x045  0x08159         ||     CALL draw_dot
+(0137)  CS-0x046  0x08238         ||     BRN DONE
+(0138)                            || 
+(0139)  CS-0x047  0x08238  0x047  || DONE:        BRN DONE                  ;ALL DONE, NO MORE INTERRUPTS!
+(0140)                            || 
+(0141)                            || .CSEG
+(0142)                       1023  || .ORG 0x3FF
+(0143)  CS-0x3FF  0x081D0  0x3FF  || VECTOR:      BRN ISR
+(0144)                            || 
 
 
 
@@ -165,24 +176,22 @@ C4+: source code line number of where symbol is referenced
 
 -- Labels
 ------------------------------------------------------------ 
-BACK1          0x01A   (0039)  ||  0067 
-DD_ADD40       0x043   (0098)  ||  0091 
-DD_ADD80       0x046   (0101)  ||  0093 
-DD_OUT         0x03F   (0094)  ||  0102 
-DONE           0x053   (0128)  ||  0128 
-DRAW_DOT       0x039   (0087)  ||  0032 0111 0119 
-FOR            0x01D   (0045)  ||  0036 0114 0122 
-FOR2           0x02E   (0069)  ||  0042 
-INSIDE_FOR     0x032   (0075)  ||  0076 
-INSIDE_FOR1    0x021   (0051)  ||  0060 
-ISR            0x048   (0108)  ||  0132 
-MAIN           0x015   (0028)  ||  0043 0083 
-MIDDLE_FOR     0x030   (0072)  ||  0079 
-MIDDLE_FOR1    0x01F   (0048)  ||  0063 
-OUTSIDE_FOR    0x02E   (0070)  ||  0082 
-OUTSIDE_FOR1   0x01D   (0046)  ||  0066 
-T1             0x03D   (0092)  ||  0100 
-VECTOR         0x3FF   (0132)  ||  
+CLEAR_END      0x043   (0133)  ||  
+CLEAR_ROW      0x015   (0033)  ||  0039 0134 
+CLEAR_SQUARE   0x035   (0099)  ||  0036 0109 
+DD_ADD40       0x031   (0092)  ||  
+DD_ADD80       0x033   (0095)  ||  
+DD_OUT         0x02D   (0088)  ||  0096 
+DONE           0x047   (0139)  ||  0055 0125 0137 0139 
+DRAW_DOT       0x02B   (0081)  ||  0052 0104 0120 0136 
+INSIDE_FOR1    0x024   (0068)  ||  0069 
+ISR            0x03A   (0108)  ||  0143 
+MAIN           0x01A   (0048)  ||  
+MIDDLE_FOR1    0x022   (0065)  ||  0072 
+OUTSIDE_FOR1   0x020   (0062)  ||  0075 
+PAUSE          0x01F   (0059)  ||  
+T1             0x02D   (0086)  ||  
+VECTOR         0x3FF   (0143)  ||  
 
 
 -- Directives: .BYTE
@@ -192,12 +201,15 @@ VECTOR         0x3FF   (0132)  ||
 
 -- Directives: .EQU
 ------------------------------------------------------------ 
-LEDS           0x040   (0013)  ||  
-LOOP_COUNT     0x0FF   (0014)  ||  0041 0047 0050 0071 0074 
-SSEG           0x081   (0012)  ||  
-VGA_COLOR      0x092   (0011)  ||  0096 
-VGA_HADD       0x090   (0009)  ||  0095 
-VGA_LADD       0x091   (0010)  ||  0094 
+INSIDE_FOR_COUNT 0x024   (0007)  ||  0067 
+LEDS           0x040   (0015)  ||  
+LOOP_COUNT     0x025   (0016)  ||  
+MIDDLE_FOR_COUNT 0x024   (0008)  ||  0064 
+OUTSIDE_FOR_COUNT 0x024   (0009)  ||  0061 
+SSEG           0x081   (0014)  ||  
+VGA_COLOR      0x092   (0013)  ||  0090 
+VGA_HADD       0x090   (0011)  ||  0089 
+VGA_LADD       0x091   (0012)  ||  0088 
 
 
 -- Directives: .DEF
