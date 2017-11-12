@@ -30,7 +30,7 @@
    MOV  R1, 0x00
    MOV  R7, 0x00
    MOV  R8, 0x00 
-   MOV  R18, END_ROW
+   MOV  R10, END_ROW
 	MOV R11, 0x01
 	
 MAIN:     
@@ -39,7 +39,9 @@ MAIN:
 			CALL draw_ship   ;draw red square at origin
 			call pause
 			
-			CMP R8, END_ROW
+
+			SUB R10, 0x01
+			CMP R10, 0x00
 			BREQ col
 
 
@@ -49,7 +51,7 @@ end_main:	ADD R8, R11
 
 
 col:		ADD R7, 0x01
-			MOV R18, END_ROW
+			MOV R10, END_ROW
 			CMP R7, END_COL
 			BREQ DONE
 			
@@ -57,17 +59,28 @@ col:		ADD R7, 0x01
 			BREQ set_neg
 	
 			MOV R11, 0x01
+			MOV R8, 0x00
 			BRN end_main
 
 set_neg:	MOV R11, 0xFF
+			MOV R8, 0x27
 			brn end_main
 
 draw_ship:
 			MOV R5, R8
 			MOV R4, R7
 			MOV R6, 0x00
+
+
+			CMP R1, 0x01
+			BRNE draw_neg
+
 			SUB R5, 0x03
-			call draw_dot
+			brn rest
+
+draw_neg:	ADD R5, 0x03
+
+rest:		call draw_dot
 
 
 			MOV R5, R8
