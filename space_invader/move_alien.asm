@@ -12,11 +12,11 @@
 .EQU SSEG = 0x81
 .EQU LEDS = 0x40
 
-.EQU INSIDE_FOR_COUNT    = 0x2f;0xB4
-.EQU MIDDLE_FOR_COUNT    = 0x2f;0xCA
+.EQU INSIDE_FOR_COUNT    = 	0x2f
+.EQU MIDDLE_FOR_COUNT    = 0x2f
 .EQU OUTSIDE_FOR_COUNT   = 0x2f
 
-.equ END_ROW = 0x27
+.equ END_ROW = 0x28
 .equ END_COL = 0x06
 .equ SHIP_COLOR = 0x03
 
@@ -26,8 +26,8 @@
 .ORG 0x10
 
    SEI
-   MOV  R0, 0x00
-   MOV  R1, 0x00
+
+   MOV  R1, 0x01
    MOV  R7, 0x00
    MOV  R8, 0x00 
    MOV  R10, END_ROW
@@ -36,11 +36,11 @@
 MAIN:     
 			MOV  R4, R7   ;y coordin
 			MOV  R5, R8   ;x coordin
-			CALL draw_ship   ;draw red square at origin
-			call pause
+			call draw_ship  
+main_pause:	call pause
 			
 
-			SUB R10, 0x01
+ret_pause:	SUB R10, 0x01
 			CMP R10, 0x00
 			BREQ col
 
@@ -59,11 +59,11 @@ col:		ADD R7, 0x01
 			BREQ set_neg
 	
 			MOV R11, 0x01
-			MOV R8, 0x00
+			MOV R8, 0xFF
 			BRN end_main
 
 set_neg:	MOV R11, 0xFF
-			MOV R8, 0x27
+			MOV R8, 0x28
 			brn end_main
 
 draw_ship:
@@ -72,8 +72,8 @@ draw_ship:
 			MOV R6, 0x00
 
 
-			CMP R1, 0x01
-			BRNE draw_neg
+			CMP R11, 0xFF
+			BREQ draw_neg
 
 			SUB R5, 0x03
 			brn rest
