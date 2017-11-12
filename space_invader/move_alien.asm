@@ -17,8 +17,8 @@
 .EQU OUTSIDE_FOR_COUNT   = 0x2f
 
 .equ END_ROW = 0x27
-.equ END_COL = 0x1E
-.equ SHIP_COLOR = 0xE0
+.equ END_COL = 0x06
+.equ SHIP_COLOR = 0x03
 
 
 
@@ -39,7 +39,7 @@ MAIN:
 			CALL draw_ship   ;draw red square at origin
 			call pause
 			
-			SUB R18, 0x01
+			CMP R8, END_ROW
 			BREQ col
 
 
@@ -79,7 +79,6 @@ draw_ship:
 draw_dot: 
         AND r5, 0x3F ; make sure top 2 bits cleared
         AND r4, 0x1F ; make sure top 3 bits cleared
-        LSR r4 ;need to get the bot 2 bits of s4 into sA
 
 dd_out: OUT r5, VGA_LADD ; write bot 8 address bits to register
         OUT r4, VGA_HADD ; write top 3 address bits to register
