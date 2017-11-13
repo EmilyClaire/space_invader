@@ -181,9 +181,11 @@ clear_square:
    RET
 
 
-ISR:            
-   CMP R28, 0x00
-   BREQ retie   
+ISR:
+
+	CMP R28, 0x00
+	BREQ ISR_END
+
    CALL clear_square
 
    
@@ -195,9 +197,8 @@ ISR:
    MOV  R6, 0xFF
    CALL draw_dot   ;draw red square at origin
    
-
-
-	RETIE
+ISR_END:
+		RETIE
 
 .CSEG
 .ORG 0x3FF
