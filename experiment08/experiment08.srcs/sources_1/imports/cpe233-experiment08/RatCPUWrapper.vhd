@@ -19,8 +19,13 @@ entity RAT_wrapper is
              seg    : out   STD_LOGIC_VECTOR (7 downto 0);
            --SWITCHES : in    STD_LOGIC_VECTOR (7 downto 0);
            RESET    : in    STD_LOGIC;
-           INT      : in    STD_LOGIC;
-           CLK      : in    STD_LOGIC);
+           L_INT      : in    STD_LOGIC;
+           CLK      : in    STD_LOGIC;
+           
+           
+           VGA_RGB  : out std_logic_vector(7 downto 0);
+          VGA_HS   : out std_logic;
+          VGA_VS   : out std_logic);
 end RAT_wrapper;
 
 architecture Behavioral of RAT_wrapper is
@@ -35,9 +40,19 @@ architecture Behavioral of RAT_wrapper is
    -------------------------------------------------------------------------------
    -- OUTPUT PORT IDS ------------------------------------------------------------
    -- In future labs you can add more port IDs
-   --CONSTANT LEDS_ID       : STD_LOGIC_VECTOR (7 downto 0) := X"40";
+   CONSTANT LEDS_ID       : STD_LOGIC_VECTOR (7 downto 0) := x"40";
    CONSTANT SSEG_CNTR_ID : STD_LOGIC_VECTOR (7 downto 0) := x"60";
    CONSTANT SSEG_VAL_ID:    STD_LOGIC_VECTOR (7 downto 0) := x"80";
+   
+   
+   CONSTANT INTERRUPT_LEFT_ID : STD_LOGIC_VECTOR (7 downto 0) := x"20";
+   CONSTANT INTERRUPT_RIGHT_ID : STD_LOGIC_VECTOR (7 downto 0) := x"21";
+   CONSTANT INTERRUPT_SHOOT_ID : STD_LOGIC_VECTOR (7 downto 0) := x"22";
+   
+   CONSTANT VGA_READ_ID : STD_LOGIC_VECTOR(7 downto 0) := x"93";
+   CONSTANT VGA_HADDR_ID : STD_LOGIC_VECTOR(7 downto 0) := x"90";
+   CONSTANT VGA_LADDR_ID : STD_LOGIC_VECTOR(7 downto 0) := x"91";
+   CONSTANT VGA_WRITE_ID : STD_LOGIC_VECTOR(7 downto 0) := x"92";   
    -------------------------------------------------------------------------------
 
    -- Declare RAT_CPU ------------------------------------------------------------
@@ -52,9 +67,38 @@ architecture Behavioral of RAT_wrapper is
    end component RAT_CPU;
    
    
+   component PmodJSTK_Demo
+   Port(
+       CLK : in std_logic;
+       RST : in std_logic;
+       MISO : in std_logic;
+        SW : in std_logic_vector (2 downto 0);
+       SS : out std_logic;
+       MOSI : out std_logic;
+       SCLK : out std_logic;
+       LED : out std_logic_vector (2 downto 0);
+        AN : out std_logic_vector (3 downto 0);
+        SEG : out std_logic_vector (6 downto 0));
+      end component;
+   
+   
+   
    component clk_div 
        Port (       CLK : in std_logic;
                    FCLK : out std_logic);
+   end component;
+   
+   
+   component vgaDriverBuffer is
+      Port (CLK, we : in std_logic;
+            wa   : in std_logic_vector (10 downto 0);
+            wd   : in std_logic_vector (7 downto 0);
+            Rout : out std_logic_vector(2 downto 0);
+            Gout : out std_logic_vector(2 downto 0);
+            Bout : out std_logic_vector(1 downto 0);
+            HS   : out std_logic;
+            VS   : out std_logic;
+            pixelData : out std_logic_vector(7 downto 0));
    end component;
    
    
@@ -94,9 +138,17 @@ architecture Behavioral of RAT_wrapper is
    signal s_clk         : std_logic;
    --signal s_interrupt   : std_logic; -- not yet used
    
+   
+      signal r_vga_we   : std_logic;                       -- Write enable
+   signal r_vga_wa   : std_logic_vector(10 downto 0);   -- The address to read from / write to  
+   signal r_vga_wd   : std_logic_vector(7 downto 0);    -- The pixel data to write to the framebuffer
+   signal r_vgaData  : std_logic_vector(7 downto 0);    -- The pixel data read from the framebuffer
+   
+   
+   
    -- Register definitions for output devices ------------------------------------
    -- add signals for any added outputs
-   --signal r_LEDS        : std_logic_vector (7 downto 0);
+   signal r_LEDS        : std_logic_vector (7 downto 0);
    -------------------------------------------------------------------------------
 
 begin
@@ -109,7 +161,7 @@ begin
               PORT_ID  => s_port_id,
               RST    => RESET,
               IO_STRB  => s_load,
-              INT   => INT,  -- s_interrupt
+              INT   => s_dbn_int,  -- s_interrupt
               CLK      => s_CLK);
               
      
@@ -132,11 +184,21 @@ begin
                        FCLK => s_clk
                        );
           
-              
+   VGA: vgaDriverBuffer
+                                               port map(CLK => CLK,
+                                                        WE => r_vga_we,
+                                                        WA => r_vga_wa,
+                                                        WD => r_vga_wd,
+                                                        Rout => VGA_RGB(7 downto 5),
+                                                        Gout => VGA_RGB(4 downto 2),
+                                                        Bout => VGA_RGB(1 downto 0),
+                                                        HS => VGA_HS,
+                                                        VS => VGA_VS,
+                                                        pixelData => r_vgaData);     
               
               
     my_db_1shot_FSM : db_1shot_FSM 
-        port map ( A    => INT,
+        port map ( A    => L_INT,
                    CLK  => s_clk,
                    A_DB => s_dbn_int);
                                    
@@ -163,30 +225,48 @@ begin
    -- Register updates depend on rising clock edge and asserted load signal
    -- add conditions and connections for any added PORT IDs
    -------------------------------------------------------------------------------
-   outputs: process(s_CLK, RESET)
+   outputs: process(CLK, RESET)
    begin
       if(RESET = '1') then
         s_sseg_val <= x"00";
       end if;
-      if (rising_edge(s_CLK)) then
+      if (rising_edge(CLK)) then
+
+         if( s_port_id = VGA_WRITE_ID and s_load = '1') then
+                   r_vga_we <= '1';
+                else
+                   r_vga_we <= '0';
+                end if;
+
          if (s_load = '1') then
-           
-            -- the register definition for the LEDS
---            if (s_port_id = LEDS_ID) then
---               r_LEDS <= s_output_port;
-            if(s_port_id = SSEG_CNTR_ID) then
+          
+             --the register definition for the LEDS
+            if (s_port_id = LEDS_ID) then
+               r_LEDS <= s_output_port;
+            elsif(s_port_id = SSEG_CNTR_ID) then
                 s_sseg_CNTR <= s_output_port;
+            
+
             elsif(s_port_id = SSEG_VAL_ID) then
                 s_sseg_VAL <= s_output_port;
-            end if;
-           
-         end if;
-      end if;
-   end process outputs;
+                     elsif (s_port_id = VGA_HADDR_ID) then
+                   r_vga_wa(10 downto 6) <= s_output_port(4 downto 0);
+                elsif (s_port_id = VGA_LADDR_ID) then
+                   r_vga_wa(5 downto 0) <= s_output_port(5 downto 0);
+                elsif (s_port_id = VGA_WRITE_ID) then
+                   r_vga_wd <= s_output_port;
+                end if;  
+                
+                
+                           end if;
+             end if;
+          
+        
+        end process outputs;
    -------------------------------------------------------------------------------
 
    -- Register Interface Assignments ---------------------------------------------
    -- add all outputs that you added to this design
 --   LEDS <= r_LEDS;
 
-end Behavioral;
+ end Behavioral;
