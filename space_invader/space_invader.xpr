@@ -277,6 +277,17 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+<<<<<<< HEAD
+=======
+      <File Path="$PSRCDIR/sources_1/imports/space_invader/prog_rom.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/prog_rom.vhd"/>
+          <Attr Name="ImportTime" Val="1510598881"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+>>>>>>> 1961a2f628cdc6fb8bfef9e807ef207e72c646d6
       <File Path="$PSRCDIR/sources_1/imports/new/RATCPU.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/RATCPU.vhd"/>

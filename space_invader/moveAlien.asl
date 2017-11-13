@@ -197,30 +197,29 @@ C5:  Raw line from source code.
 (0181)  CS-0x079  0x18002         ||    RET
 (0182)                            || 
 (0183)                            || 
-(0184)                     0x07A  || ISR:            
-(0185)  CS-0x07A  0x31C00         ||    CMP R28, 0x00
-(0186)                            ||    BREQ retie   
-            syntax error
-
-(0187)  CS-0x07B  0x083A9         ||    CALL clear_square
+(0184)                     0x07A  || ISR:
+(0185)                            || 
+(0186)  CS-0x07A  0x31C00         || 	CMP R28, 0x00
+(0187)  CS-0x07B  0x08412         || 	BREQ ISR_END
 (0188)                            || 
-(0189)                            ||    
-(0190)  CS-0x07C  0x2DC01         ||    SUB  R28, 0x01  
-(0191)                            || 
-(0192)                            || 
-(0193)  CS-0x07D  0x044D9         ||    MOV  R4, R27   ;y coordin
-(0194)  CS-0x07E  0x045E1         ||    MOV  R5, R28   ;x coordin
-(0195)  CS-0x07F  0x366FF         ||    MOV  R6, 0xFF
-(0196)  CS-0x080  0x08311         ||    CALL draw_dot   ;draw red square at origin
-(0197)                            ||    
-(0198)                            || 
-(0199)                            || 
-(0200)  CS-0x081  0x1A003         || 	RETIE
-(0201)                            || 
-(0202)                            || .CSEG
-(0203)                       1023  || .ORG 0x3FF
-(0204)  CS-0x3FF  0x083D0  0x3FF  || VECTOR:      BRN ISR
-(0205)                            || 
+(0189)  CS-0x07C  0x083A9         ||    CALL clear_square
+(0190)                            || 
+(0191)                            ||    
+(0192)  CS-0x07D  0x2DC01         ||    SUB  R28, 0x01  
+(0193)                            || 
+(0194)                            || 
+(0195)  CS-0x07E  0x044D9         ||    MOV  R4, R27   ;y coordin
+(0196)  CS-0x07F  0x045E1         ||    MOV  R5, R28   ;x coordin
+(0197)  CS-0x080  0x366FF         ||    MOV  R6, 0xFF
+(0198)  CS-0x081  0x08311         ||    CALL draw_dot   ;draw red square at origin
+(0199)                            ||    
+(0200)                     0x082  || ISR_END:
+(0201)  CS-0x082  0x1A003         || 		RETIE
+(0202)                            || 
+(0203)                            || .CSEG
+(0204)                       1023  || .ORG 0x3FF
+(0205)  CS-0x3FF  0x083D0  0x3FF  || VECTOR:      BRN ISR
+(0206)                            || 
 
 
 
@@ -241,16 +240,17 @@ C4+: source code line number of where symbol is referenced
 ------------------------------------------------------------ 
 CLEAR_LOOP     0x04B   (0109)  ||  0116 
 CLEAR_SHIP     0x048   (0105)  ||  0093 0099 
-CLEAR_SQUARE   0x075   (0175)  ||  0187 
+CLEAR_SQUARE   0x075   (0175)  ||  0189 
 COL            0x038   (0084)  ||  0078 
 DD_OUT         0x064   (0149)  ||  
 DONE           0x068   (0154)  ||  0087 0154 
-DRAW_DOT       0x062   (0145)  ||  0037 0052 0112 0136 0142 0180 0196 
+DRAW_DOT       0x062   (0145)  ||  0037 0052 0112 0136 0142 0180 0198 
 DRAW_NEG       0x05B   (0134)  ||  0129 
 DRAW_SHIP      0x054   (0122)  ||  0063 0072 
 END_MAIN       0x036   (0081)  ||  
 INSIDE_FOR0    0x06E   (0164)  ||  0165 
-ISR            0x07A   (0184)  ||  0204 
+ISR            0x07A   (0184)  ||  0205 
+ISR_END        0x082   (0200)  ||  0187 
 MAIN           0x02F   (0069)  ||  0082 
 MAIN_PAUSE     0x032   (0073)  ||  
 MIDDLE_FOR0    0x06C   (0161)  ||  0168 
@@ -262,7 +262,7 @@ REST           0x05C   (0136)  ||  0132
 RET_PAUSE      0x033   (0076)  ||  
 SET_NEG        0x043   (0098)  ||  0090 
 START          0x028   (0060)  ||  0066 0096 0102 
-VECTOR         0x3FF   (0204)  ||  
+VECTOR         0x3FF   (0205)  ||  
 
 
 -- Directives: .BYTE
