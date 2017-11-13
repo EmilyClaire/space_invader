@@ -51,12 +51,12 @@ set rc [catch {
   set_param xicom.use_bs_reader 1
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
-  set_property webtalk.parent_dir C:/Users/Donald/Documents/experiment08/experiment08.cache/wt [current_project]
-  set_property parent.project_path C:/Users/Donald/Documents/experiment08/experiment08.xpr [current_project]
-  set_property ip_repo_paths c:/Users/Donald/Documents/experiment08/experiment08.cache/ip [current_project]
-  set_property ip_output_repo c:/Users/Donald/Documents/experiment08/experiment08.cache/ip [current_project]
-  add_files -quiet C:/Users/Donald/Documents/experiment08/experiment08.runs/synth_1/RAT_wrapper.dcp
-  read_xdc C:/Users/Donald/Documents/experiment08/experiment08.srcs/constrs_1/imports/cpe233-experiment08/CPU.xdc
+  set_property webtalk.parent_dir {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.cache/wt} [current_project]
+  set_property parent.project_path {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.xpr} [current_project]
+  set_property ip_repo_paths {{c:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.cache/ip}} [current_project]
+  set_property ip_output_repo {{c:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.cache/ip}} [current_project]
+  add_files -quiet {{C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.runs/synth_1/RAT_wrapper.dcp}}
+  read_xdc {{C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/constrs_1/imports/cpe233-experiment08/CPU.xdc}}
   link_design -top RAT_wrapper -part xc7a35tcpg236-1
   write_hwdef -file RAT_wrapper.hwdef
   close_msg_db -file init_design.pb

@@ -13,17 +13,11 @@ end EXP8_wrapper_tb;
 architecture Behavioral of EXP8_wrapper_tb is
 
    component RAT_Wrapper
-   Port( --LEDS     : out   STD_LOGIC_VECTOR (7 downto 0);
-                an     : out   STD_LOGIC_VECTOR (3 downto 0);
-                seg    : out   STD_LOGIC_VECTOR (7 downto 0);
-              --SWITCHES : in    STD_LOGIC_VECTOR (7 downto 0);
-              RESET    : in    STD_LOGIC;
-              INT      : in    STD_LOGIC;
-              CLK      : in    STD_LOGIC;
-              --VGA IO
-              VGA_RGB  : out std_logic_vector(7 downto 0);
-              VGA_HS   : out std_logic;
-              VGA_VS   : out std_logic);
+   Port(  an     : out   STD_LOGIC_VECTOR (3 downto 0);
+           seg    : out   STD_LOGIC_VECTOR (7 downto 0);
+          RESET    : in    STD_LOGIC;
+          INT      : in STD_LOGIC;
+          CLK      : in    STD_LOGIC);
           
     end component;
 
@@ -32,9 +26,6 @@ architecture Behavioral of EXP8_wrapper_tb is
    signal clk_tb : std_logic :=  '0';
    signal rst_tb : std_logic :=  '0';
    signal int_tb : std_logic := '0';
-   signal s_VGA_RGB : std_logic_vector(7 downto 0);
-   signal s_VGA_HS :  std_logic;
-   signal s_VGA_VS :  std_logic;
   -- Clock period definitions
   constant CLK_period : time := 10 ns;
   
@@ -45,9 +36,6 @@ begin
       an => switches_tb,
       RESET      => rst_tb,
       CLK      => clk_tb,
-      VGA_RGB  => s_VGA_RGB,
-      VGA_HS   => s_VGA_HS,
-      VGA_VS   => s_VGA_VS,
       INT      => int_tb
    );
 
@@ -64,11 +52,11 @@ begin
    stim_proc: process
    begin       
       rst_tb <= '0';     
-      wait for 400 us;
---      int_tb <= '1';
---      wait for 3000ns;
---      int_tb <= '0';
---      wait for 30000ns;
+      wait for 1000ns;
+      int_tb <= '1';
+      wait for 3000ns;
+      int_tb <= '0';
+      wait for 30000ns;
       
 --      rst_tb <= '1';
 --      wait for 50ns;

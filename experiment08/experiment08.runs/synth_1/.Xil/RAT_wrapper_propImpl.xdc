@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:C:/Users/Donald/Documents/experiment08/experiment08.srcs/constrs_1/imports/cpe233-experiment08/CPU.xdc rfile:../../../experiment08.srcs/constrs_1/imports/cpe233-experiment08/CPU.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:{C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/constrs_1/imports/cpe233-experiment08/CPU.xdc} rfile:../../../experiment08.srcs/constrs_1/imports/cpe233-experiment08/CPU.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:9 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN W5 [get_ports CLK]
 set_property src_info {type:XDC file:1 line:84 export:INPUT save:INPUT read:READ} [current_design]

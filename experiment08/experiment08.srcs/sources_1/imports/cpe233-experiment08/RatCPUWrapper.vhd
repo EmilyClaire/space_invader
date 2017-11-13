@@ -67,19 +67,19 @@ architecture Behavioral of RAT_wrapper is
    end component RAT_CPU;
    
    
-   component PmodJSTK_Demo
-   Port(
-       CLK : in std_logic;
-       RST : in std_logic;
-       MISO : in std_logic;
-        SW : in std_logic_vector (2 downto 0);
-       SS : out std_logic;
-       MOSI : out std_logic;
-       SCLK : out std_logic;
-       LED : out std_logic_vector (2 downto 0);
-        AN : out std_logic_vector (3 downto 0);
-        SEG : out std_logic_vector (6 downto 0));
-      end component;
+--   component PmodJSTK_Demo
+--   Port(
+--       CLK : in std_logic;
+--       RST : in std_logic;
+--       MISO : in std_logic;
+--        SW : in std_logic_vector (2 downto 0);
+--       SS : out std_logic;
+--       MOSI : out std_logic;
+--       SCLK : out std_logic;
+--       LED : out std_logic_vector (2 downto 0);
+--        AN : out std_logic_vector (3 downto 0);
+--        SEG : out std_logic_vector (6 downto 0));
+--      end component;
    
    
    

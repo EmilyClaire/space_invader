@@ -10,60 +10,48 @@ create_project -in_memory -part xc7a35tcpg236-1
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir C:/Users/Donald/Documents/experiment08/experiment08.cache/wt [current_project]
-set_property parent.project_path C:/Users/Donald/Documents/experiment08/experiment08.xpr [current_project]
+set_property webtalk.parent_dir {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.cache/wt} [current_project]
+set_property parent.project_path {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.xpr} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
-read_verilog -library xil_defaultlib {
-  C:/Users/Donald/Downloads/PmodJSTK/PmodJSTK.srcs/ClkDiv_5Hz.v
-  C:/Users/Donald/Downloads/PmodJSTK/PmodJSTK.srcs/SPImode0.v
-  C:/Users/Donald/Downloads/PmodJSTK/PmodJSTK.srcs/ClkDiv_66_67kHz.v
-  C:/Users/Donald/Downloads/PmodJSTK/PmodJSTK.srcs/PmodJSTK_Demo.v
-  C:/Users/Donald/Downloads/PmodJSTK/PmodJSTK.srcs/ssdCtrl.v
-  C:/Users/Donald/Downloads/PmodJSTK/PmodJSTK.srcs/PmodJSTK.v
-  C:/Users/Donald/Downloads/PmodJSTK/PmodJSTK.srcs/spiCtrl.v
-  C:/Users/Donald/Downloads/PmodJSTK/PmodJSTK.srcs/Binary_To_BCD.v
-}
 read_vhdl -library xil_defaultlib {
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/counter_for_one_shot.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/pc.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/mux.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/debounce_one_shot_FSM.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/Stack_Pointer.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/new/shad_flag_reg_z.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/new/shad_flag_reg_c.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/scr_data_mux.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/Scratch_Pad_Mux.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/new/ScratchPAD.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/reg_mux.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/RegisterFile.vhd
-  {C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe 233/prog_rom.vhd}
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/program_counter.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/int_input.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/Flag_Reg_z.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/Flag_Reg_c.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/new/flag_mux.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/ControlUnit.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/ALU_MUX.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/ALU.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/new/7_Seg.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/debounce_one_shot_FSM_TB.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/clk_div.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/new/8_wrapper_tb.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/RATCPU.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/RatCPUWrapper.vhd
-  C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/new/vga_driver.vhd
-  C:/Users/Donald/Downloads/space_invader/space_invader/space_invader.srcs/sources_1/imports/new/VGAdrive.vhd
-  C:/Users/Donald/Downloads/space_invader/space_invader/space_invader.srcs/sources_1/imports/new/vga_clk_div.vhd
-  C:/Users/Donald/Downloads/space_invader/space_invader/space_invader.srcs/sources_1/imports/new/vgaDriverBuffer.vhd
-  C:/Users/Donald/Downloads/space_invader/space_invader/space_invader.srcs/sources_1/imports/new/vga_sample.vhd
-  C:/Users/Donald/Downloads/space_invader/space_invader/space_invader.srcs/sources_1/imports/new/ram2k_8.vhd
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/counter_for_one_shot.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/pc.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/mux.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/debounce_one_shot_FSM.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/Stack_Pointer.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/new/shad_flag_reg_z.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/new/shad_flag_reg_c.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/scr_data_mux.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/Scratch_Pad_Mux.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/new/ScratchPAD.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/reg_mux.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/RegisterFile.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe 233/prog_rom.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/program_counter.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/int_input.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/Flag_Reg_z.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/Flag_Reg_c.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/new/flag_mux.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/ControlUnit.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/ALU_MUX.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/ALU.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/new/7_Seg.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/debounce_one_shot_FSM_TB.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/clk_div.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/new/8_wrapper_tb.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/RATCPU.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/cpe233-experiment08/RatCPUWrapper.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/new/VGAdrive.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/new/vgaDriverBuffer.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/new/ram2k_8.vhd}
+  {C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/sources_1/imports/new/vga_clk_div.vhd}
 }
 foreach dcp [get_files -quiet -all *.dcp] {
   set_property used_in_implementation false $dcp
 }
-read_xdc C:/Users/Donald/Documents/experiment08/experiment08.srcs/constrs_1/imports/cpe233-experiment08/CPU.xdc
-set_property used_in_implementation false [get_files C:/Users/Donald/Documents/experiment08/experiment08.srcs/constrs_1/imports/cpe233-experiment08/CPU.xdc]
+read_xdc {{C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/constrs_1/imports/cpe233-experiment08/CPU.xdc}}
+set_property used_in_implementation false [get_files {{C:/Users/eclai/Desktop/cpe 233/space_invader/experiment08/experiment08.srcs/constrs_1/imports/cpe233-experiment08/CPU.xdc}}]
 
 
 synth_design -top RAT_wrapper -part xc7a35tcpg236-1
