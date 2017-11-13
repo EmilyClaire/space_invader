@@ -12,7 +12,7 @@
 .EQU OUTSIDE_FOR_COUNT   = 0x2f
 
 .equ END_ROW = 0x25
-.equ END_COL = 0x0A
+.equ END_COL = 0x1D
 .equ SHIP_COLOR = 0x03
 
 

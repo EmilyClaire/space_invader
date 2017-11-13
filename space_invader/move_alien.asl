@@ -28,7 +28,7 @@ C5:  Raw line from source code.
 (0012)                       047  || .EQU OUTSIDE_FOR_COUNT   = 0x2f
 (0013)                            || 
 (0014)                       037  || .equ END_ROW = 0x25
-(0015)                       010  || .equ END_COL = 0x0A
+(0015)                       029  || .equ END_COL = 0x1D
 (0016)                       003  || .equ SHIP_COLOR = 0x03
 (0017)                            || 
 (0018)                            || 
@@ -87,7 +87,7 @@ C5:  Raw line from source code.
 (0071)                            || 
 (0072)  CS-0x032  0x28701  0x032  || col:		ADD R7, 0x01
 (0073)  CS-0x033  0x36A25         || 			MOV R10, END_ROW
-(0074)  CS-0x034  0x3070A         || 			CMP R7, END_COL
+(0074)  CS-0x034  0x3071D         || 			CMP R7, END_COL
 (0075)  CS-0x035  0x0835A         || 			BREQ DONE
 (0076)                            || 			
 (0077)  CS-0x036  0x30B01         || 			CMP R11, 0x01
@@ -248,7 +248,7 @@ VECTOR         0x3FF   (0183)  ||
 
 -- Directives: .EQU
 ------------------------------------------------------------ 
-END_COL        0x00A   (0015)  ||  0074 
+END_COL        0x01D   (0015)  ||  0074 
 END_ROW        0x025   (0014)  ||  0044 0073 
 INSIDE_FOR_COUNT 0x02F   (0010)  ||  0169 
 LEDS           0x040   (0008)  ||  
