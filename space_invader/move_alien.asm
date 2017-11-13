@@ -15,6 +15,9 @@
 .equ END_COL = 0x1D
 .equ SHIP_COLOR = 0x03
 
+.EQU INPUT_LEFT_ID   = 0x20
+.EQU INPUT_RIGHT_ID  = 0x21
+.EQU INPUT_SHOOT_ID  = 0x22
 
 
 .CSEG
@@ -39,12 +42,19 @@ reset_loop:
 	
 		call pause
 
+   MOV  R27, 0x1D
+   MOV  R28, 0x14
+	MOV R6, 0xFF
+	MOV R4, R27
+	MOV R5, R28
+	call draw_dot
+
    MOV  R7, 0x00
    MOV  R8, 0x00 
    MOV  R10, END_ROW
 	MOV R11, 0x01
 	MOV R3, 0x03
-
+	
 start:
 	MOV R4, R7
 	MOV R5, R8
@@ -138,25 +148,7 @@ dd_out: OUT r5, VGA_LADD ; write bot 8 address bits to register
         OUT r4, VGA_HADD ; write top 3 address bits to register
         OUT r6, VGA_COLOR ; write data to frame buffer
         RET
-
-
-
-ISR:            MOV  R4, R7   ;y coordin
-   MOV  R5, R8   ;x coordin
-   MOV  R6, 0x00
-   CALL draw_dot   ;draw red square at origin
-
-    
-   MOV  R4, R7   ;y coordin
-   MOV  R5, R8   ;x coordin
-   MOV  R6, 0x03
-   CALL draw_dot   ;draw red square at origin
-
-
-   RETIE
 	   
-
-
 DONE:        BRN DONE                  ;ALL DONE, NO MORE INTERRUPTS!
 
 
@@ -177,6 +169,31 @@ inside_for0:  	SUB     R19, 0x01
              	BRNE    outside_for0
 
 				ret
+
+clear_square:
+
+   MOV  R4, R27   ;y coordin
+   MOV  R5, R28   ;x coordin
+   MOV  R6, 0x00
+   CALL draw_dot   ;clears dot at the origin
+   RET
+
+
+ISR:            
+   CALL clear_square
+   
+   SUB  R28, 0x01  
+
+
+   MOV  R4, R27   ;y coordin
+   MOV  R5, R28   ;x coordin
+   MOV  R6, 0xFF
+   CALL draw_dot   ;draw red square at origin
+   
+   CMP R28, 0x00
+   BREQ DONE
+
+   RETIE
 
 .CSEG
 .ORG 0x3FF
