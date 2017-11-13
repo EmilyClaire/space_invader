@@ -3,19 +3,19 @@
 <!--                                                         -->
 <!-- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="14" Path="C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.xpr">
+<Project Version="7" Minor="14" Path="C:/Users/Donald/Downloads/space_invader/space_invader/space_invader.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="f7707750f42346308240f558bc80a749"/>
     <Option Name="Part" Val="xc7a35tcpg236-1"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>
-    <Option Name="CompiledLibDirModelSim" Val="$PPRDIR/../../../../AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/modelsim"/>
-    <Option Name="CompiledLibDirQuesta" Val="$PPRDIR/../../../../AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/questa"/>
-    <Option Name="CompiledLibDirIES" Val="$PPRDIR/../../../../AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/ies"/>
-    <Option Name="CompiledLibDirVCS" Val="$PPRDIR/../../../../AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/vcs"/>
-    <Option Name="CompiledLibDirRiviera" Val="$PPRDIR/../../../../AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/riviera"/>
-    <Option Name="CompiledLibDirActivehdl" Val="$PPRDIR/../../../../AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/activehdl"/>
+    <Option Name="CompiledLibDirModelSim" Val="$PPRDIR/../../../AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/modelsim"/>
+    <Option Name="CompiledLibDirQuesta" Val="$PPRDIR/../../../AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/questa"/>
+    <Option Name="CompiledLibDirIES" Val="$PPRDIR/../../../AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/ies"/>
+    <Option Name="CompiledLibDirVCS" Val="$PPRDIR/../../../AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/vcs"/>
+    <Option Name="CompiledLibDirRiviera" Val="$PPRDIR/../../../AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/riviera"/>
+    <Option Name="CompiledLibDirActivehdl" Val="$PPRDIR/../../../AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/activehdl"/>
     <Option Name="TargetLanguage" Val="VHDL"/>
     <Option Name="SimulatorLanguage" Val="VHDL"/>
     <Option Name="BoardPart" Val=""/>
@@ -57,6 +57,34 @@
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/mux.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../PmodJSTK/PmodJSTK.srcs/SPImode0.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../PmodJSTK/PmodJSTK.srcs/spiCtrl.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../PmodJSTK/PmodJSTK.srcs/ClkDiv_66_67kHz.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../PmodJSTK/PmodJSTK.srcs/Binary_To_BCD.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
@@ -196,6 +224,35 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/sources_1/imports/space_invader/prog_rom.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/prog_rom.vhd"/>
+          <Attr Name="ImportTime" Val="1510597220"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../PmodJSTK/PmodJSTK.srcs/ssdCtrl.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../PmodJSTK/PmodJSTK.srcs/PmodJSTK.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../PmodJSTK/PmodJSTK.srcs/ClkDiv_5Hz.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/imports/new/vga_clk_div.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/vga_clk_div.vhd"/>
@@ -220,14 +277,6 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/space_invader/prog_rom.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/prog_rom.vhd"/>
-          <Attr Name="ImportTime" Val="1510597220"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sources_1/imports/new/RATCPU.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/RATCPU.vhd"/>
@@ -241,6 +290,13 @@
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/debounce_one_shot_FSM.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../PmodJSTK/PmodJSTK.srcs/PmodJSTK_Demo.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
@@ -271,24 +327,6 @@
       <File Path="$PSRCDIR/sources_1/imports/new/RatCPUWrapper.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/RatCPUWrapper.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/8_wrapper_tb.vhd">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/8_wrapper_tb.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/ScratchPAD.vhd">
-        <FileInfo>
-          <Attr Name="UserDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/ScratchPAD.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -325,6 +363,24 @@
         <FileInfo>
           <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/debounce_one_shot_FSM_TB.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/8_wrapper_tb.vhd">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/8_wrapper_tb.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/ScratchPAD.vhd">
+        <FileInfo>
+          <Attr Name="UserDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/ScratchPAD.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>

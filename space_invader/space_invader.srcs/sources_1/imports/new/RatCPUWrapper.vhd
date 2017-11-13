@@ -14,13 +14,18 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity RAT_wrapper is
-    Port ( --LEDS     : out   STD_LOGIC_VECTOR (7 downto 0);
+    Port ( LEDS     : out   STD_LOGIC_VECTOR (2 downto 0);
              an     : out   STD_LOGIC_VECTOR (3 downto 0);
              seg    : out   STD_LOGIC_VECTOR (7 downto 0);
            --SWITCHES : in    STD_LOGIC_VECTOR (7 downto 0);
            RESET    : in    STD_LOGIC;
            L_INT      : in    STD_LOGIC;
            CLK      : in    STD_LOGIC;
+           MISO : in std_logic;
+                   SW : in std_logic_vector (2 downto 0);
+                  SS : out std_logic;
+                  MOSI : out std_logic;
+                  SCLK : out std_logic;
            
            
            VGA_RGB  : out std_logic_vector(7 downto 0);
@@ -67,19 +72,19 @@ architecture Behavioral of RAT_wrapper is
    end component RAT_CPU;
    
    
---   component PmodJSTK_Demo
---   Port(
---       CLK : in std_logic;
---       RST : in std_logic;
---       MISO : in std_logic;
---        SW : in std_logic_vector (2 downto 0);
---       SS : out std_logic;
---       MOSI : out std_logic;
---       SCLK : out std_logic;
---       LED : out std_logic_vector (2 downto 0);
---        AN : out std_logic_vector (3 downto 0);
---        SEG : out std_logic_vector (6 downto 0));
---      end component;
+   component PmodJSTK_Demo
+   Port(
+       CLK : in std_logic;
+       RST : in std_logic;
+       MISO : in std_logic;
+       SW   : in std_logic_vector (2 downto 0);
+       SS : out std_logic;
+       MOSI : out std_logic;
+       SCLK : out std_logic;
+       LED : out std_logic_vector (2 downto 0));
+        --AN : out std_logic_vector (3 downto 0);
+        --SEG : out std_logic_vector (7 downto 0));
+      end component;
    
    
    
@@ -201,6 +206,22 @@ begin
         port map ( A    => L_INT,
                    CLK  => s_clk,
                    A_DB => s_dbn_int);
+                   
+                   
+   my_PmodJSTK_Demo : PmodJSTK_Demo
+                   port map(
+                       CLK => CLK,
+                       RST => RESET,
+                       MISO => MISO,
+                       SW => SW,
+                       SS => SS,
+                       MOSI => MOSI,
+                       SCLK => SCLK,
+                       LED => LEDS);
+                        --AN => an,
+                        --SEG => seg);
+                      
+
                                    
    -------------------------------------------------------------------------------
 
