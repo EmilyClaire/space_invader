@@ -1,10 +1,5 @@
-
-
 .DSEG
 .ORG 0x00
-
-
-
 
 .EQU VGA_HADD = 0x90
 .EQU VGA_LADD = 0x91
@@ -16,8 +11,8 @@
 .EQU MIDDLE_FOR_COUNT    = 0x2f
 .EQU OUTSIDE_FOR_COUNT   = 0x2f
 
-.equ END_ROW = 0x28
-.equ END_COL = 0x06
+.equ END_ROW = 0x25
+.equ END_COL = 0x0A
 .equ SHIP_COLOR = 0x03
 
 
@@ -27,12 +22,38 @@
 
    SEI
 
-   MOV  R1, 0x01
+reset:
+		MOV R8, 0x28
+		MOV R7, 0x1D
+		MOV R6, 0x00
+reset_loop:
+		MOV R4, R7
+		MOV R5, R8
+		call draw_dot
+		SUB R8, 0x01
+		BRNE reset_loop
+
+		SUB R7, 0x01
+		CMP R7, 0xFF
+		BRNE reset_loop
+	
+		call pause
+
    MOV  R7, 0x00
    MOV  R8, 0x00 
    MOV  R10, END_ROW
 	MOV R11, 0x01
-	
+	MOV R3, 0x03
+
+start:
+	MOV R4, R7
+	MOV R5, R8
+	CALL draw_ship
+	ADD R8, R11
+	SUB R3, 0x01
+	BRNE start
+
+call pause
 MAIN:     
 			MOV  R4, R7   ;y coordin
 			MOV  R5, R8   ;x coordin
@@ -48,8 +69,6 @@ ret_pause:	SUB R10, 0x01
 end_main:	ADD R8, R11
 			BRN MAIN
 
-
-
 col:		ADD R7, 0x01
 			MOV R10, END_ROW
 			CMP R7, END_COL
@@ -59,12 +78,34 @@ col:		ADD R7, 0x01
 			BREQ set_neg
 	
 			MOV R11, 0x01
-			MOV R8, 0xFF
-			BRN end_main
+			call clear_ship
+			MOV R8, 0x00
+			MOV R3, 0x03
+			BRN start
 
 set_neg:	MOV R11, 0xFF
-			MOV R8, 0x28
-			brn end_main
+			CALL clear_ship
+			MOV R8, 0x27
+			MoV R3, 0x03
+			brn start
+
+
+clear_ship:
+			SUB R7, 0x01
+			MOV R3, 0x03
+			MOV R6, 0x00
+clear_loop: 
+			MOV R5, R8
+			MOV R4, R7
+			call draw_dot
+			ADD R8, R11
+			SUB R3, 0x01
+			CMP R3, 0x03
+			BRNE clear_loop
+						
+			ADD R7, 0x01
+			ret
+
 
 draw_ship:
 			MOV R5, R8
