@@ -14,12 +14,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity RAT_wrapper is
-    Port ( LEDS     : out   STD_LOGIC_VECTOR (2 downto 0);
+    Port ( --LEDS     : out   STD_LOGIC_VECTOR (2 downto 0);
              an     : out   STD_LOGIC_VECTOR (3 downto 0);
              seg    : out   STD_LOGIC_VECTOR (7 downto 0);
            --SWITCHES : in    STD_LOGIC_VECTOR (7 downto 0);
            RESET    : in    STD_LOGIC;
-           L_INT      : in    STD_LOGIC;
+           --L_INT      : in    STD_LOGIC;
            CLK      : in    STD_LOGIC;
            MISO : in std_logic;
                    SW : in std_logic_vector (2 downto 0);
@@ -143,6 +143,8 @@ architecture Behavioral of RAT_wrapper is
    signal s_clk         : std_logic;
    --signal s_interrupt   : std_logic; -- not yet used
    
+   signal s_LEDS     :   STD_LOGIC_VECTOR (2 downto 0);
+   signal s_l_int    : std_logic;
    
       signal r_vga_we   : std_logic;                       -- Write enable
    signal r_vga_wa   : std_logic_vector(10 downto 0);   -- The address to read from / write to  
@@ -166,7 +168,7 @@ begin
               PORT_ID  => s_port_id,
               RST    => RESET,
               IO_STRB  => s_load,
-              INT   => s_dbn_int,  -- s_interrupt
+              INT   => s_l_int,  -- s_interrupt
               CLK      => s_CLK);
               
      
@@ -202,10 +204,10 @@ begin
                                                         pixelData => r_vgaData);     
               
               
-    my_db_1shot_FSM : db_1shot_FSM 
-        port map ( A    => L_INT,
-                   CLK  => s_clk,
-                   A_DB => s_dbn_int);
+--    my_db_1shot_FSM : db_1shot_FSM 
+--        port map ( A    => L_INT,
+--                   CLK  => s_clk,
+--                   A_DB => s_dbn_int);
                    
                    
    my_PmodJSTK_Demo : PmodJSTK_Demo
@@ -217,12 +219,17 @@ begin
                        SS => SS,
                        MOSI => MOSI,
                        SCLK => SCLK,
-                       LED => LEDS);
+                       LED => s_LEDS);
                         --AN => an,
                         --SEG => seg);
                       
+    my_db_1shot_FSM : db_1shot_FSM 
+                                port map ( A    => s_LEDS(2),
+                                           CLK  => s_clk,
+                                           A_DB => s_l_int);
 
-                                   
+
+                             
    -------------------------------------------------------------------------------
 
 
