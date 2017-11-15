@@ -14,7 +14,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity RAT_wrapper is
-    Port ( --LEDS     : out   STD_LOGIC_VECTOR (2 downto 0);
+    Port ( LEDS     : out   STD_LOGIC_VECTOR (2 downto 0);
              an     : out   STD_LOGIC_VECTOR (3 downto 0);
              seg    : out   STD_LOGIC_VECTOR (7 downto 0);
            --SWITCHES : in    STD_LOGIC_VECTOR (7 downto 0);
@@ -81,9 +81,9 @@ architecture Behavioral of RAT_wrapper is
        SS : out std_logic;
        MOSI : out std_logic;
        SCLK : out std_logic;
-       LED : out std_logic_vector (2 downto 0));
-        --AN : out std_logic_vector (3 downto 0);
-        --SEG : out std_logic_vector (7 downto 0));
+       LED : out std_logic_vector (2 downto 0);
+        AN : out std_logic_vector (3 downto 0);
+        SEG : out std_logic_vector (7 downto 0));
       end component;
    
    
@@ -174,17 +174,17 @@ begin
      
     s_cnt1_assign <= "000000" & s_SSEG_val;
     
-    my_sseg_dec_uni : sseg_dec_uni
-    port map (       COUNT1 => s_cnt1_assign,
-                     COUNT2 => s_sseg_val,
-                     SEL => s_SSEG_cntr (7 downto 6),
-                     dp_oe => s_sseg_cntr(2),
-                     dp => s_sseg_cntr (5 downto 4),                       
-                     CLK => CLK,
-                     SIGN => s_sseg_cntr(1),
-                     VALID => s_sseg_cntr(0),
-                     DISP_EN => an,
-                     SEGMENTS => seg);
+--    my_sseg_dec_uni : sseg_dec_uni
+--    port map (       COUNT1 => s_cnt1_assign,
+--                     COUNT2 => s_sseg_val,
+--                     SEL => s_SSEG_cntr (7 downto 6),
+--                     dp_oe => s_sseg_cntr(2),
+--                     dp => s_sseg_cntr (5 downto 4),                       
+--                     CLK => CLK,
+--                     SIGN => s_sseg_cntr(1),
+--                     VALID => s_sseg_cntr(0),
+--                     DISP_EN => an,
+--                     SEGMENTS => seg);
               
         my_clk_div : clk_div 
              port map (CLK => CLK,
@@ -219,9 +219,9 @@ begin
                        SS => SS,
                        MOSI => MOSI,
                        SCLK => SCLK,
-                       LED => s_LEDS);
-                        --AN => an,
-                        --SEG => seg);
+                       LED => s_LEDS,
+                        AN => an,
+                        SEG => seg);
                       
     my_db_1shot_FSM : db_1shot_FSM 
                                 port map ( A    => s_LEDS(2),
@@ -230,6 +230,7 @@ begin
 
 
                              
+   
    -------------------------------------------------------------------------------
 
 
