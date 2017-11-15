@@ -28,6 +28,7 @@
    SEI
 
 reset:
+	    CALL clear_row
 		MOV R8, 0x28
 		MOV R7, 0x1D
 		MOV R6, 0x00
@@ -67,7 +68,8 @@ start:
 
 call pause
 MAIN:     
-			MOV  R4, R7   ;y coordin
+			
+            MOV  R4, R7   ;y coordin
 			MOV  R5, R8   ;x coordin
 			call draw_ship  
 main_pause:	call pause
@@ -80,6 +82,27 @@ ret_pause:	SUB R10, 0x01
 
 end_main:	ADD R8, R11
 			BRN MAIN
+
+
+
+
+
+
+clear_row:
+
+   
+   CALL clear_square
+   SUB R8, 0x01
+   CMP R8, 0xFF
+   BRNE clear_row
+   RET
+
+
+
+
+
+
+
 
 col:		ADD R7, 0x01
 			MOV R10, END_ROW
