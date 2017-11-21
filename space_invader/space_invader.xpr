@@ -10,12 +10,12 @@
     <Option Name="Part" Val="xc7a35tcpg236-1"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>
-    <Option Name="CompiledLibDirModelSim" Val="$PPRDIR/../../../AppData/Roaming/Xilinx/Vivado/AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/modelsim"/>
-    <Option Name="CompiledLibDirQuesta" Val="$PPRDIR/../../../AppData/Roaming/Xilinx/Vivado/AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/questa"/>
-    <Option Name="CompiledLibDirIES" Val="$PPRDIR/../../../AppData/Roaming/Xilinx/Vivado/AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/ies"/>
-    <Option Name="CompiledLibDirVCS" Val="$PPRDIR/../../../AppData/Roaming/Xilinx/Vivado/AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/vcs"/>
-    <Option Name="CompiledLibDirRiviera" Val="$PPRDIR/../../../AppData/Roaming/Xilinx/Vivado/AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/riviera"/>
-    <Option Name="CompiledLibDirActivehdl" Val="$PPRDIR/../../../AppData/Roaming/Xilinx/Vivado/AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/activehdl"/>
+    <Option Name="CompiledLibDirModelSim" Val="$PPRDIR/../../AppData/Roaming/Xilinx/Vivado/AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/modelsim"/>
+    <Option Name="CompiledLibDirQuesta" Val="$PPRDIR/../../AppData/Roaming/Xilinx/Vivado/AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/questa"/>
+    <Option Name="CompiledLibDirIES" Val="$PPRDIR/../../AppData/Roaming/Xilinx/Vivado/AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/ies"/>
+    <Option Name="CompiledLibDirVCS" Val="$PPRDIR/../../AppData/Roaming/Xilinx/Vivado/AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/vcs"/>
+    <Option Name="CompiledLibDirRiviera" Val="$PPRDIR/../../AppData/Roaming/Xilinx/Vivado/AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/riviera"/>
+    <Option Name="CompiledLibDirActivehdl" Val="$PPRDIR/../../AppData/Roaming/Xilinx/Vivado/AppData/AppData/AppData/Roaming/AppData/AppData/AppData/AppData/Roaming/AppData/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/compile_simlib/activehdl"/>
     <Option Name="TargetLanguage" Val="VHDL"/>
     <Option Name="SimulatorLanguage" Val="VHDL"/>
     <Option Name="BoardPart" Val=""/>
@@ -79,14 +79,14 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../../Downloads/PmodJSTK/PmodJSTK.srcs/PmodJSTK.v">
+      <File Path="$PSRCDIR/sources_1/imports/new/pmod_step_driver.v">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../../Downloads/PmodJSTK/PmodJSTK.srcs/ClkDiv_5Hz.v">
+      <File Path="$PPRDIR/../../../Downloads/PmodJSTK/PmodJSTK.srcs/PmodJSTK.v">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
@@ -104,6 +104,28 @@
       <File Path="$PSRCDIR/sources_1/imports/new/mux.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/mux.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/clock_div.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../../Downloads/PmodJSTK/PmodJSTK.srcs/ClkDiv_5Hz.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/counter_for_one_shot.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/counter_for_one_shot.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -200,7 +222,7 @@
       <File Path="$PSRCDIR/sources_1/imports/space_invader/prog_rom.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/prog_rom.vhd"/>
-          <Attr Name="ImportTime" Val="1510768987"/>
+          <Attr Name="ImportTime" Val="1511248036"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -210,6 +232,13 @@
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/program_counter.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/pmod_step_interface.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
@@ -283,9 +312,9 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/counter_for_one_shot.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/new/debounce_one_shot_FSM.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/counter_for_one_shot.vhd"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/debounce_one_shot_FSM.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -317,14 +346,6 @@
       <File Path="$PSRCDIR/sources_1/imports/new/clk_div.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/clk_div.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/debounce_one_shot_FSM.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/debounce_one_shot_FSM.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -398,6 +419,70 @@
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/ScratchPAD.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../../Downloads/PmodJSTKsteppercontrol/PmodJSTK.v">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../../Downloads/PmodJSTKsteppercontrol/ClkDiv_5Hz.v">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../../Downloads/PmodJSTKsteppercontrol/ClkDiv_66_67kHz.v">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../../Downloads/PmodJSTKsteppercontrol/spiCtrl.v">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../../Downloads/PmodJSTKsteppercontrol/PmodJSTK_Demo.v">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../../Downloads/PmodJSTKsteppercontrol/ssdCtrl.v">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../../Downloads/PmodJSTKsteppercontrol/SPImode0.v">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../../Downloads/PmodJSTKsteppercontrol/Binary_To_BCD.v">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>

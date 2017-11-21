@@ -45,7 +45,7 @@ reset_loop:
 	
 		call pause
 
-   MOV  R27, 0x1D
+   MOV  R27, 0x1A
    MOV  R28, 0x14
 	MOV R6, 0xFF
 	MOV R4, R27

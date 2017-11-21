@@ -14,7 +14,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity RAT_wrapper is
-    Port ( LEDS     : out   STD_LOGIC_VECTOR (2 downto 0);
+    Port ( --LEDS     : out   STD_LOGIC_VECTOR (2 downto 0);
            an     : out   STD_LOGIC_VECTOR (3 downto 0);
            seg    : out   STD_LOGIC_VECTOR (7 downto 0);
            --SWITCHES : in    STD_LOGIC_VECTOR (7 downto 0);
@@ -85,7 +85,7 @@ component jstksteptop
        jstk_input_sclk_3 : out std_logic;
        an : out std_logic_vector (3 downto 0);
        seg : out std_logic_vector (7 downto 0);
-       LEDS : out std_logic_vector (2 downto 0);
+       --LEDS : out std_logic_vector (2 downto 0);
        signal_x : out std_logic_vector (3 downto 0);
        signal_y : out std_logic_vector (3 downto 0));
  end component;
@@ -155,6 +155,8 @@ component jstksteptop
    signal r_vga_wd   : std_logic_vector(7 downto 0);    -- The pixel data to write to the framebuffer
    signal r_vgaData  : std_logic_vector(7 downto 0);    -- The pixel data read from the framebuffer
    
+   signal s_signal_x : std_logic_vector (3 downto 0);
+   signal s_signal_y : std_logic_vector (3 downto 0);
    
    
    -- Register definitions for output devices ------------------------------------
@@ -239,9 +241,9 @@ begin
                                jstk_input_sclk_3 => SCLK,
                                an => an,
                                seg => seg,
-                               LEDS => s_LEDS,
-                               signal_x => signal_x,
-                               signal_y => signal_y);
+                               --LEDS => s_LEDS,
+                               signal_x => s_signal_x,
+                               signal_y => s_signal_y);
                          
                       
     my_db_1shot_FSM : db_1shot_FSM 
@@ -249,17 +251,12 @@ begin
                                            CLK  => s_clk,
                                            A_DB => s_l_int);
 
---        process(s_posdata)
---        begin
---           if (s_posdata > "0000011111") then
---                LEDS(0) <= '1';
-                
---           else
---                LEDS(0) <= '0';
---           end if;                  
---        end process;
-   -------------------------------------------------------------------------------
-
+--process(s_signal_x)
+--begin
+--if (s_signal_x(0) = '1') then
+--    s_l_int <= '1';
+--end if;
+--end process;
 
    -------------------------------------------------------------------------------
    -- MUX for selecting what input to read ---------------------------------------

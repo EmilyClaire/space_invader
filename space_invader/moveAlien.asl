@@ -61,7 +61,7 @@ C5:  Raw line from source code.
 (0045)                            || 	
 (0046)  CS-0x01D  0x08379         || 		call pause
 (0047)                            || 
-(0048)  CS-0x01E  0x37B1D         ||    MOV  R27, 0x1D
+(0048)  CS-0x01E  0x37B1A         ||    MOV  R27, 0x1A
 (0049)  CS-0x01F  0x37C14         ||    MOV  R28, 0x14
 (0050)  CS-0x020  0x366FF         || 	MOV R6, 0xFF
 (0051)  CS-0x021  0x044D9         || 	MOV R4, R27
