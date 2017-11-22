@@ -17,9 +17,7 @@
 					   ;0xE0 ;red
 					   ;     ;green
 
-.EQU INPUT_LEFT_ID   = 0x20
-.EQU INPUT_RIGHT_ID  = 0x21
-.EQU INPUT_SHOOT_ID  = 0x22
+.EQU INTERRUPT_ID  = 0x20
 
 
 .CSEG
@@ -45,7 +43,7 @@ reset_loop:
 	
 		call pause
 
-   MOV  R27, 0x1A
+   MOV  R27, 0x1B
    MOV  R28, 0x14
 	MOV R6, 0xFF
 	MOV R4, R27
@@ -203,9 +201,49 @@ clear_square:
    CALL draw_dot   ;clears dot at the origin
    RET
 
+;		mov r29, 0x01
+;		mov r30, 0x02
+ ;       mov r31, 0x03
 
-ISR:
+ISR: 
+   IN R22, INTERRUPT_ID
+	
+	cmp r22, 0x00
+    breq testing
+	
+   CMP R22, 0x03
+   BREQ shoot
 
+   CMP R22, 0x02
+   BREQ moveLeft   
+
+   CMP R22, 0x01  
+   BREQ moveRight
+
+   brn testing
+
+   brn ISR_END
+
+testing: 
+   MOV  R4, R27   ;y coordin
+   MOV  R5, R28   ;x coordin
+
+	mov r6, 0x03
+    call draw_dot
+    brn isr_end
+
+shoot: 
+   MOV  R4, R27   ;y coordin
+   MOV  R5, R28   ;x coordin
+
+	  mov R6, 0xE0
+	  call draw_dot
+      call pause
+	  mov R6, 0xFF
+      call draw_dot
+	  brn ISR_END
+
+moveLeft:
 	CMP R28, 0x00
 	BREQ ISR_END
 
@@ -219,7 +257,24 @@ ISR:
    MOV  R5, R28   ;x coordin
    MOV  R6, 0xFF
    CALL draw_dot   ;draw red square at origin
+   brn ISR_END
+
+moveRight:
+	CMP R28, END_ROW
+	BREQ ISR_END
+
+   CALL clear_square
+
    
+   ADD  R28, 0x01  
+
+
+   MOV  R4, R27   ;y coordin
+   MOV  R5, R28   ;x coordin
+   MOV  R6, 0xFF
+   CALL draw_dot   ;draw red square at origin
+   
+	brn ISR_END
 ISR_END:
 		RETIE
 

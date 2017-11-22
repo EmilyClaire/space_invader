@@ -19,20 +19,22 @@ entity RAT_wrapper is
            seg    : out   STD_LOGIC_VECTOR (7 downto 0);
            --SWITCHES : in    STD_LOGIC_VECTOR (7 downto 0);
            RESET    : in    STD_LOGIC;
-           --L_INT      : in    STD_LOGIC;
+           L_INT      : in    STD_LOGIC;
+           R_INT    : in STD_LOGIC;
+           SHOOT_INT: in STD_LOGIC;
            CLK      : in    STD_LOGIC;
-           MISO : in std_logic;
-           SW : in std_logic;
-           SS : out std_logic;
-           --MOSI : out std_logic;
-           SCLK : out std_logic;
+--           MISO : in std_logic;
+--           SW : in std_logic;
+--           SS : out std_logic;
+--           MOSI : out std_logic;
+--           SCLK : out std_logic;
            
            
            VGA_RGB  : out std_logic_vector(7 downto 0);
            VGA_HS   : out std_logic;
-           VGA_VS   : out std_logic;
-           signal_x : out std_logic_vector (3 downto 0);
-           signal_y : out std_logic_vector (3 downto 0));
+           VGA_VS   : out std_logic);
+--           signal_x : out std_logic_vector (3 downto 0);
+--           signal_y : out std_logic_vector (3 downto 0));
 end RAT_wrapper;
 
 architecture Behavioral of RAT_wrapper is
@@ -52,9 +54,7 @@ architecture Behavioral of RAT_wrapper is
    CONSTANT SSEG_VAL_ID:    STD_LOGIC_VECTOR (7 downto 0) := x"80";
    
    
-   CONSTANT INTERRUPT_LEFT_ID : STD_LOGIC_VECTOR (7 downto 0) := x"20";
-   CONSTANT INTERRUPT_RIGHT_ID : STD_LOGIC_VECTOR (7 downto 0) := x"21";
-   CONSTANT INTERRUPT_SHOOT_ID : STD_LOGIC_VECTOR (7 downto 0) := x"22";
+   CONSTANT INTERRUPT_ID : STD_LOGIC_VECTOR (7 downto 0) := x"20";
    
    CONSTANT VGA_READ_ID : STD_LOGIC_VECTOR(7 downto 0) := x"93";
    CONSTANT VGA_HADDR_ID : STD_LOGIC_VECTOR(7 downto 0) := x"90";
@@ -74,21 +74,21 @@ architecture Behavioral of RAT_wrapper is
    end component RAT_CPU;
    
    
-component jstksteptop
- Port(
-       clk : in std_logic;
-       rst : in std_logic;
-       --sw_en : in std_logic_vector (1 downto 0);
-       sw : in std_logic;
-       jstk_input_ss_0 : out std_logic;
-       jstk_input_miso_2 : in std_logic;
-       jstk_input_sclk_3 : out std_logic;
-       an : out std_logic_vector (3 downto 0);
-       seg : out std_logic_vector (7 downto 0);
-       --LEDS : out std_logic_vector (2 downto 0);
-       signal_x : out std_logic_vector (3 downto 0);
-       signal_y : out std_logic_vector (3 downto 0));
- end component;
+--component jstksteptop
+-- Port(
+--       clk : in std_logic;
+--       rst : in std_logic;
+--       --sw_en : in std_logic_vector (1 downto 0);
+--       sw : in std_logic;
+--       jstk_input_ss_0 : out std_logic;
+--       jstk_input_miso_2 : in std_logic;
+--       jstk_input_sclk_3 : out std_logic;
+--       an : out std_logic_vector (3 downto 0);
+--       seg : out std_logic_vector (7 downto 0);
+--       --LEDS : out std_logic_vector (2 downto 0);
+--       signal_x : out std_logic_vector (3 downto 0);
+--       signal_y : out std_logic_vector (3 downto 0));
+-- end component;
    
    
    
@@ -145,10 +145,14 @@ component jstksteptop
    signal s_cnt1_assign : std_logic_vector (13 downto 0);
    signal s_dbn_int     : std_logic;
    signal s_clk         : std_logic;
-   --signal s_interrupt   : std_logic; -- not yet used
-   
+   signal s_interrupt   : std_logic; -- not yet used
+   signal s_int_port    : std_logic_vector(7 downto 0);
+   signal s_reset       : std_logic;
    signal s_LEDS     :   STD_LOGIC_VECTOR (2 downto 0);
-   signal s_l_int    : std_logic;
+   
+   signal s_r_int    : std_logic := '0';
+   signal s_shoot_int : std_logic := '0';
+   signal s_l_int    : std_logic := '0';
    signal s_posdata  :std_logic_vector (9 downto 0);
       signal r_vga_we   : std_logic;                       -- Write enable
    signal r_vga_wa   : std_logic_vector(10 downto 0);   -- The address to read from / write to  
@@ -172,9 +176,9 @@ begin
    port map(  IN_PORT  => s_input_port,
               OUT_PORT => s_output_port,
               PORT_ID  => s_port_id,
-              RST    => RESET,
+              RST    => s_reset,
               IO_STRB  => s_load,
-              INT   => s_l_int,  -- s_interrupt
+              INT   => s_interrupt,
               CLK      => s_CLK);
               
      
@@ -198,17 +202,17 @@ begin
                        );
           
    VGA: vgaDriverBuffer
-                                               port map(CLK => CLK,
-                                                        WE => r_vga_we,
-                                                        WA => r_vga_wa,
-                                                        WD => r_vga_wd,
-                                                        Rout => VGA_RGB(7 downto 5),
-                                                        Gout => VGA_RGB(4 downto 2),
-                                                        Bout => VGA_RGB(1 downto 0),
-                                                        HS => VGA_HS,
-                                                        VS => VGA_VS,
-                                                        pixelData => r_vgaData);     
-              
+   port map(CLK => CLK,
+            WE => r_vga_we,
+            WA => r_vga_wa,
+            WD => r_vga_wd,
+            Rout => VGA_RGB(7 downto 5),
+            Gout => VGA_RGB(4 downto 2),
+            Bout => VGA_RGB(1 downto 0),
+            HS => VGA_HS,
+            VS => VGA_VS,
+            pixelData => r_vgaData);     
+
               
 --    my_db_1shot_FSM : db_1shot_FSM 
 --        port map ( A    => L_INT,
@@ -230,27 +234,44 @@ begin
 --                        SEG => seg);
                         
                         
-  my_jstksteptop : jstksteptop
-                         port map(
-                               clk => CLK,
-                               rst => RESET,
-                               --sw_en =>,
-                               sw => SW,
-                               jstk_input_ss_0 => SS,
-                               jstk_input_miso_2 => MISO,
-                               jstk_input_sclk_3 => SCLK,
-                               an => an,
-                               seg => seg,
-                               --LEDS => s_LEDS,
-                               signal_x => s_signal_x,
-                               signal_y => s_signal_y);
+--  my_jstksteptop : jstksteptop
+--                         port map(
+--                               clk => CLK,
+--                               rst => RESET,
+--                               --sw_en =>,
+--                               sw => SW,
+--                               jstk_input_ss_0 => SS,
+--                               jstk_input_miso_2 => MISO,
+--                               jstk_input_sclk_3 => SCLK,
+--                               an => an,
+--                               seg => seg,
+--                               --LEDS => s_LEDS,
+--                               signal_x => s_signal_x,
+--                               signal_y => s_signal_y);
                          
                       
-    my_db_1shot_FSM : db_1shot_FSM 
-                                port map ( A    => s_LEDS(2),
+    my_db_reset : db_1shot_FSM 
+                                port map ( A    => RESET,
+                                           CLK  => s_clk,
+                                           A_DB => s_reset );
+
+    my_db_L_INT : db_1shot_FSM 
+                                port map ( A    => L_INT,
                                            CLK  => s_clk,
                                            A_DB => s_l_int);
+                                           
+                                           
+    my_db_R_INT : db_1shot_FSM 
+                               port map ( A    => R_INT,
+                                          CLK  => s_clk,
+                                          A_DB => s_r_int);
+    my_db_shoot : db_1shot_FSM 
+                              port map ( A    => SHOOT_INT,
+                                         CLK  => s_clk,
+                                         A_DB => s_shoot_int);
 
+    s_interrupt <= shoot_int or r_int or l_int;
+                
 --process(s_signal_x)
 --begin
 --if (s_signal_x(0) = '1') then
@@ -262,14 +283,22 @@ begin
    -- MUX for selecting what input to read ---------------------------------------
    -- add conditions and connections for any added PORT IDs
    -------------------------------------------------------------------------------
---   inputs: process(s_port_id, SWITCHES)
---   begin
---      if (s_port_id  = SWITCHES_ID) then
---         s_input_port <= SWITCHES;
---      else
---         s_input_port <= x"00";
---      end if;
---   end process inputs;
+   inputs: process(s_port_id, l_int, r_int, shoot_int)
+   begin
+      if (s_port_id  = INTERRUPT_ID) then
+        if(l_int = '1') then
+            s_int_port <= x"02";
+        elsif (r_int = '1') then
+            s_input_port <= x"01";
+        elsif(shoot_int = '1') then
+            s_input_port <= x"03";
+        end if;
+
+        s_input_port <= s_int_port;
+      else
+        s_input_port <= x"00";
+      end if;
+   end process inputs;
    -------------------------------------------------------------------------------
 
 
