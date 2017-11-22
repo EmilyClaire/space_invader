@@ -31,7 +31,7 @@ C5:  Raw line from source code.
 (0015)                       029  || .equ END_COL = 0x1D
 (0016)                       224  || .equ SHIP_COLOR = 0xE0;0x03 ;blue
 (0017)                            || 					   ;0xE0 ;red
-(0018)                            || 					   ;     ;green
+(0018)                            || 					   ; 0x1C    ;green
 (0019)                            || 
 (0020)                       032  || .EQU INTERRUPT_ID  = 0x20
 (0021)                            || 
@@ -225,79 +225,97 @@ C5:  Raw line from source code.
 (0209)  CS-0x080  0x33620         ||    IN R22, INTERRUPT_ID
 (0210)                            || 	
 (0211)  CS-0x081  0x31600         || 	cmp r22, 0x00
-(0212)  CS-0x082  0x0845A         ||     breq testing
-(0213)                            || 	
-(0214)  CS-0x083  0x31603         ||    CMP R22, 0x03
-(0215)  CS-0x084  0x08482         ||    BREQ shoot
+(0212)  CS-0x082  0x08462         ||     breq testing0
+(0213)                            || 
+(0214)  CS-0x083  0x31605         || 	cmp r22, 0x05
+(0215)  CS-0x084  0x084A2         || 	breq testing5
 (0216)                            || 
-(0217)  CS-0x085  0x31602         ||    CMP R22, 0x02
-(0218)  CS-0x086  0x084C2         ||    BREQ moveLeft   
+(0217)  CS-0x085  0x31603         ||    CMP R22, 0x03
+(0218)  CS-0x086  0x084E2         ||    BREQ shoot
 (0219)                            || 
-(0220)  CS-0x087  0x31601         ||    CMP R22, 0x01  
-(0221)  CS-0x088  0x0850A         ||    BREQ moveRight
+(0220)  CS-0x087  0x31602         ||    CMP R22, 0x02
+(0221)  CS-0x088  0x08522         ||    BREQ moveLeft   
 (0222)                            || 
-(0223)  CS-0x089  0x08458         ||    brn testing
-(0224)                            || 
-(0225)  CS-0x08A  0x08550         ||    brn ISR_END
-(0226)                            || 
-(0227)                     0x08B  || testing: 
-(0228)  CS-0x08B  0x044D9         ||    MOV  R4, R27   ;y coordin
-(0229)  CS-0x08C  0x045E1         ||    MOV  R5, R28   ;x coordin
-(0230)                            || 
-(0231)  CS-0x08D  0x36603         || 	mov r6, 0x03
-(0232)  CS-0x08E  0x08341         ||     call draw_dot
-(0233)  CS-0x08F  0x08550         ||     brn isr_end
-(0234)                            || 
-(0235)                     0x090  || shoot: 
-(0236)  CS-0x090  0x044D9         ||    MOV  R4, R27   ;y coordin
-(0237)  CS-0x091  0x045E1         ||    MOV  R5, R28   ;x coordin
+(0223)  CS-0x089  0x31601         ||    CMP R22, 0x01  
+(0224)  CS-0x08A  0x0856A         ||    BREQ moveRight
+(0225)                            || 
+(0226)  CS-0x08B  0x085B0         ||    brn ISR_END
+(0227)                            || 
+(0228)                     0x08C  || testing0: 
+(0229)  CS-0x08C  0x044D9         ||    MOV  R4, R27   ;y coordin
+(0230)  CS-0x08D  0x045E1         ||    MOV  R5, R28   ;x coordin
+(0231)                            || 
+(0232)  CS-0x08E  0x36603         || 	mov r6, 0x03
+(0233)  CS-0x08F  0x08341         ||     call draw_dot
+(0234)  CS-0x090  0x08379         || 	call pause
+(0235)  CS-0x091  0x366FF         || 	mov r6, 0xff
+(0236)  CS-0x092  0x08341         || 	call draw_dot
+(0237)  CS-0x093  0x085B0         ||     brn isr_end
 (0238)                            || 
-(0239)  CS-0x092  0x366E0         || 	  mov R6, 0xE0
-(0240)  CS-0x093  0x08341         || 	  call draw_dot
-(0241)  CS-0x094  0x08379         ||       call pause
-(0242)  CS-0x095  0x366FF         || 	  mov R6, 0xFF
-(0243)  CS-0x096  0x08341         ||       call draw_dot
-(0244)  CS-0x097  0x08550         || 	  brn ISR_END
-(0245)                            || 
-(0246)                     0x098  || moveLeft:
-(0247)  CS-0x098  0x31C00         || 	CMP R28, 0x00
-(0248)  CS-0x099  0x08552         || 	BREQ ISR_END
-(0249)                            || 
-(0250)  CS-0x09A  0x083D9         ||    CALL clear_square
+(0239)                            || 
+(0240)                            || 
+(0241)                     0x094  || testing5: 
+(0242)  CS-0x094  0x044D9         ||    MOV  R4, R27   ;y coordin
+(0243)  CS-0x095  0x045E1         ||    MOV  R5, R28   ;x coordin
+(0244)                            || 
+(0245)  CS-0x096  0x3661C         || 	mov r6, 0x1c
+(0246)  CS-0x097  0x08341         ||     call draw_dot
+(0247)  CS-0x098  0x08379         || 	call pause
+(0248)  CS-0x099  0x366FF         || 	mov r6, 0xff
+(0249)  CS-0x09A  0x08341         || 	call draw_dot
+(0250)  CS-0x09B  0x085B0         ||     brn isr_end
 (0251)                            || 
-(0252)                            ||    
-(0253)  CS-0x09B  0x2DC01         ||    SUB  R28, 0x01  
-(0254)                            || 
-(0255)                            || 
-(0256)  CS-0x09C  0x044D9         ||    MOV  R4, R27   ;y coordin
-(0257)  CS-0x09D  0x045E1         ||    MOV  R5, R28   ;x coordin
-(0258)  CS-0x09E  0x366FF         ||    MOV  R6, 0xFF
-(0259)  CS-0x09F  0x08341         ||    CALL draw_dot   ;draw red square at origin
-(0260)  CS-0x0A0  0x08550         ||    brn ISR_END
-(0261)                            || 
-(0262)                     0x0A1  || moveRight:
-(0263)  CS-0x0A1  0x31C25         || 	CMP R28, END_ROW
-(0264)  CS-0x0A2  0x08552         || 	BREQ ISR_END
-(0265)                            || 
-(0266)  CS-0x0A3  0x083D9         ||    CALL clear_square
+(0252)                            || 
+(0253)                     0x09C  || shoot: 
+(0254)  CS-0x09C  0x044D9         ||    MOV  R4, R27   ;y coordin
+(0255)  CS-0x09D  0x045E1         ||    MOV  R5, R28   ;x coordin
+(0256)                            || 
+(0257)  CS-0x09E  0x366E0         || 	  mov R6, 0xE0
+(0258)  CS-0x09F  0x08341         || 	  call draw_dot
+(0259)  CS-0x0A0  0x08379         ||       call pause
+(0260)  CS-0x0A1  0x366FF         || 	  mov R6, 0xFF
+(0261)  CS-0x0A2  0x08341         ||       call draw_dot
+(0262)  CS-0x0A3  0x085B0         || 	  brn ISR_END
+(0263)                            || 
+(0264)                     0x0A4  || moveLeft:
+(0265)  CS-0x0A4  0x31C00         || 	CMP R28, 0x00
+(0266)  CS-0x0A5  0x085B2         || 	BREQ ISR_END
 (0267)                            || 
-(0268)                            ||    
-(0269)  CS-0x0A4  0x29C01         ||    ADD  R28, 0x01  
-(0270)                            || 
-(0271)                            || 
-(0272)  CS-0x0A5  0x044D9         ||    MOV  R4, R27   ;y coordin
-(0273)  CS-0x0A6  0x045E1         ||    MOV  R5, R28   ;x coordin
-(0274)  CS-0x0A7  0x366FF         ||    MOV  R6, 0xFF
-(0275)  CS-0x0A8  0x08341         ||    CALL draw_dot   ;draw red square at origin
-(0276)                            ||    
-(0277)  CS-0x0A9  0x08550         || 	brn ISR_END
-(0278)                     0x0AA  || ISR_END:
-(0279)  CS-0x0AA  0x1A003         || 		RETIE
-(0280)                            || 
-(0281)                            || .CSEG
-(0282)                       1023  || .ORG 0x3FF
-(0283)  CS-0x3FF  0x08400  0x3FF  || VECTOR:      BRN ISR
-(0284)                            || 
+(0268)  CS-0x0A6  0x083D9         ||    CALL clear_square
+(0269)                            || 
+(0270)                            ||    
+(0271)  CS-0x0A7  0x2DC01         ||    SUB  R28, 0x01  
+(0272)                            || 
+(0273)                            || 
+(0274)  CS-0x0A8  0x044D9         ||    MOV  R4, R27   ;y coordin
+(0275)  CS-0x0A9  0x045E1         ||    MOV  R5, R28   ;x coordin
+(0276)  CS-0x0AA  0x366FF         ||    MOV  R6, 0xFF
+(0277)  CS-0x0AB  0x08341         ||    CALL draw_dot   ;draw red square at origin
+(0278)  CS-0x0AC  0x085B0         ||    brn ISR_END
+(0279)                            || 
+(0280)                     0x0AD  || moveRight:
+(0281)  CS-0x0AD  0x31C25         || 	CMP R28, END_ROW
+(0282)  CS-0x0AE  0x085B2         || 	BREQ ISR_END
+(0283)                            || 
+(0284)  CS-0x0AF  0x083D9         ||    CALL clear_square
+(0285)                            || 
+(0286)                            ||    
+(0287)  CS-0x0B0  0x29C01         ||    ADD  R28, 0x01  
+(0288)                            || 
+(0289)                            || 
+(0290)  CS-0x0B1  0x044D9         ||    MOV  R4, R27   ;y coordin
+(0291)  CS-0x0B2  0x045E1         ||    MOV  R5, R28   ;x coordin
+(0292)  CS-0x0B3  0x366FF         ||    MOV  R6, 0xFF
+(0293)  CS-0x0B4  0x08341         ||    CALL draw_dot   ;draw red square at origin
+(0294)                            ||    
+(0295)  CS-0x0B5  0x085B0         || 	brn ISR_END
+(0296)                     0x0B6  || ISR_END:
+(0297)  CS-0x0B6  0x1A003         || 		RETIE
+(0298)                            || 
+(0299)                            || .CSEG
+(0300)                       1023  || .ORG 0x3FF
+(0301)  CS-0x3FF  0x08400  0x3FF  || VECTOR:      BRN ISR
+(0302)                            || 
 
 
 
@@ -319,34 +337,35 @@ C4+: source code line number of where symbol is referenced
 CLEAR_LOOP     0x051   (0130)  ||  0137 
 CLEAR_ROW      0x039   (0089)  ||  0029 0095 
 CLEAR_SHIP     0x04E   (0126)  ||  0114 0120 
-CLEAR_SQUARE   0x07B   (0196)  ||  0092 0250 0266 
+CLEAR_SQUARE   0x07B   (0196)  ||  0092 0268 0284 
 COL            0x03E   (0105)  ||  0078 
 DD_OUT         0x06A   (0170)  ||  
 DONE           0x06E   (0175)  ||  0108 0175 
-DRAW_DOT       0x068   (0166)  ||  0036 0051 0133 0157 0163 0201 0232 0240 0243 0259 
-                               ||  0275 
+DRAW_DOT       0x068   (0166)  ||  0036 0051 0133 0157 0163 0201 0233 0236 0246 0249 
+                               ||  0258 0261 0277 0293 
 DRAW_NEG       0x061   (0155)  ||  0150 
 DRAW_SHIP      0x05A   (0143)  ||  0062 0072 
 END_MAIN       0x037   (0081)  ||  
 INSIDE_FOR0    0x074   (0185)  ||  0186 
-ISR            0x080   (0208)  ||  0283 
-ISR_END        0x0AA   (0278)  ||  0225 0233 0244 0248 0260 0264 0277 
+ISR            0x080   (0208)  ||  0301 
+ISR_END        0x0B6   (0296)  ||  0226 0237 0250 0262 0266 0278 0282 0295 
 MAIN           0x030   (0068)  ||  0082 
 MAIN_PAUSE     0x033   (0073)  ||  
 MIDDLE_FOR0    0x072   (0182)  ||  0189 
-MOVELEFT       0x098   (0246)  ||  0218 
-MOVERIGHT      0x0A1   (0262)  ||  0221 
+MOVELEFT       0x0A4   (0264)  ||  0221 
+MOVERIGHT      0x0AD   (0280)  ||  0224 
 OUTSIDE_FOR0   0x070   (0179)  ||  0192 
-PAUSE          0x06F   (0178)  ||  0044 0067 0073 0241 
+PAUSE          0x06F   (0178)  ||  0044 0067 0073 0234 0247 0259 
 RESET          0x011   (0028)  ||  
 RESET_LOOP     0x015   (0033)  ||  0038 0042 
 REST           0x062   (0157)  ||  0153 
 RET_PAUSE      0x034   (0076)  ||  
 SET_NEG        0x049   (0119)  ||  0111 
-SHOOT          0x090   (0235)  ||  0215 
+SHOOT          0x09C   (0253)  ||  0218 
 START          0x029   (0059)  ||  0065 0117 0123 
-TESTING        0x08B   (0227)  ||  0212 0223 
-VECTOR         0x3FF   (0283)  ||  
+TESTING0       0x08C   (0228)  ||  0212 
+TESTING5       0x094   (0241)  ||  0215 
+VECTOR         0x3FF   (0301)  ||  
 
 
 -- Directives: .BYTE
@@ -357,7 +376,7 @@ VECTOR         0x3FF   (0283)  ||
 -- Directives: .EQU
 ------------------------------------------------------------ 
 END_COL        0x01D   (0015)  ||  0107 
-END_ROW        0x025   (0014)  ||  0055 0106 0263 
+END_ROW        0x025   (0014)  ||  0055 0106 0281 
 INSIDE_FOR_COUNT 0x02F   (0010)  ||  0184 
 INTERRUPT_ID   0x020   (0020)  ||  0209 
 LEDS           0x040   (0008)  ||  

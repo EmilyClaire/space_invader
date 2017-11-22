@@ -419,14 +419,14 @@ my_z_flag_mux:  flag_mux
 my_shad_flag_reg_z: Shad_FlagReg_Z 
     Port map ( IN_FLAG  => s_z_flag,
                LD       => s_flg_shad_ld,
-               CLK      => s_clk,
+               CLK      => clk,
                OUT_FLAG => s_flg_shad_z_out);
  
                
 my_shad_flag_reg_c: Shad_FlagReg_C 
     Port map ( IN_FLAG  => s_c_flag,
                LD       => s_flg_shad_ld,       
-               CLK      => s_clk,
+               CLK      => clk,
                OUT_FLAG => s_flg_shad_c_out); --flag output
     
 out_port <= s_dx_out;

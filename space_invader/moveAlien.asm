@@ -15,7 +15,7 @@
 .equ END_COL = 0x1D
 .equ SHIP_COLOR = 0xE0;0x03 ;blue
 					   ;0xE0 ;red
-					   ;     ;green
+					   ; 0x1C    ;green
 
 .EQU INTERRUPT_ID  = 0x20
 
@@ -209,8 +209,11 @@ ISR:
    IN R22, INTERRUPT_ID
 	
 	cmp r22, 0x00
-    breq testing
-	
+    breq testing0
+
+	cmp r22, 0x05
+	breq testing5
+
    CMP R22, 0x03
    BREQ shoot
 
@@ -220,17 +223,32 @@ ISR:
    CMP R22, 0x01  
    BREQ moveRight
 
-   brn testing
-
    brn ISR_END
 
-testing: 
+testing0: 
    MOV  R4, R27   ;y coordin
    MOV  R5, R28   ;x coordin
 
 	mov r6, 0x03
     call draw_dot
+	call pause
+	mov r6, 0xff
+	call draw_dot
     brn isr_end
+
+
+
+testing5: 
+   MOV  R4, R27   ;y coordin
+   MOV  R5, R28   ;x coordin
+
+	mov r6, 0x1c
+    call draw_dot
+	call pause
+	mov r6, 0xff
+	call draw_dot
+    brn isr_end
+
 
 shoot: 
    MOV  R4, R27   ;y coordin

@@ -26,7 +26,7 @@
     <Option Name="IPUserFilesDir" Val="$PPRDIR/space_invader.ip_user_files"/>
     <Option Name="IPStaticSourceDir" Val="$PPRDIR/space_invader.ip_user_files/ipstatic"/>
     <Option Name="EnableBDX" Val="FALSE"/>
-    <Option Name="WTXSimLaunchSim" Val="25"/>
+    <Option Name="WTXSimLaunchSim" Val="37"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -370,15 +370,6 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/space_invader/prog_rom.vhd">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/prog_rom.vhd"/>
-          <Attr Name="ImportTime" Val="1511248036"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sources_1/imports/new/7_Seg.vhd">
         <FileInfo>
           <Attr Name="AutoDisabled" Val="1"/>
@@ -417,6 +408,7 @@
       </File>
       <File Path="$PSRCDIR/sources_1/imports/new/debounce_one_shot_FSM_TB.vhd">
         <FileInfo>
+          <Attr Name="UserDisabled" Val="1"/>
           <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/debounce_one_shot_FSM_TB.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>

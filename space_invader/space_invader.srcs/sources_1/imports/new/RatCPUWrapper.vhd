@@ -146,7 +146,7 @@ architecture Behavioral of RAT_wrapper is
    signal s_dbn_int     : std_logic;
    signal s_clk         : std_logic;
    signal s_interrupt   : std_logic; -- not yet used
-   signal s_int_port    : std_logic_vector(7 downto 0);
+   signal s_int_port    : std_logic_vector(7 downto 0):=x"05";
    signal s_reset       : std_logic;
    signal s_LEDS     :   STD_LOGIC_VECTOR (2 downto 0);
    
@@ -270,7 +270,7 @@ begin
                                          CLK  => s_clk,
                                          A_DB => s_shoot_int);
 
-    s_interrupt <= shoot_int or r_int or l_int;
+    s_interrupt <= s_shoot_int or s_r_int or s_l_int;
                 
 --process(s_signal_x)
 --begin
@@ -279,6 +279,18 @@ begin
 --end if;
 --end process;
 
+    process(s_l_int, s_r_int, s_shoot_int, s_interrupt)
+    begin
+
+            if(s_shoot_int = '1') then
+                s_int_port <= x"03"; 
+            elsif (s_l_int = '1') then
+                s_int_port <= x"02";
+            elsif(s_r_int = '1') then
+                s_int_port <= x"01";
+            end if;
+    end process;
+
    -------------------------------------------------------------------------------
    -- MUX for selecting what input to read ---------------------------------------
    -- add conditions and connections for any added PORT IDs
@@ -286,17 +298,21 @@ begin
    inputs: process(s_port_id, s_int_port)
    begin
       if (s_port_id  = INTERRUPT_ID) then
-          if(l_int = '1') then
-              s_int_port <= x"02";
-          elsif (r_int = '1') then
-              s_int_port <= x"01";
-          elsif(shoot_int = '1') then
-              s_int_port <= x"03";
-          end if;
+--        if(s_shoot_int = '1') then
+--            s_input_port <= x"03";
+--        end if;
+        
+--        if (s_l_int = '1') then
+--            s_input_port <= x"02";
+--        elsif(s_r_int = '1') then
+--            s_input_port <= x"01";
+--        end if;
         s_input_port <= s_int_port;
+      else
+        s_input_port <= x"00";
       end if;
    end process inputs;
-   -------------------------------------------------------------------------------
+--   -------------------------------------------------------------------------------
 
 
    -------------------------------------------------------------------------------
