@@ -4,7 +4,6 @@
 .EQU VGA_HADD = 0x90
 .EQU VGA_LADD = 0x91
 .EQU VGA_COLOR = 0x92
-.EQU SSEG = 0x81
 .EQU LEDS = 0x40
 
 .EQU INSIDE_FOR_COUNT    = 	0x2f
@@ -19,12 +18,16 @@
 
 .EQU INTERRUPT_ID  = 0x20
 
+.equ SSEG_CNTR_ID = 0x60
+.equ SSEG_VAL_ID  = 0x80
 
 .CSEG
 .ORG 0x10
 
    SEI
 
+MOV R2, 0x81
+OUT R2, SSEG_CNTR_ID
 reset:
 	    CALL clear_row
 		MOV R8, 0x28
@@ -207,7 +210,8 @@ clear_square:
 
 ISR: 
    IN R22, INTERRUPT_ID
-	
+	OUT  R22, SSEG_VAL_ID
+
 	cmp r22, 0x00
     breq testing0
 
@@ -217,7 +221,7 @@ ISR:
    CMP R22, 0x03
    BREQ shoot
 
-   CMP R22, 0x02
+   CMP R22, 0x15
    BREQ moveLeft   
 
    CMP R22, 0x01  

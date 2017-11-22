@@ -57,7 +57,17 @@ begin
       rst_tb <= '0';     
       wait for 1000ns;
       l_int_tb <= '1';
-      wait for 30000ns;
+      wait for 15000ns;
+      l_int_tb <= '0';
+      wait for 15000ns;
+      r_int_tb <= '1';
+      wait for 15000ns;
+      r_int_tb <= '0';
+      wait for 15000ns;
+      shoot_int_tb <='1';
+      wait for 15000ns;
+      shoot_int_tb <= '0';
+      wait for 15000ns;
       
 --      rst_tb <= '1';
 --      wait for 50ns;

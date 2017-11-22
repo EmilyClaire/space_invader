@@ -150,6 +150,8 @@ architecture Behavioral of RAT_wrapper is
    signal s_reset       : std_logic;
    signal s_LEDS     :   STD_LOGIC_VECTOR (2 downto 0);
    
+   signal s_ints : std_logic_vector(3 downto 0);
+   
    signal s_r_int    : std_logic := '0';
    signal s_shoot_int : std_logic := '0';
    signal s_l_int    : std_logic := '0';
@@ -184,17 +186,17 @@ begin
      
     s_cnt1_assign <= "000000" & s_SSEG_val;
     
---    my_sseg_dec_uni : sseg_dec_uni
---    port map (       COUNT1 => s_cnt1_assign,
---                     COUNT2 => s_sseg_val,
---                     SEL => s_SSEG_cntr (7 downto 6),
---                     dp_oe => s_sseg_cntr(2),
---                     dp => s_sseg_cntr (5 downto 4),                       
---                     CLK => CLK,
---                     SIGN => s_sseg_cntr(1),
---                     VALID => s_sseg_cntr(0),
---                     DISP_EN => an,
---                     SEGMENTS => seg);
+    my_sseg_dec_uni : sseg_dec_uni
+    port map (       COUNT1 => s_cnt1_assign,
+                     COUNT2 => s_sseg_val,
+                     SEL => s_SSEG_cntr (7 downto 6),
+                     dp_oe => s_sseg_cntr(2),
+                     dp => s_sseg_cntr (5 downto 4),                       
+                     CLK => CLK,
+                     SIGN => s_sseg_cntr(1),
+                     VALID => s_sseg_cntr(0),
+                     DISP_EN => an,
+                     SEGMENTS => seg);
               
         my_clk_div : clk_div 
              port map (CLK => CLK,
@@ -271,7 +273,14 @@ begin
                                          A_DB => s_shoot_int);
 
     s_interrupt <= s_shoot_int or s_r_int or s_l_int;
-                
+--    s_interrupt <= shoot_int or r_int or l_int;
+    
+--    process(s_r_int, s_shoot_int, s_l_int)
+--    begin
+--    s_ints(0) <= s_r_int;
+--    s_ints(1) <= s_shoot_int;
+--    s_ints(2) <= s_l_int;            
+--    end process;
 --process(s_signal_x)
 --begin
 --if (s_signal_x(0) = '1') then
@@ -279,23 +288,57 @@ begin
 --end if;
 --end process;
 
-    process(s_l_int, s_r_int, s_shoot_int, s_interrupt)
-    begin
+--    process(s_ints)
+--    begin
+--        case s_ints is
+--        when "100" =>  s_int_port <= x"02";
+--        when "001" =>  s_int_port <= x"01";
+--        when "010" => s_int_port <= x"03";
+--        when others => s_int_port <= s_int_port; 
+--        end case;
+--    end process;
 
-            if(s_shoot_int = '1') then
-                s_int_port <= x"03"; 
-            elsif (s_l_int = '1') then
-                s_int_port <= x"02";
-            elsif(s_r_int = '1') then
-                s_int_port <= x"01";
+process (s_l_int, s_shoot_int, s_r_int)
+begin
+    if (s_r_int = '1') then
+        s_int_port <= x"01";
+    else
+        if (s_l_int = '1') then
+            s_int_port <= x"02";
+        else
+            if (s_shoot_int = '1') then
+                s_int_port <= x"05";
+            else
+            s_int_port <= s_int_port;
             end if;
-    end process;
+        end if;
+    end if;
+end process;
+
+--process (l_int, shoot_int, r_int)
+--begin
+--    if (r_int = '1') then
+--        s_int_port <= x"01";
+--    else
+--        if (l_int = '1') then
+--            s_int_port <= x"02";
+--        else
+--            if (shoot_int = '1') then
+--                s_int_port <= x"05";
+--            else
+--            s_int_port <= s_int_port;
+--            end if;
+--        end if;
+--    end if;
+--end process;
+
+
 
    -------------------------------------------------------------------------------
    -- MUX for selecting what input to read ---------------------------------------
    -- add conditions and connections for any added PORT IDs
    -------------------------------------------------------------------------------
-   inputs: process(s_port_id, s_int_port)
+   inputs: process(s_port_id)
    begin
       if (s_port_id  = INTERRUPT_ID) then
 --        if(s_shoot_int = '1') then
@@ -340,8 +383,6 @@ begin
                r_LEDS <= s_output_port;
             elsif(s_port_id = SSEG_CNTR_ID) then
                 s_sseg_CNTR <= s_output_port;
-            
-
             elsif(s_port_id = SSEG_VAL_ID) then
                 s_sseg_VAL <= s_output_port;
                      elsif (s_port_id = VGA_HADDR_ID) then
