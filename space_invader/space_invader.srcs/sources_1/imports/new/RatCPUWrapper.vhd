@@ -283,20 +283,17 @@ begin
    -- MUX for selecting what input to read ---------------------------------------
    -- add conditions and connections for any added PORT IDs
    -------------------------------------------------------------------------------
-   inputs: process(s_port_id, l_int, r_int, shoot_int)
+   inputs: process(s_port_id, s_int_port)
    begin
       if (s_port_id  = INTERRUPT_ID) then
-        if(l_int = '1') then
-            s_int_port <= x"02";
-        elsif (r_int = '1') then
-            s_input_port <= x"01";
-        elsif(shoot_int = '1') then
-            s_input_port <= x"03";
-        end if;
-
+          if(l_int = '1') then
+              s_int_port <= x"02";
+          elsif (r_int = '1') then
+              s_int_port <= x"01";
+          elsif(shoot_int = '1') then
+              s_int_port <= x"03";
+          end if;
         s_input_port <= s_int_port;
-      else
-        s_input_port <= x"00";
       end if;
    end process inputs;
    -------------------------------------------------------------------------------
