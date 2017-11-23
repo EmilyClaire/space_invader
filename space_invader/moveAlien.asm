@@ -215,13 +215,13 @@ ISR:
 	cmp r22, 0x00
     breq testing0
 
-	cmp r22, 0x05
+	cmp r22, 0x03
 	breq testing5
 
-   CMP R22, 0x03
+   CMP R22, 0x05
    BREQ shoot
 
-   CMP R22, 0x15
+   CMP R22, 0x02
    BREQ moveLeft   
 
    CMP R22, 0x01  

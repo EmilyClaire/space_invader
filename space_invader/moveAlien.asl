@@ -231,13 +231,13 @@ C5:  Raw line from source code.
 (0215)  CS-0x084  0x31600         || 	cmp r22, 0x00
 (0216)  CS-0x085  0x0847A         ||     breq testing0
 (0217)                            || 
-(0218)  CS-0x086  0x31605         || 	cmp r22, 0x05
+(0218)  CS-0x086  0x31603         || 	cmp r22, 0x03
 (0219)  CS-0x087  0x084BA         || 	breq testing5
 (0220)                            || 
-(0221)  CS-0x088  0x31603         ||    CMP R22, 0x03
+(0221)  CS-0x088  0x31605         ||    CMP R22, 0x05
 (0222)  CS-0x089  0x084FA         ||    BREQ shoot
 (0223)                            || 
-(0224)  CS-0x08A  0x31615         ||    CMP R22, 0x15
+(0224)  CS-0x08A  0x31602         ||    CMP R22, 0x02
 (0225)  CS-0x08B  0x0853A         ||    BREQ moveLeft   
 (0226)                            || 
 (0227)  CS-0x08C  0x31601         ||    CMP R22, 0x01  

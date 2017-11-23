@@ -303,11 +303,11 @@ begin
     if (s_r_int = '1') then
         s_int_port <= x"01";
     else
-        if (s_l_int = '1') then
-            s_int_port <= x"02";
+        if (s_shoot_int = '1') then
+            s_int_port <= x"05";
         else
-            if (s_shoot_int = '1') then
-                s_int_port <= x"05";
+            if (s_l_int = '1') then
+                s_int_port <= x"02";
             else
             s_int_port <= s_int_port;
             end if;
