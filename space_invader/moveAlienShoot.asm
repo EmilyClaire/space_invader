@@ -4,7 +4,6 @@
 .EQU VGA_HADD = 0x90
 .EQU VGA_LADD = 0x91
 .EQU VGA_COLOR = 0x92
-.EQU LEDS = 0x40
 
 .EQU INSIDE_FOR_COUNT    = 	0x2f
 .EQU MIDDLE_FOR_COUNT    = 0x2f
@@ -12,12 +11,10 @@
 
 .equ END_ROW = 0x25
 .equ END_COL = 0x1D
-.equ SHIP_COLOR = 0x1F;0x03 ;blue
+.equ SHIP_COLOR = 0xE0;0x03 ;blue
 					   ;0xE0 ;red
 					   ; 0x1C    ;green
-					; 0xE3 ; pink
-						;0xFC ; yellow
-					;0x1F aqua
+
 .EQU INTERRUPT_ID  = 0x20
 
 .equ SSEG_CNTR_ID = 0x60
@@ -86,26 +83,13 @@ ret_pause:	SUB R10, 0x01
 end_main:	ADD R8, R11
 			BRN MAIN
 
-
-
-
-
-
 clear_row:
-
    
    CALL clear_square
    SUB R8, 0x01
    CMP R8, 0xFF
    BRNE clear_row
    RET
-
-
-
-
-
-
-
 
 col:		ADD R7, 0x01
 			MOV R10, END_ROW
@@ -127,7 +111,6 @@ set_neg:	MOV R11, 0xFF
 			MoV R3, 0x03
 			brn start
 
-
 clear_ship:
 			SUB R7, 0x01
 			MOV R3, 0x03
@@ -144,7 +127,6 @@ clear_loop:
 			ADD R7, 0x01
 			ret
 
-
 draw_ship:
 			MOV R5, R8
 			MOV R4, R7
@@ -160,7 +142,6 @@ draw_ship:
 draw_neg:	ADD R5, 0x03
 
 rest:		call draw_dot
-
 
 			MOV R5, R8
 			MOV R4, R7
@@ -206,27 +187,23 @@ clear_square:
    CALL draw_dot   ;clears dot at the origin
    RET
 
-;		mov r29, 0x01
-;		mov r30, 0x02
- ;       mov r31, 0x03
-
 ISR: 
-   IN R22, INTERRUPT_ID
-	OUT  R22, SSEG_VAL_ID
+   	IN R20, INTERRUPT_ID
+	OUT  R20, SSEG_VAL_ID
 
-	cmp r22, 0x00
+	cmp R20, 0x00
     breq testing0
 
-	cmp r22, 0x03
+	CMP R20, 0x03
 	breq testing5
 
-   CMP R22, 0x05
+   CMP R20, 0x05
    BREQ shoot
 
-   CMP R22, 0x02
+   CMP R20, 0x02
    BREQ moveLeft   
 
-   CMP R22, 0x01  
+   CMP R20, 0x01  
    BREQ moveRight
 
    brn ISR_END
@@ -242,8 +219,6 @@ testing0:
 	call draw_dot
     brn isr_end
 
-
-
 testing5: 
    MOV  R4, R27   ;y coordin
    MOV  R5, R28   ;x coordin
@@ -254,7 +229,6 @@ testing5:
 	mov r6, 0xff
 	call draw_dot
     brn isr_end
-
 
 shoot: 
    MOV  R4, R27   ;y coordin
@@ -272,10 +246,8 @@ moveLeft:
 	BREQ ISR_END
 
    CALL clear_square
-
    
    SUB  R28, 0x01  
-
 
    MOV  R4, R27   ;y coordin
    MOV  R5, R28   ;x coordin

@@ -1,0 +1,44 @@
+R1 	- ship bullet counter 
+
+R2 	- The value for SSEG_CNTR_ID
+
+R3 	- counter (do not use in interrupts)
+
+R4 	- y value for draw dot
+R5 	- x value for draw dot
+R6 	- color value for draw dot
+
+R7 	- y temp value 
+R8 	- x temp value 
+
+R9 	- 
+
+R10 - end of row place holder
+
+R11 - R11 adding bit for ship movement
+
+R12 - 1 player bullet x
+R13 - 1 player bullet y
+R14 - 2 player bullet x
+R15 - 2 player bullet y
+
+R16 -  
+
+R17 - counter for pause (do not use in interrupts)
+R18 - counter for pause (do not use in interrupts)
+R19 - counter for pause (do not use in interrupts)
+
+R20 - in port for interrupt values
+
+R21 - 1 ship bullet x
+R22 - 1 ship bullet y 
+R23 - 2 ship bullet x
+R24 - 2 ship bullet y
+R25 - 3 ship bullet x
+R26 - 3 ship bullet y
+
+R27 - y temp value player draw dot
+R28 - x temp value player draw dot
+R29 - 
+R30 - 
+R31 - 
