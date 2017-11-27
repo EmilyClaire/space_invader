@@ -28,11 +28,7 @@
 .ORG 0x10
 
    SEI
-MOV R16, 0x00
-MOV R12, 0x00
-MOV R13, 0x00
-MOV R14, 0x00
-MOV R15, 0x00
+
 
 MOV R2, 0x81
 OUT R2, SSEG_CNTR_ID
@@ -69,6 +65,12 @@ reset_loop:
 	MOV R3, 0x03
 	
 start:
+	MOV R16, 0x00	
+	MOV R12, 0x00
+	MOV R13, 0x00
+	MOV R14, 0x00
+	MOV R15, 0x00
+
 	MOV R4, R7
 	MOV R5, R8
 	CALL draw_ship
@@ -87,7 +89,7 @@ MAIN:
 			BREQ p_bullet_2
 
 			SUB R13, 0x01
-			MOV R5, R12
+			MOV R4, R13
 			MOV R6, PLAYER_BULLET_COLOR
 			call draw_dot
 
