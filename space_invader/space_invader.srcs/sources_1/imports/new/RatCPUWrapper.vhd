@@ -23,18 +23,18 @@ entity RAT_wrapper is
            R_INT    : in STD_LOGIC;
            SHOOT_INT: in STD_LOGIC;
            CLK      : in    STD_LOGIC;
---           MISO : in std_logic;
---           SW : in std_logic;
---           SS : out std_logic;
---           MOSI : out std_logic;
---           SCLK : out std_logic;
+           MISO : in std_logic;
+           SW : in std_logic;
+           SS : out std_logic;
+           MOSI : out std_logic;
+           SCLK : out std_logic;
            
            
            VGA_RGB  : out std_logic_vector(7 downto 0);
            VGA_HS   : out std_logic;
-           VGA_VS   : out std_logic);
---           signal_x : out std_logic_vector (3 downto 0);
---           signal_y : out std_logic_vector (3 downto 0));
+           VGA_VS   : out std_logic;
+           signal_x : out std_logic_vector (3 downto 0);
+           signal_y : out std_logic_vector (3 downto 0));
 end RAT_wrapper;
 
 architecture Behavioral of RAT_wrapper is
@@ -74,21 +74,21 @@ architecture Behavioral of RAT_wrapper is
    end component RAT_CPU;
    
    
---component jstksteptop
--- Port(
---       clk : in std_logic;
---       rst : in std_logic;
---       --sw_en : in std_logic_vector (1 downto 0);
---       sw : in std_logic;
---       jstk_input_ss_0 : out std_logic;
---       jstk_input_miso_2 : in std_logic;
---       jstk_input_sclk_3 : out std_logic;
---       an : out std_logic_vector (3 downto 0);
---       seg : out std_logic_vector (7 downto 0);
---       --LEDS : out std_logic_vector (2 downto 0);
---       signal_x : out std_logic_vector (3 downto 0);
---       signal_y : out std_logic_vector (3 downto 0));
--- end component;
+component jstksteptop
+ Port(
+       clk : in std_logic;
+       rst : in std_logic;
+       --sw_en : in std_logic_vector (1 downto 0);
+       sw : in std_logic;
+       jstk_input_ss_0 : out std_logic;
+       jstk_input_miso_2 : in std_logic;
+       jstk_input_sclk_3 : out std_logic;
+       an : out std_logic_vector (3 downto 0);
+       seg : out std_logic_vector (7 downto 0);
+       --LEDS : out std_logic_vector (2 downto 0);
+       signal_x : out std_logic_vector (3 downto 0);
+       signal_y : out std_logic_vector (3 downto 0));
+ end component;
    
    
    
@@ -111,18 +111,18 @@ architecture Behavioral of RAT_wrapper is
    end component;
    
    
-   component sseg_dec_uni
-       Port (       COUNT1 : in std_logic_vector(13 downto 0); 
-                    COUNT2 : in std_logic_vector(7 downto 0);
-                       SEL : in std_logic_vector(1 downto 0);
-                     dp_oe : in std_logic;
-                        dp : in std_logic_vector(1 downto 0);                       
-                       CLK : in std_logic;
-                      SIGN : in std_logic;
-                     VALID : in std_logic;
-                   DISP_EN : out std_logic_vector(3 downto 0);
-                  SEGMENTS : out std_logic_vector(7 downto 0));
-   end component sseg_dec_uni;
+--   component sseg_dec_uni
+--       Port (       COUNT1 : in std_logic_vector(13 downto 0); 
+--                    COUNT2 : in std_logic_vector(7 downto 0);
+--                       SEL : in std_logic_vector(1 downto 0);
+--                     dp_oe : in std_logic;
+--                        dp : in std_logic_vector(1 downto 0);                       
+--                       CLK : in std_logic;
+--                      SIGN : in std_logic;
+--                     VALID : in std_logic;
+--                   DISP_EN : out std_logic_vector(3 downto 0);
+--                  SEGMENTS : out std_logic_vector(7 downto 0));
+--   end component sseg_dec_uni;
    
    
    
@@ -186,17 +186,17 @@ begin
      
     s_cnt1_assign <= "000000" & s_SSEG_val;
     
-    my_sseg_dec_uni : sseg_dec_uni
-    port map (       COUNT1 => s_cnt1_assign,
-                     COUNT2 => s_sseg_val,
-                     SEL => s_SSEG_cntr (7 downto 6),
-                     dp_oe => s_sseg_cntr(2),
-                     dp => s_sseg_cntr (5 downto 4),                       
-                     CLK => CLK,
-                     SIGN => s_sseg_cntr(1),
-                     VALID => s_sseg_cntr(0),
-                     DISP_EN => an,
-                     SEGMENTS => seg);
+--    my_sseg_dec_uni : sseg_dec_uni
+--    port map (       COUNT1 => s_cnt1_assign,
+--                     COUNT2 => s_sseg_val,
+--                     SEL => s_SSEG_cntr (7 downto 6),
+--                     dp_oe => s_sseg_cntr(2),
+--                     dp => s_sseg_cntr (5 downto 4),                       
+--                     CLK => CLK,
+--                     SIGN => s_sseg_cntr(1),
+--                     VALID => s_sseg_cntr(0),
+--                     DISP_EN => an,
+--                     SEGMENTS => seg);
               
         my_clk_div : clk_div 
              port map (CLK => CLK,
@@ -236,20 +236,20 @@ begin
 --                        SEG => seg);
                         
                         
---  my_jstksteptop : jstksteptop
---                         port map(
---                               clk => CLK,
---                               rst => RESET,
---                               --sw_en =>,
---                               sw => SW,
---                               jstk_input_ss_0 => SS,
---                               jstk_input_miso_2 => MISO,
---                               jstk_input_sclk_3 => SCLK,
---                               an => an,
---                               seg => seg,
---                               --LEDS => s_LEDS,
---                               signal_x => s_signal_x,
---                               signal_y => s_signal_y);
+  my_jstksteptop : jstksteptop
+                         port map(
+                               clk => CLK,
+                               rst => RESET,
+                               --sw_en =>,
+                               sw => SW,
+                               jstk_input_ss_0 => SS,
+                               jstk_input_miso_2 => MISO,
+                               jstk_input_sclk_3 => SCLK,
+                               an => an,
+                               seg => seg,
+                               --LEDS => s_LEDS,
+                               signal_x => signal_x,
+                               signal_y => signal_y);
                          
                       
     my_db_reset : db_1shot_FSM 
