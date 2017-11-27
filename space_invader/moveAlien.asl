@@ -28,7 +28,7 @@ C5:  Raw line from source code.
 (0012)                            || 
 (0013)                       037  || .equ END_ROW = 0x25
 (0014)                       029  || .equ END_COL = 0x1D
-(0015)                       031  || .equ SHIP_COLOR = 0x1F;0x03 ;blue
+(0015)                       227  || .equ SHIP_COLOR = 0xE3;0x03 ;blue
 (0016)                            || 					   ;0xE0 ;red
 (0017)                            || 					   ; 0x1C    ;green
 (0018)                            || 					; 0xE3 ; pink
@@ -180,7 +180,7 @@ C5:  Raw line from source code.
 (0164)                            || 
 (0165)  CS-0x065  0x04541         || 			MOV R5, R8
 (0166)  CS-0x066  0x04439         || 			MOV R4, R7
-(0167)  CS-0x067  0x3661F         || 			MOV R6, SHIP_COLOR
+(0167)  CS-0x067  0x366E3         || 			MOV R6, SHIP_COLOR
 (0168)  CS-0x068  0x08351         || 			call draw_dot
 (0169)  CS-0x069  0x18002         || 			ret
 (0170)                            || 
@@ -388,7 +388,7 @@ INTERRUPT_ID   0x020   (0021)  ||  0214
 LEDS           0x040   (0007)  ||  
 MIDDLE_FOR_COUNT 0x02F   (0010)  ||  0186 
 OUTSIDE_FOR_COUNT 0x02F   (0011)  ||  0183 
-SHIP_COLOR     0x01F   (0015)  ||  0167 
+SHIP_COLOR     0x0E3   (0015)  ||  0167 
 SSEG_CNTR_ID   0x060   (0023)  ||  0032 
 SSEG_VAL_ID    0x080   (0024)  ||  0215 
 VGA_COLOR      0x092   (0006)  ||  0177 

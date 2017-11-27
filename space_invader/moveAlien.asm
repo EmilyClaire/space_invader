@@ -12,7 +12,7 @@
 
 .equ END_ROW = 0x25
 .equ END_COL = 0x1D
-.equ SHIP_COLOR = 0x1F;0x03 ;blue
+.equ SHIP_COLOR = 0xE3;0x03 ;blue
 					   ;0xE0 ;red
 					   ; 0x1C    ;green
 					; 0xE3 ; pink

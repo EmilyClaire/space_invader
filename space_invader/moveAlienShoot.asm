@@ -11,10 +11,14 @@
 
 .equ END_ROW = 0x25
 .equ END_COL = 0x1D
-.equ SHIP_COLOR = 0xE0;0x03 ;blue
+.equ SHIP_COLOR = 0xE3;0x03 ;blue
 					   ;0xE0 ;red
 					   ; 0x1C    ;green
+					; 0xE3 ; pink
+						;0xFC ; yellow
+					;0x1F aqua
 
+.equ PLAYER_BULLET_COLOR = 0xFC
 .EQU INTERRUPT_ID  = 0x20
 
 .equ SSEG_CNTR_ID = 0x60
@@ -24,6 +28,11 @@
 .ORG 0x10
 
    SEI
+MOV R16, 0x00
+MOV R12, 0x00
+MOV R13, 0x00
+MOV R14, 0x00
+MOV R15, 0x00
 
 MOV R2, 0x81
 OUT R2, SSEG_CNTR_ID
@@ -45,7 +54,8 @@ reset_loop:
 	
 		call pause
 
-   MOV  R27, 0x1B
+   MOV  R27, END_COL
+	SUB R27, 0x01
    MOV  R28, 0x14
 	MOV R6, 0xFF
 	MOV R4, R27
@@ -67,8 +77,36 @@ start:
 	BRNE start
 
 call pause
-MAIN:     
-			
+MAIN:       
+			MOV R4, R13
+			MOV R5, R12
+			MOV R6, 0x00
+			call draw_dot
+
+			CMP R13, 0x00
+			BREQ p_bullet_2
+
+			SUB R13, 0x01
+			MOV R5, R12
+			MOV R6, PLAYER_BULLET_COLOR
+			call draw_dot
+
+p_bullet_2:
+			MOV R4, R15
+			MOV R5, R14
+			MOV R6, 0x00
+			call draw_dot
+
+			CMP R15, 0x00
+			BREQ main_ship
+
+			SUB R15, 0x01
+			MOV R5, R14
+			MOV R4, R15
+			MOV R6, SHIP_COLOR
+			call draw_dot
+								
+main_ship:
             MOV  R4, R7   ;y coordin
 			MOV  R5, R8   ;x coordin
 			call draw_ship  
@@ -231,6 +269,48 @@ testing5:
     brn isr_end
 
 shoot: 
+   
+	CMP R16, 0x01
+	BREQ second_bullet
+
+	MOV R4, R13
+	MOV R5, R12
+	MOV R6, 0x00
+	call draw_dot
+
+   Mov R13, R27
+   SUB R13, 0x01
+
+   MOV R12, R28
+
+   MOV R4, R13
+   MOV R5, R12
+   MOV R6, PLAYER_BULLET_COLOR
+   call draw_dot
+
+   ADD R16, 0x01
+   
+   BRN animation
+
+second_bullet:		   
+	MOV R4, R15
+	MOV R5, R14
+	MOV R6, 0x00
+	call draw_dot
+
+	MOV R15, R27
+	SUB R15, 0x01
+
+	MOV R14, R28	
+
+   MOV R4, R15
+   MOV R5, R14
+   MOV R6, SHIP_COLOR
+   call draw_dot
+
+   SUB R16, 0x01
+
+animation:
    MOV  R4, R27   ;y coordin
    MOV  R5, R28   ;x coordin
 
