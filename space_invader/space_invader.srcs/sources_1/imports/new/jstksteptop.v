@@ -31,7 +31,7 @@ module jstksteptop(
     input jstk_input_miso_2,
     output jstk_input_sclk_3,
     output [3:0] an,
-    output [6:0] seg,
+    output [7:0] seg,
     output [3:0] signal_x,
     output [3:0] signal_y
     
@@ -80,7 +80,7 @@ module jstksteptop(
         .clk(clk),
         .rst(rst),
         .direction(x_direction_net),
-        .en(sw_en[0]),
+        //.en(sw_en[0]),
         .signal_out(signal_x)
         );
     
@@ -91,7 +91,7 @@ module jstksteptop(
         .clk(clk),
         .rst(rst),
         .direction(y_direction_net),
-        .en(sw_en[1]),
+        //.en(sw_en[1]),
         .signal_out(signal_y)
         );      
 endmodule
