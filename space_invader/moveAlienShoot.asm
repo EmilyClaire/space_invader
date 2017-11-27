@@ -13,7 +13,7 @@
 .EQU MIDDLE_FOR_COUNT2    = 0x1f
 .EQU OUTSIDE_FOR_COUNT2   = 0x1f
 
-.equ END_ROW_SHIP = 0x25
+.equ END_ROW_SHIP = 0x24
 .equ END_ROW_PLAYER = 0x27
 .equ END_COL = 0x1D
 .equ SHIP_COLOR = 0xE3;0x03 ;blue

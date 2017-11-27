@@ -29,7 +29,7 @@ C5:  Raw line from source code.
 (0013)                       031  || .EQU MIDDLE_FOR_COUNT2    = 0x1f
 (0014)                       031  || .EQU OUTSIDE_FOR_COUNT2   = 0x1f
 (0015)                            || 
-(0016)                       037  || .equ END_ROW_SHIP = 0x25
+(0016)                       036  || .equ END_ROW_SHIP = 0x24
 (0017)                       039  || .equ END_ROW_PLAYER = 0x27
 (0018)                       029  || .equ END_COL = 0x1D
 (0019)                       227  || .equ SHIP_COLOR = 0xE3;0x03 ;blue
@@ -87,7 +87,7 @@ C5:  Raw line from source code.
 (0071)                            || 
 (0072)  CS-0x02C  0x36700         ||    MOV  R7, 0x00
 (0073)  CS-0x02D  0x36801         ||    MOV  R8, 0x01 
-(0074)  CS-0x02E  0x36A25         ||    MOV  R10, END_ROW_SHIP
+(0074)  CS-0x02E  0x36A24         ||    MOV  R10, END_ROW_SHIP
 (0075)  CS-0x02F  0x36B01         || 	MOV R11, 0x01
 (0076)  CS-0x030  0x36303         || 	MOV R3, 0x03
 (0077)                            || 	
@@ -154,7 +154,7 @@ C5:  Raw line from source code.
 (0138)  CS-0x05A  0x18002         ||    RET
 (0139)                            || 
 (0140)  CS-0x05B  0x28701  0x05B  || col:		ADD R7, 0x01
-(0141)  CS-0x05C  0x36A25         || 			MOV R10, END_ROW_SHIP
+(0141)  CS-0x05C  0x36A24         || 			MOV R10, END_ROW_SHIP
 (0142)  CS-0x05D  0x3071D         || 			CMP R7, END_COL
 (0143)  CS-0x05E  0x0845A         || 			BREQ DONE
 (0144)                            || 			
@@ -467,7 +467,7 @@ VECTOR         0x3FF   (0382)  ||
 ------------------------------------------------------------ 
 END_COL        0x01D   (0018)  ||  0064 0142 
 END_ROW_PLAYER 0x027   (0017)  ||  0362 
-END_ROW_SHIP   0x025   (0016)  ||  0074 0141 
+END_ROW_SHIP   0x024   (0016)  ||  0074 0141 
 INSIDE_FOR_COUNT 0x02F   (0008)  ||  0216 
 INSIDE_FOR_COUNT2 0x01F   (0012)  ||  0233 
 INTERRUPT_ID   0x020   (0027)  ||  0252 
