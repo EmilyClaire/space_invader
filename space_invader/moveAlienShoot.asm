@@ -9,6 +9,10 @@
 .EQU MIDDLE_FOR_COUNT    = 0x2f
 .EQU OUTSIDE_FOR_COUNT   = 0x2f
 
+.EQU INSIDE_FOR_COUNT2    = 	0x1f
+.EQU MIDDLE_FOR_COUNT2    = 0x1f
+.EQU OUTSIDE_FOR_COUNT2   = 0x1f
+
 .equ END_ROW_SHIP = 0x25
 .equ END_ROW_PLAYER = 0x27
 .equ END_COL = 0x1D
@@ -220,17 +224,22 @@ inside_for0:  	SUB     R19, 0x01
              	BRNE    outside_for0
 				ret
 
-pause2:	    	MOV     R17, OUTSIDE_FOR_COUNT  
-outside_for: 	SUB     R17, 0x01
+pause2:	    	MOV     R17, OUTSIDE_FOR_COUNT2  
+outside_for: 	SUB     R17, 0x10
 
+             	MOV     R18, MIDDLE_FOR_COUNT2   
+middle_for:  	SUB     R18, 0x10
              
-             	MOV     R19, INSIDE_FOR_COUNT   
-inside_for:  	SUB     R19, 0x01
+             	MOV     R19, INSIDE_FOR_COUNT2   
+inside_for:  	SUB     R19, 0x10
              	BRNE    inside_for
-                          
-             	OR      R17, 0x00               
+             
+             	or     R18, 0x00              
+             	BRNE    middle_for
+             
+             	CMP      R17, 0x00               
              	BRNE    outside_for
-
+				ret
 clear_square:
 
    MOV  R4, R27   ;y coordin
@@ -336,7 +345,7 @@ animation:
 	  brn ISR_END
 
 moveLeft:
-	CMP R28, 0x00
+	CMP R28, 0x01
 	BREQ ISR_END
 
    CALL clear_square
