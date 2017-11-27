@@ -13,7 +13,7 @@
 .EQU MIDDLE_FOR_COUNT2    = 0x1f
 .EQU OUTSIDE_FOR_COUNT2   = 0x1f
 
-.equ END_ROW_SHIP = 0x24
+.equ END_ROW_SHIP = 0x4A; the row length minus 3 times 2
 .equ END_ROW_PLAYER = 0x27
 .equ END_COL = 0x1D
 .equ SHIP_COLOR = 0xE3;0x03 ;blue
@@ -38,11 +38,11 @@
 MOV R2, 0x81
 OUT R2, SSEG_CNTR_ID
 	MOV R16, 0x00	
-	MOV R12, 0x00
-	MOV R13, 0x00
-	MOV R14, 0x00
-	MOV R15, 0x00
-
+	MOV R12, 0xFF
+	MOV R13, 0xFF
+	MOV R14, 0xFF
+	MOV R15, 0xFF
+    MOV R31, 0x02
 reset:
 	    CALL clear_row
 		MOV R8, END_ROW_PLAYER
@@ -55,13 +55,16 @@ reset_loop:
 		SUB R8, 0x01
 		BRNE reset_loop
 
+		MOV R4, R7
+		MOV R5, R8
+		call draw_dot
 		SUB R7, 0x01
 		CMP R7, 0xFF
 		BRNE reset_loop
 	
 		call pause
 
-   MOV  R27, 0x03 ;END_COL
+   MOV  R27, END_COL
 	SUB R27, 0x01
    MOV  R28, 0x14
 	MOV R6, 0xFF
@@ -70,7 +73,7 @@ reset_loop:
 	call draw_dot
 
    MOV  R7, 0x00
-   MOV  R8, 0x01 
+   MOV  R8, 0x00 
    MOV  R10, END_ROW_SHIP
 	MOV R11, 0x01
 	MOV R3, 0x03
@@ -92,6 +95,7 @@ collision:
 			BRNE collision2
 
 			MOV R29, R12
+			ADD R29, R11
 			CMP R29, R8  ; check the front of the ship
 			BREQ win
 
@@ -107,6 +111,7 @@ collision2: CMP R15, R7
 			BRNE collision3
 
 			MOV R29, R14
+			ADD R29, R11
 			CMP R29, R8  ; check the front of the ship
 			BREQ win2
 
@@ -145,7 +150,7 @@ p_bullet_1:
 			call draw_dot
 			brn p_bullet_2
 
-clear_bullet_1: MOV R12, 0x00
+clear_bullet_1: MOV R12, 0xFF
 
 p_bullet_2:
 			MOV R4, R15
@@ -164,17 +169,24 @@ p_bullet_2:
 		    brn main_pause
 
 clear_bullet_2:
-			MOV R14, 0x00
+			MOV R14, 0xFF
 
-main_pause:	call pause
+main_pause:	call pause2
 			
 
-ret_pause:	SUB R10, 0x01
+ret_pause:	
+			SUB R10, 0x01
 			CMP R10, 0x00
 			BREQ col
 
+end_main:	
+			
 
-end_main:	ADD R8, R11
+			SUB R31, 0x01
+			BRNE MAIN
+			
+			MOV R31, 0x02
+			ADD R8, R11
 			BRN MAIN
 
 clear_row:
@@ -300,6 +312,9 @@ reset_loop2:
 		SUB R8, 0x01
 		BRNE reset_loop2
 
+		MOV R4, R7
+		MOV R5, R8
+		call draw_dot
 		SUB R7, 0x01
 		CMP R7, 0xFF
 		BRNE reset_loop2
@@ -316,6 +331,9 @@ reset_loop3:
 		SUB R8, 0x01
 		BRNE reset_loop3
 
+		MOV R4, R7
+		MOV R5, R8
+		call draw_dot
 		SUB R7, 0x01
 		CMP R7, 0xFF
 		BRNE reset_loop3
@@ -325,6 +343,7 @@ lose:
 		call pause
 		MOV R8, END_ROW_PLAYER
 		MOV R7, END_COL
+		ADD R8, 0x01
 		MOV R6, 0xE0 ;RED SCREEN
 reset_loop4:
 		MOV R4, R7
@@ -333,6 +352,9 @@ reset_loop4:
 		SUB R8, 0x01
 		BRNE reset_loop4
 
+		MOV R4, R7
+		MOV R5, R8
+		call draw_dot
 		SUB R7, 0x01
 		CMP R7, 0xFF
 		BRNE reset_loop4
@@ -444,7 +466,7 @@ animation:
 	  brn ISR_END
 
 moveLeft:
-	CMP R28, 0x01
+	CMP R28, 0x00
 	BREQ ISR_END
 
    CALL clear_square
