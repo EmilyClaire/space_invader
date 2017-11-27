@@ -9,7 +9,8 @@
 .EQU MIDDLE_FOR_COUNT    = 0x2f
 .EQU OUTSIDE_FOR_COUNT   = 0x2f
 
-.equ END_ROW = 0x25
+.equ END_ROW_SHIP = 0x25
+.equ END_ROW_PLAYER = 0x27
 .equ END_COL = 0x1D
 .equ SHIP_COLOR = 0xE3;0x03 ;blue
 					   ;0xE0 ;red
@@ -32,6 +33,12 @@
 
 MOV R2, 0x81
 OUT R2, SSEG_CNTR_ID
+	MOV R16, 0x00	
+	MOV R12, 0x00
+	MOV R13, 0x00
+	MOV R14, 0x00
+	MOV R15, 0x00
+
 reset:
 	    CALL clear_row
 		MOV R8, 0x28
@@ -59,17 +66,12 @@ reset_loop:
 	call draw_dot
 
    MOV  R7, 0x00
-   MOV  R8, 0x00 
-   MOV  R10, END_ROW
+   MOV  R8, 0x01 
+   MOV  R10, END_ROW_SHIP
 	MOV R11, 0x01
 	MOV R3, 0x03
 	
 start:
-	MOV R16, 0x00	
-	MOV R12, 0x00
-	MOV R13, 0x00
-	MOV R14, 0x00
-	MOV R15, 0x00
 
 	MOV R4, R7
 	MOV R5, R8
@@ -132,7 +134,7 @@ clear_row:
    RET
 
 col:		ADD R7, 0x01
-			MOV R10, END_ROW
+			MOV R10, END_ROW_SHIP
 			CMP R7, END_COL
 			BREQ DONE
 			
@@ -141,7 +143,7 @@ col:		ADD R7, 0x01
 	
 			MOV R11, 0x01
 			call clear_ship
-			MOV R8, 0x00
+			MOV R8, 0x01
 			MOV R3, 0x03
 			BRN start
 
@@ -216,8 +218,18 @@ inside_for0:  	SUB     R19, 0x01
              
              	OR      R17, 0x00               
              	BRNE    outside_for0
-
 				ret
+
+pause2:	    	MOV     R17, OUTSIDE_FOR_COUNT  
+outside_for: 	SUB     R17, 0x01
+
+             
+             	MOV     R19, INSIDE_FOR_COUNT   
+inside_for:  	SUB     R19, 0x01
+             	BRNE    inside_for
+                          
+             	OR      R17, 0x00               
+             	BRNE    outside_for
 
 clear_square:
 
@@ -318,7 +330,7 @@ animation:
 
 	  mov R6, 0xE0
 	  call draw_dot
-      call pause
+      call pause2
 	  mov R6, 0xFF
       call draw_dot
 	  brn ISR_END
@@ -338,7 +350,7 @@ moveLeft:
    brn ISR_END
 
 moveRight:
-	CMP R28, END_ROW
+	CMP R28, END_ROW_PLAYER
 	BREQ ISR_END
 
    CALL clear_square
