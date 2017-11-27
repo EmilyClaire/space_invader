@@ -175,7 +175,7 @@ C5:  Raw line from source code.
 (0159)  CS-0x066  0x2CF01         || 			SUB R15, 0x01
 (0160)  CS-0x067  0x04571         || 			MOV R5, R14
 (0161)  CS-0x068  0x04479         || 			MOV R4, R15
-(0162)  CS-0x069  0x366E3         || 			MOV R6, SHIP_COLOR
+(0162)  CS-0x069  0x366FC         || 			MOV R6, PLAYER_BULLET_COLOR
 (0163)  CS-0x06A  0x08511         || 			call draw_dot
 (0164)  CS-0x06B  0x08368         || 		    brn main_pause
 (0165)                            || 
@@ -443,7 +443,7 @@ C5:  Raw line from source code.
 (0427)                            || 
 (0428)  CS-0x120  0x04479         ||    MOV R4, R15
 (0429)  CS-0x121  0x04571         ||    MOV R5, R14
-(0430)  CS-0x122  0x366E3         ||    MOV R6, SHIP_COLOR
+(0430)  CS-0x122  0x366FC         ||    MOV R6, PLAYER_BULLET_COLOR
 (0431)  CS-0x123  0x08511         ||    call draw_dot
 (0432)                            || 
 (0433)  CS-0x124  0x2D001         ||    SUB R16, 0x01
@@ -587,8 +587,8 @@ MIDDLE_FOR_COUNT 0x02F   (0009)  ||  0261
 MIDDLE_FOR_COUNT2 0x01F   (0013)  ||  0278 
 OUTSIDE_FOR_COUNT 0x02F   (0010)  ||  0258 
 OUTSIDE_FOR_COUNT2 0x01F   (0014)  ||  0275 
-PLAYER_BULLET_COLOR 0x0FC   (0026)  ||  0144 0410 
-SHIP_COLOR     0x0E3   (0019)  ||  0162 0242 0430 
+PLAYER_BULLET_COLOR 0x0FC   (0026)  ||  0144 0162 0410 0430 
+SHIP_COLOR     0x0E3   (0019)  ||  0242 
 SSEG_CNTR_ID   0x060   (0029)  ||  0039 
 SSEG_VAL_ID    0x080   (0030)  ||  0352 
 VGA_COLOR      0x092   (0006)  ||  0252 

@@ -159,7 +159,7 @@ p_bullet_2:
 			SUB R15, 0x01
 			MOV R5, R14
 			MOV R4, R15
-			MOV R6, SHIP_COLOR
+			MOV R6, PLAYER_BULLET_COLOR
 			call draw_dot
 		    brn main_pause
 
@@ -427,7 +427,7 @@ second_bullet:
 
    MOV R4, R15
    MOV R5, R14
-   MOV R6, SHIP_COLOR
+   MOV R6, PLAYER_BULLET_COLOR
    call draw_dot
 
    SUB R16, 0x01
