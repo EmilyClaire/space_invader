@@ -45,8 +45,8 @@ OUT R2, SSEG_CNTR_ID
 
 reset:
 	    CALL clear_row
-		MOV R8, 0x28
-		MOV R7, 0x1D
+		MOV R8, END_ROW_PLAYER
+		MOV R7, END_COL
 		MOV R6, 0x00
 reset_loop:
 		MOV R4, R7
@@ -61,7 +61,7 @@ reset_loop:
 	
 		call pause
 
-   MOV  R27, END_COL
+   MOV  R27, 0x03 ;END_COL
 	SUB R27, 0x01
    MOV  R28, 0x14
 	MOV R6, 0xFF
@@ -86,18 +86,66 @@ start:
 
 call pause
 MAIN:       
+
+collision:
+			CMP R13, R7
+			BRNE collision2
+
+			MOV R29, R12
+			CMP R29, R8  ; check the front of the ship
+			BREQ win
+
+			ADD R29, R11
+			CMP R29, R8		; check the middle of the ship
+			BREQ win
+
+			ADD R29, R11
+			CMP R29, R8		; check the end of the ship
+			BREQ win
+
+collision2: CMP R15, R7
+			BRNE collision3
+
+			MOV R29, R14
+			CMP R29, R8  ; check the front of the ship
+			BREQ win2
+
+			ADD R29, R11
+			CMP R29, R8		; check the middle of the ship
+			BREQ win2
+
+			ADD R29, R11
+			CMP R29, R8		; check the end of the ship
+			BREQ win2
+collision3: 
+			CMP R27, R7
+			BRNE collision_end
+			
+			BRN lose
+			
+collision_end:
+
+main_ship:
+            MOV  R4, R7   ;y coordin
+			MOV  R5, R8   ;x coordin
+			call draw_ship  
+			
+p_bullet_1:
 			MOV R4, R13
 			MOV R5, R12
 			MOV R6, 0x00
 			call draw_dot
 
 			CMP R13, 0x00
-			BREQ p_bullet_2
+			BREQ clear_bullet_1
 
 			SUB R13, 0x01
 			MOV R4, R13
 			MOV R6, PLAYER_BULLET_COLOR
 			call draw_dot
+			brn p_bullet_2
+
+clear_bullet_1: MOV R12, 0x00
 
 p_bullet_2:
 			MOV R4, R15
@@ -106,18 +154,18 @@ p_bullet_2:
 			call draw_dot
 
 			CMP R15, 0x00
-			BREQ main_ship
+			BREQ clear_bullet_2
 
 			SUB R15, 0x01
 			MOV R5, R14
 			MOV R4, R15
 			MOV R6, SHIP_COLOR
 			call draw_dot
-								
-main_ship:
-            MOV  R4, R7   ;y coordin
-			MOV  R5, R8   ;x coordin
-			call draw_ship  
+		    brn main_pause
+
+clear_bullet_2:
+			MOV R14, 0x00
+
 main_pause:	call pause
 			
 
@@ -240,6 +288,57 @@ inside_for:  	SUB     R19, 0x01
              	CMP      R17, 0x00               
              	BRNE    outside_for
 				ret
+
+win:    call pause
+		MOV R8, END_ROW_PLAYER
+		MOV R7, END_COL
+		MOV R6, 0x1C ;GREEN SCREEN
+reset_loop2:
+		MOV R4, R7
+		MOV R5, R8
+		call draw_dot
+		SUB R8, 0x01
+		BRNE reset_loop2
+
+		SUB R7, 0x01
+		CMP R7, 0xFF
+		BRNE reset_loop2
+	
+	    brn done
+win2:   call pause
+		MOV R8, END_ROW_PLAYER
+		MOV R7, END_COL
+		MOV R6, 0xFC ;YELLOW SCREEN
+reset_loop3:
+		MOV R4, R7
+		MOV R5, R8
+		call draw_dot
+		SUB R8, 0x01
+		BRNE reset_loop3
+
+		SUB R7, 0x01
+		CMP R7, 0xFF
+		BRNE reset_loop3
+		brn done
+
+lose:     
+		call pause
+		MOV R8, END_ROW_PLAYER
+		MOV R7, END_COL
+		MOV R6, 0xE0 ;RED SCREEN
+reset_loop4:
+		MOV R4, R7
+		MOV R5, R8
+		call draw_dot
+		SUB R8, 0x01
+		BRNE reset_loop4
+
+		SUB R7, 0x01
+		CMP R7, 0xFF
+		BRNE reset_loop4
+
+		brn done
+
 clear_square:
 
    MOV  R4, R27   ;y coordin
