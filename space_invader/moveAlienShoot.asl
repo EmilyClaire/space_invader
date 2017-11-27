@@ -241,13 +241,13 @@ C5:  Raw line from source code.
 (0225)  CS-0x097  0x18002         || 				ret
 (0226)                            || 
 (0227)  CS-0x098  0x3711F  0x098  || pause2:	    	MOV     R17, OUTSIDE_FOR_COUNT2  
-(0228)  CS-0x099  0x2D110  0x099  || outside_for: 	SUB     R17, 0x10
+(0228)  CS-0x099  0x2D101  0x099  || outside_for: 	SUB     R17, 0x01
 (0229)                            || 
 (0230)  CS-0x09A  0x3721F         ||              	MOV     R18, MIDDLE_FOR_COUNT2   
-(0231)  CS-0x09B  0x2D210  0x09B  || middle_for:  	SUB     R18, 0x10
+(0231)  CS-0x09B  0x2D201  0x09B  || middle_for:  	SUB     R18, 0x01
 (0232)                            ||              
 (0233)  CS-0x09C  0x3731F         ||              	MOV     R19, INSIDE_FOR_COUNT2   
-(0234)  CS-0x09D  0x2D310  0x09D  || inside_for:  	SUB     R19, 0x10
+(0234)  CS-0x09D  0x2D301  0x09D  || inside_for:  	SUB     R19, 0x01
 (0235)  CS-0x09E  0x084EB         ||              	BRNE    inside_for
 (0236)                            ||              
 (0237)  CS-0x09F  0x23200         ||              	or     R18, 0x00              

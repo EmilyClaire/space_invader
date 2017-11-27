@@ -225,13 +225,13 @@ inside_for0:  	SUB     R19, 0x01
 				ret
 
 pause2:	    	MOV     R17, OUTSIDE_FOR_COUNT2  
-outside_for: 	SUB     R17, 0x10
+outside_for: 	SUB     R17, 0x01
 
              	MOV     R18, MIDDLE_FOR_COUNT2   
-middle_for:  	SUB     R18, 0x10
+middle_for:  	SUB     R18, 0x01
              
              	MOV     R19, INSIDE_FOR_COUNT2   
-inside_for:  	SUB     R19, 0x10
+inside_for:  	SUB     R19, 0x01
              	BRNE    inside_for
              
              	or     R18, 0x00              
