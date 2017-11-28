@@ -13,7 +13,7 @@
 .EQU MIDDLE_FOR_COUNT2    = 0x1f
 .EQU OUTSIDE_FOR_COUNT2   = 0x1f
 
-.equ END_ROW_SHIP = 0x4A; the row length minus 3 times 2
+.equ END_ROW_SHIP = 0x48; the row length minus 3 times 2
 .equ END_ROW_PLAYER = 0x27
 .equ END_COL = 0x1D
 .equ SHIP_COLOR = 0xE3;0x03 ;blue
@@ -95,7 +95,6 @@ collision:
 			BRNE collision2
 
 			MOV R29, R12
-			ADD R29, R11
 			CMP R29, R8  ; check the front of the ship
 			BREQ win
 
@@ -111,7 +110,6 @@ collision2: CMP R15, R7
 			BRNE collision3
 
 			MOV R29, R14
-			ADD R29, R11
 			CMP R29, R8  ; check the front of the ship
 			BREQ win2
 
@@ -370,23 +368,26 @@ clear_square:
    RET
 
 ISR: 
+	MOV R30, 0x00
+
    	IN R20, INTERRUPT_ID
 	OUT  R20, SSEG_VAL_ID
-
-	cmp R20, 0x00
+	
+	OR R30, R20
     breq testing0
 
-	CMP R20, 0x03
-	breq testing5
+;	MOV R30, 0x07
+;	OR R20, 0x07
+;	breq testing5
 
-   CMP R20, 0x05
-   BREQ shoot
+   LSR R20
+   BRCS moveRight
 
-   CMP R20, 0x02
-   BREQ moveLeft   
+   LSR R20
+   BRCS shoot   
 
-   CMP R20, 0x01  
-   BREQ moveRight
+   LSR R20  
+   BREQ moveLeft
 
    brn ISR_END
 

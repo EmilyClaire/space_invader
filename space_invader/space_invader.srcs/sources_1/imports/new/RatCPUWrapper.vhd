@@ -64,7 +64,8 @@ architecture Behavioral of RAT_wrapper is
 
    -- Declare RAT_CPU ------------------------------------------------------------
    component RAT_CPU
-       Port ( IN_PORT  : in  STD_LOGIC_VECTOR (7 downto 0);
+       Port ( 
+              IN_PORT  : in  STD_LOGIC_VECTOR (7 downto 0);
               OUT_PORT : out STD_LOGIC_VECTOR (7 downto 0);
               PORT_ID  : out STD_LOGIC_VECTOR (7 downto 0);
               IO_STRB  : out STD_LOGIC;
@@ -93,13 +94,16 @@ component jstksteptop
    
    
    component clk_div 
-       Port (       CLK : in std_logic;
+       Port (       
+                    CLK : in std_logic;
                    FCLK : out std_logic);
    end component;
    
    
    component vgaDriverBuffer is
-      Port (CLK, we : in std_logic;
+      Port (
+            CLK : in std_logic;
+            we : in std_logic;
             wa   : in std_logic_vector (10 downto 0);
             wd   : in std_logic_vector (7 downto 0);
             Rout : out std_logic_vector(2 downto 0);
@@ -112,7 +116,8 @@ component jstksteptop
    
    
    component sseg_dec_uni
-       Port (       COUNT1 : in std_logic_vector(13 downto 0); 
+       Port (       
+                    COUNT1 : in std_logic_vector(13 downto 0); 
                     COUNT2 : in std_logic_vector(7 downto 0);
                        SEL : in std_logic_vector(1 downto 0);
                      dp_oe : in std_logic;
@@ -127,7 +132,8 @@ component jstksteptop
    
    
    component db_1shot_FSM is
-       Port ( A    : in STD_LOGIC;
+       Port ( 
+                A    : in STD_LOGIC;
               CLK  : in STD_LOGIC;
               A_DB : out STD_LOGIC);
    end component db_1shot_FSM;
@@ -146,7 +152,7 @@ component jstksteptop
    signal s_dbn_int     : std_logic;
    signal s_clk         : std_logic;
    signal s_interrupt   : std_logic; -- not yet used
-   signal s_int_port    : std_logic_vector(7 downto 0):=x"05";
+   signal s_int_port    : std_logic_vector(7 downto 0):=x"00";
    signal s_reset       : std_logic;
    signal s_LEDS     :   STD_LOGIC_VECTOR (2 downto 0);
    
@@ -245,7 +251,7 @@ begin
                                jstk_input_ss_0 => SS,
                                jstk_input_miso_2 => MISO,
                                jstk_input_sclk_3 => SCLK,
-                               an => an,
+                               --an => an,
                                --seg => seg,
                                --LEDS => s_LEDS,
                                signal_x => signal_x,
@@ -274,7 +280,6 @@ begin
 
     s_interrupt <= s_shoot_int or s_r_int or s_l_int;
 --    s_interrupt <= shoot_int or r_int or l_int;
-    
 
 --    process(s_ints)
 --    begin
@@ -286,22 +291,19 @@ begin
 --        end case;
 --    end process;
 
---process (s_l_int, s_shoot_int, s_r_int)
+--process (l_int, shoot_int, r_int)
 --begin
---    if (s_r_int = '1') then
+--    if (r_int = '1') then
 --        s_int_port <= x"01";
+--    elsif (shoot_int = '1') then
+--        s_int_port <= x"02";
+--    elsif (l_int = '1') then
+--        s_int_port <= x"04";
 --    else
---        if (s_shoot_int = '1') then
---            s_int_port <= x"05";
---        else
---            if (s_l_int = '1') then
---                s_int_port <= x"02";
---            else
---            s_int_port <= s_int_port;
---            end if;
---        end if;
+--        s_int_port <= s_int_port;
 --    end if;
---end process;
+    
+-- end process;
 
 --process (l_int, shoot_int, r_int)
 --begin
@@ -326,17 +328,21 @@ begin
    -- MUX for selecting what input to read ---------------------------------------
    -- add conditions and connections for any added PORT IDs
    -------------------------------------------------------------------------------
-   inputs: process(s_port_id)
+   inputs: process(s_port_id, s_int_port)
    begin
       if (s_port_id  = INTERRUPT_ID) then
-        if(s_shoot_int = '1') then
-            s_input_port <= x"05";
-        elsif (s_l_int = '1') then
-            s_input_port <= x"02";
-        elsif(s_r_int = '1') then
-            s_input_port <= x"01";
-        end if;
-        s_input_port <= s_input_port;
+                if (r_int = '1') then
+                s_int_port <= x"01";
+            elsif (shoot_int = '1') then
+                s_int_port <= x"02";
+            elsif (l_int = '1') then
+                s_int_port <= x"04";
+            else
+                s_int_port <= s_int_port;
+            end if;
+            
+          s_input_port <= s_int_port;
+                          
       else
         s_input_port <= x"00";
       end if;
@@ -371,17 +377,17 @@ begin
                 s_sseg_CNTR <= s_output_port;
             elsif(s_port_id = SSEG_VAL_ID) then
                 s_sseg_VAL <= s_output_port;
-                     elsif (s_port_id = VGA_HADDR_ID) then
+            elsif (s_port_id = VGA_HADDR_ID) then
                    r_vga_wa(10 downto 6) <= s_output_port(4 downto 0);
-                elsif (s_port_id = VGA_LADDR_ID) then
+            elsif (s_port_id = VGA_LADDR_ID) then
                    r_vga_wa(5 downto 0) <= s_output_port(5 downto 0);
-                elsif (s_port_id = VGA_WRITE_ID) then
+            elsif (s_port_id = VGA_WRITE_ID) then
                    r_vga_wd <= s_output_port;
-                end if;  
+            end if;  
                 
                 
-                           end if;
-             end if;
+           end if;
+       end if;
           
         
         end process outputs;

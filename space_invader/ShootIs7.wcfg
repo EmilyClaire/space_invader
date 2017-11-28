@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="EXP8_wrapper_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="EXP8_wrapper_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="261831666666fs"></ZoomStartTime>
+      <ZoomEndTime time="271231666667fs"></ZoomEndTime>
+      <Cursor1Time time="269665000000fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="10" />
+   <wvobject fp_name="/EXP8_wrapper_tb/rst_tb" type="logic">
+      <obj_property name="ElementShortName">rst_tb</obj_property>
+      <obj_property name="ObjectShortName">rst_tb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/l_int_tb" type="logic">
+      <obj_property name="ElementShortName">l_int_tb</obj_property>
+      <obj_property name="ObjectShortName">l_int_tb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/r_int_tb" type="logic">
+      <obj_property name="ElementShortName">r_int_tb</obj_property>
+      <obj_property name="ObjectShortName">r_int_tb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/shoot_int_tb" type="logic">
+      <obj_property name="ElementShortName">shoot_int_tb</obj_property>
+      <obj_property name="ObjectShortName">shoot_int_tb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/seg_tb" type="array">
+      <obj_property name="ElementShortName">seg_tb[7:0]</obj_property>
+      <obj_property name="ObjectShortName">seg_tb[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/uut/s_int_port" type="array">
+      <obj_property name="ElementShortName">s_int_port[7:0]</obj_property>
+      <obj_property name="ObjectShortName">s_int_port[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/uut/CPU/IN_PORT" type="array">
+      <obj_property name="ElementShortName">IN_PORT[7:0]</obj_property>
+      <obj_property name="ObjectShortName">IN_PORT[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/uut/CPU/INT" type="logic">
+      <obj_property name="ElementShortName">INT</obj_property>
+      <obj_property name="ObjectShortName">INT</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/uut/CPU/PORT_ID" type="array">
+      <obj_property name="ElementShortName">PORT_ID[7:0]</obj_property>
+      <obj_property name="ObjectShortName">PORT_ID[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/uut/CPU/my_PC/PC_COUNT" type="array">
+      <obj_property name="ElementShortName">PC_COUNT[9:0]</obj_property>
+      <obj_property name="ObjectShortName">PC_COUNT[9:0]</obj_property>
+   </wvobject>
+</wave_config>

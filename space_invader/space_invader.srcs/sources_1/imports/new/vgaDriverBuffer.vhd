@@ -17,7 +17,9 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 
 entity vgaDriverBuffer is
-    Port (         CLK, we : in std_logic;
+    Port (         
+                   CLK : in std_logic;
+                   we : in std_logic;
                    wa : in std_logic_vector (10 downto 0);
                    wd : in std_logic_vector (7 downto 0);
                    Rout : out std_logic_vector(2 downto 0);
@@ -47,26 +49,34 @@ signal pixelVal : std_logic_vector(7 downto 0);
    -- Declare VGA driver components
 component VGAdrive is
 
-  port( clock              : in std_logic;  -- 25.175 Mhz clock
-        red, green         : in std_logic_vector(2 downto 0);
+  port( 
+        clock              : in std_logic;  -- 25.175 Mhz clock
+        red                : in std_logic_vector(2 downto 0);
+        green              : in std_logic_vector(2 downto 0);
         blue               : in std_logic_vector(1 downto 0);
-        row, column        : out std_logic_vector(9 downto 0); -- for current pixel
-        Rout, Gout         : out std_logic_vector(2 downto 0);
+        row                : out std_logic_vector(9 downto 0);
+        column             : out std_logic_vector(9 downto 0); -- for current pixel
+        Rout               : out std_logic_vector(2 downto 0);
+        Gout               : out std_logic_vector(2 downto 0);
         Bout               : out std_logic_vector(1 downto 0);
-        H, V : out std_logic); -- VGA drive signals
+        H : out std_logic;
+        V : out std_logic); -- VGA drive signals
 end component;
 
 component ram2k_8 is
-  port(clk:           in  STD_LOGIC;
+  port(
+       clk:           in  STD_LOGIC;
        we:            in  STD_LOGIC;
-       ra, wa:        in  STD_LOGIC_VECTOR(10 downto 0);
+       ra  : in  STD_LOGIC_VECTOR(10 downto 0);
+       wa:   in  STD_LOGIC_VECTOR(10 downto 0);     
        wd:            in  STD_LOGIC_VECTOR(7 downto 0);
        rd:            out STD_LOGIC_VECTOR(7 downto 0);
        pixelVal:      out STD_LOGIC_VECTOR(7 downto 0));
 end component; 
 
 component vga_clk_div is
-  port(clk     : in std_logic;
+  port(
+        clk     : in std_logic;
        clkout  : out std_logic);
 end component;
 
