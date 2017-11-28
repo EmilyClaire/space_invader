@@ -111,18 +111,18 @@ component jstksteptop
    end component;
    
    
---   component sseg_dec_uni
---       Port (       COUNT1 : in std_logic_vector(13 downto 0); 
---                    COUNT2 : in std_logic_vector(7 downto 0);
---                       SEL : in std_logic_vector(1 downto 0);
---                     dp_oe : in std_logic;
---                        dp : in std_logic_vector(1 downto 0);                       
---                       CLK : in std_logic;
---                      SIGN : in std_logic;
---                     VALID : in std_logic;
---                   DISP_EN : out std_logic_vector(3 downto 0);
---                  SEGMENTS : out std_logic_vector(7 downto 0));
---   end component sseg_dec_uni;
+   component sseg_dec_uni
+       Port (       COUNT1 : in std_logic_vector(13 downto 0); 
+                    COUNT2 : in std_logic_vector(7 downto 0);
+                       SEL : in std_logic_vector(1 downto 0);
+                     dp_oe : in std_logic;
+                        dp : in std_logic_vector(1 downto 0);                       
+                       CLK : in std_logic;
+                      SIGN : in std_logic;
+                     VALID : in std_logic;
+                   DISP_EN : out std_logic_vector(3 downto 0);
+                  SEGMENTS : out std_logic_vector(7 downto 0));
+   end component sseg_dec_uni;
    
    
    
@@ -186,17 +186,17 @@ begin
      
     s_cnt1_assign <= "000000" & s_SSEG_val;
     
---    my_sseg_dec_uni : sseg_dec_uni
---    port map (       COUNT1 => s_cnt1_assign,
---                     COUNT2 => s_sseg_val,
---                     SEL => s_SSEG_cntr (7 downto 6),
---                     dp_oe => s_sseg_cntr(2),
---                     dp => s_sseg_cntr (5 downto 4),                       
---                     CLK => CLK,
---                     SIGN => s_sseg_cntr(1),
---                     VALID => s_sseg_cntr(0),
---                     DISP_EN => an,
---                     SEGMENTS => seg);
+    my_sseg_dec_uni : sseg_dec_uni
+    port map (       COUNT1 => s_cnt1_assign,
+                     COUNT2 => s_sseg_val,
+                     SEL => s_SSEG_cntr (7 downto 6),
+                     dp_oe => s_sseg_cntr(2),
+                     dp => s_sseg_cntr (5 downto 4),                       
+                     CLK => CLK,
+                     SIGN => s_sseg_cntr(1),
+                     VALID => s_sseg_cntr(0),
+                     DISP_EN => an,
+                     SEGMENTS => seg);
               
         my_clk_div : clk_div 
              port map (CLK => CLK,
@@ -246,7 +246,7 @@ begin
                                jstk_input_miso_2 => MISO,
                                jstk_input_sclk_3 => SCLK,
                                an => an,
-                               seg => seg,
+                               --seg => seg,
                                --LEDS => s_LEDS,
                                signal_x => signal_x,
                                signal_y => signal_y);
@@ -275,18 +275,6 @@ begin
     s_interrupt <= s_shoot_int or s_r_int or s_l_int;
 --    s_interrupt <= shoot_int or r_int or l_int;
     
---    process(s_r_int, s_shoot_int, s_l_int)
---    begin
---    s_ints(0) <= s_r_int;
---    s_ints(1) <= s_shoot_int;
---    s_ints(2) <= s_l_int;            
---    end process;
---process(s_signal_x)
---begin
---if (s_signal_x(0) = '1') then
---    s_l_int <= '1';
---end if;
---end process;
 
 --    process(s_ints)
 --    begin
@@ -298,22 +286,22 @@ begin
 --        end case;
 --    end process;
 
-process (s_l_int, s_shoot_int, s_r_int)
-begin
-    if (s_r_int = '1') then
-        s_int_port <= x"01";
-    else
-        if (s_shoot_int = '1') then
-            s_int_port <= x"05";
-        else
-            if (s_l_int = '1') then
-                s_int_port <= x"02";
-            else
-            s_int_port <= s_int_port;
-            end if;
-        end if;
-    end if;
-end process;
+--process (s_l_int, s_shoot_int, s_r_int)
+--begin
+--    if (s_r_int = '1') then
+--        s_int_port <= x"01";
+--    else
+--        if (s_shoot_int = '1') then
+--            s_int_port <= x"05";
+--        else
+--            if (s_l_int = '1') then
+--                s_int_port <= x"02";
+--            else
+--            s_int_port <= s_int_port;
+--            end if;
+--        end if;
+--    end if;
+--end process;
 
 --process (l_int, shoot_int, r_int)
 --begin
@@ -341,16 +329,14 @@ end process;
    inputs: process(s_port_id)
    begin
       if (s_port_id  = INTERRUPT_ID) then
---        if(s_shoot_int = '1') then
---            s_input_port <= x"03";
---        end if;
-        
---        if (s_l_int = '1') then
---            s_input_port <= x"02";
---        elsif(s_r_int = '1') then
---            s_input_port <= x"01";
---        end if;
-        s_input_port <= s_int_port;
+        if(s_shoot_int = '1') then
+            s_input_port <= x"05";
+        elsif (s_l_int = '1') then
+            s_input_port <= x"02";
+        elsif(s_r_int = '1') then
+            s_input_port <= x"01";
+        end if;
+        s_input_port <= s_input_port;
       else
         s_input_port <= x"00";
       end if;
