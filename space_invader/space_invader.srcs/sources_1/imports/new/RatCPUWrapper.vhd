@@ -281,6 +281,13 @@ begin
     s_interrupt <= s_shoot_int or s_r_int or s_l_int;
 --    s_interrupt <= shoot_int or r_int or l_int;
 
+--s_int_port (7 downto 3) <= "00000";
+--s_int_port(2) <= l_int;
+--s_int_port(1) <= shoot_int;
+--s_int_port(0) <= r_int;
+
+
+
 --    process(s_ints)
 --    begin
 --        case s_ints is
@@ -328,10 +335,10 @@ begin
    -- MUX for selecting what input to read ---------------------------------------
    -- add conditions and connections for any added PORT IDs
    -------------------------------------------------------------------------------
-   inputs: process(s_port_id, s_int_port)
+   inputs: process(s_port_id, s_r_int, s_shoot_int, s_l_int)
    begin
       if (s_port_id  = INTERRUPT_ID) then
-                if (r_int = '1') then
+            if (r_int = '1') then
                 s_int_port <= x"01";
             elsif (shoot_int = '1') then
                 s_int_port <= x"02";
