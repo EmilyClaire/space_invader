@@ -13,8 +13,8 @@
 .EQU MIDDLE_FOR_COUNT2    = 0x1f
 .EQU OUTSIDE_FOR_COUNT2   = 0x1f
 
-.equ END_ROW_SHIP = 0x48; the row length minus 3 times 2
-.equ END_ROW_PLAYER = 0x27
+.equ END_ROW_SHIP = 0x4A; the row length minus 3 times 2
+.equ END_ROW_PLAYER = 0x25
 .equ END_COL = 0x1D
 .equ SHIP_COLOR = 0xE3;0x03 ;blue
 					   ;0xE0 ;red
@@ -70,7 +70,7 @@
 ;---------------------------------------------------------------------
 		
 reset:
-		MOV R8, END_ROW_PLAYER
+		MOV R8, 0x27
 		MOV R7, END_COL
 		MOV R6, 0x00
 
@@ -84,7 +84,7 @@ reset_loop:
 		MOV R4, R7
 		MOV R5, R8
 		call draw_dot
-		MOV R8, END_ROW_PLAYER
+		MOV R8, 0x27
 		SUB R7, 0x01
 		CMP R7, 0xFF
 		BRNE reset_loop
@@ -189,13 +189,13 @@ move_player:
 				BRNE test_left_player
 
 test_right_player:
-				CMP R9, END_ROW_SHIP
+				CMP R9, END_ROW_PLAYER
 				BRNE move_player_loop
-				brn end_move_player
+				brn re_draw_player
 
 test_left_player:
 				CMP R9, 0x00
-				BREQ end_move_player
+				BREQ re_draw_player
 				
 move_player_loop:
 				LD R9, (R25)
@@ -207,7 +207,10 @@ move_player_loop:
 				ADD R25, 0x01
 				SUB R3, 0x01
 				BRNE move_player_loop
-				
+				brn end_move_player
+
+re_draw_player: call draw_player
+
 end_move_player:
 				ret
 
@@ -241,12 +244,13 @@ clear_player_loop:
 ;---------------------------------------------------------------------
 
 down_ship:		
+				call clear_ship
 				LD R9, SHIP_Y_LOC
 				
+				ADD R9, 0x01
 				CMP R9, END_COL
 				BREQ lose
 
-				ADD R9, 0x01
 				ST R9, SHIP_Y_LOC
 
 				CMP R11, 0x01
@@ -258,6 +262,7 @@ down_ship:
 set_neg:		MOV R11, 0xFF
 				
 end_down_ship:
+				call draw_ship
 				ret
 ;---------------------------------------------------------------------
 ;							Move Ship
@@ -396,7 +401,7 @@ DONE:        BRN DONE
 
 lose:     
 		call pause
-		MOV R8, END_ROW_PLAYER
+		MOV R8, 0x27
 		MOV R7, END_COL
 		ADD R8, 0x01
 		MOV R6, 0xE0 ;RED SCREEN
