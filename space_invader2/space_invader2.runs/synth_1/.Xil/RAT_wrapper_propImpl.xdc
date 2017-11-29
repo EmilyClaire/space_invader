@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:{C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.srcs/constrs_1/new/Constraints.xdc} rfile:../../../space_invader.srcs/constrs_1/new/Constraints.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:{C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/constrs_1/new/Constraints.xdc} rfile:../../../space_invader2.srcs/constrs_1/new/Constraints.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:9 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN W5 [get_ports CLK]
 set_property src_info {type:XDC file:1 line:14 export:INPUT save:INPUT read:READ} [current_design]

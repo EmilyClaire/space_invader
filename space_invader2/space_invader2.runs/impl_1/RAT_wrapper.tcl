@@ -51,11 +51,12 @@ set rc [catch {
   create_project -in_memory -part xc7a35tcpg236-1
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
-  set_property webtalk.parent_dir {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.cache/wt} [current_project]
-  set_property parent.project_path {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.xpr} [current_project]
-  set_property ip_cache_permissions disable [current_project]
-  add_files -quiet {{C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.runs/synth_1/RAT_wrapper.dcp}}
-  read_xdc {{C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.srcs/constrs_1/new/Constraints.xdc}}
+  set_property webtalk.parent_dir {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.cache/wt} [current_project]
+  set_property parent.project_path {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.xpr} [current_project]
+  set_property ip_output_repo {{C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.cache/ip}} [current_project]
+  set_property ip_cache_permissions {read write} [current_project]
+  add_files -quiet {{C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.runs/synth_1/RAT_wrapper.dcp}}
+  read_xdc {{C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/constrs_1/new/Constraints.xdc}}
   link_design -top RAT_wrapper -part xc7a35tcpg236-1
   close_msg_db -file init_design.pb
 } RESULT]
