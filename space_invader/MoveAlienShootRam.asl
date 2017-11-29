@@ -94,13 +94,13 @@ C5:  Raw line from source code.
 (0078)                     0x01D  || reset_loop:
 (0079)  CS-0x01D  0x04439         || 		MOV R4, R7
 (0080)  CS-0x01E  0x04541         || 		MOV R5, R8
-(0081)  CS-0x01F  0x08759         || 		call draw_dot
+(0081)  CS-0x01F  0x087B9         || 		call draw_dot
 (0082)  CS-0x020  0x2C801         || 		SUB R8, 0x01
 (0083)  CS-0x021  0x080EB         || 		BRNE reset_loop
 (0084)                            || 
 (0085)  CS-0x022  0x04439         || 		MOV R4, R7
 (0086)  CS-0x023  0x04541         || 		MOV R5, R8
-(0087)  CS-0x024  0x08759         || 		call draw_dot
+(0087)  CS-0x024  0x087B9         || 		call draw_dot
 (0088)  CS-0x025  0x36827         || 		MOV R8, 0x27
 (0089)  CS-0x026  0x2C701         || 		SUB R7, 0x01
 (0090)  CS-0x027  0x307FF         || 		CMP R7, 0xFF
@@ -116,7 +116,7 @@ C5:  Raw line from source code.
 (0100)                            || ; 
 (0101)                            || ;---------------------------------------------------------------------
 (0102)                            || 	
-(0103)  CS-0x02C  0x08819         || 		call pause
+(0103)  CS-0x02C  0x08879         || 		call pause
 (0104)  CS-0x02D  0x08211         || 		call draw_player
 (0105)  CS-0x02E  0x08449         || 		call draw_ship
 (0106)                            || 
@@ -127,7 +127,7 @@ C5:  Raw line from source code.
 (0111)                            || 
 (0112)                            || 
 (0113)                     0x02F  || start:
-(0114)  CS-0x02F  0x08879         || 		CALL pause2
+(0114)  CS-0x02F  0x088D9         || 		CALL pause2
 (0115)                            || 
 (0116)  CS-0x030  0x30A00         || 		CMP R10, 0x00
 (0117)  CS-0x031  0x081AB         || 		BRNE move
@@ -141,7 +141,7 @@ C5:  Raw line from source code.
 (0125)  CS-0x036  0x2CA01         || 		SUB R10, 0x01
 (0126)                            || 
 (0127)                     0x037  || move_bullets:
-(0128)  CS-0x037  0x08641         || 		call draw_ship_bullets
+(0128)  CS-0x037  0x086A1         || 		call draw_ship_bullets
 (0129)                            || 
 (0130)  CS-0x038  0x08178         || 		brn start
 (0131)                            || 
@@ -184,7 +184,7 @@ C5:  Raw line from source code.
 (0168)                            || 
 (0169)                     0x046  || draw_player_loop:
 (0170)  CS-0x046  0x045CA         || 				LD R5, (R25)
-(0171)  CS-0x047  0x08759         || 				call draw_dot
+(0171)  CS-0x047  0x087B9         || 				call draw_dot
 (0172)                            || 
 (0173)  CS-0x048  0x29901         || 				ADD R25, 0x01
 (0174)  CS-0x049  0x2C301         || 				SUB R3, 0x01
@@ -223,7 +223,7 @@ C5:  Raw line from source code.
 (0207)  CS-0x05A  0x02960         || 				ADD R9, R12
 (0208)  CS-0x05B  0x049CB         || 				ST R9, (R25)
 (0209)  CS-0x05C  0x04549         || 				MOV R5, R9
-(0210)  CS-0x05D  0x08759         || 				call draw_dot
+(0210)  CS-0x05D  0x087B9         || 				call draw_dot
 (0211)                            || 
 (0212)  CS-0x05E  0x29901         || 				ADD R25, 0x01
 (0213)  CS-0x05F  0x2C301         || 				SUB R3, 0x01
@@ -248,7 +248,7 @@ C5:  Raw line from source code.
 (0232)                            || 
 (0233)                     0x068  || clear_player_loop:
 (0234)  CS-0x068  0x045CA         || 				LD R5, (R25)
-(0235)  CS-0x069  0x08759         || 				call draw_dot
+(0235)  CS-0x069  0x087B9         || 				call draw_dot
 (0236)                            || 
 (0237)  CS-0x06A  0x29901         || 				ADD R25, 0x01
 (0238)  CS-0x06B  0x2C301         || 				SUB R3, 0x01
@@ -270,7 +270,7 @@ C5:  Raw line from source code.
 (0254)                            || 				
 (0255)  CS-0x070  0x28901         || 				ADD R9, 0x01
 (0256)  CS-0x071  0x3091D         || 				CMP R9, END_COL
-(0257)  CS-0x072  0x08792         || 				BREQ lose
+(0257)  CS-0x072  0x087F2         || 				BREQ lose
 (0258)                            || 
 (0259)  CS-0x073  0x3A90A         || 				ST R9, SHIP_Y_LOC
 (0260)                            || 
@@ -323,7 +323,7 @@ C5:  Raw line from source code.
 (0307)                     0x08D  || draw_ship_loop:
 (0308)  CS-0x08D  0x044C2         || 				LD R4, (R24)
 (0309)  CS-0x08E  0x045CA         || 				LD R5, (R25)
-(0310)  CS-0x08F  0x08759         || 				call draw_dot
+(0310)  CS-0x08F  0x087B9         || 				call draw_dot
 (0311)                            || 
 (0312)  CS-0x090  0x29901         || 				ADD R25, 0x01
 (0313)  CS-0x091  0x2C301         || 				SUB R3, 0x01
@@ -345,7 +345,7 @@ C5:  Raw line from source code.
 (0329)                     0x098  || clear_ship_loop:
 (0330)  CS-0x098  0x044C2         || 				LD R4, (R24)
 (0331)  CS-0x099  0x045CA         || 				LD R5, (R25)
-(0332)  CS-0x09A  0x08759         || 				call draw_dot
+(0332)  CS-0x09A  0x087B9         || 				call draw_dot
 (0333)                            || 
 (0334)  CS-0x09B  0x29901         || 				ADD R25, 0x01
 (0335)  CS-0x09C  0x2C301         || 				SUB R3, 0x01
@@ -397,333 +397,357 @@ C5:  Raw line from source code.
 (0381)                            || ;---------------------------------------------------------------------
 (0382)                     0x0B1  || move_bullet:	
 (0383)                            || 
-(0384)                     0x0B1  || hit_player:
-(0385)                     0x0B1  || hit_ship:
-(0386)  CS-0x0B1  0x08619         || 				call clear_bullet
-(0387)  CS-0x0B2  0x049C2         || 				LD R9, (R24)
-(0388)  CS-0x0B3  0x3091D         || 				CMP R9, END_COL
-(0389)  CS-0x0B4  0x085D2         || 				BREQ move_remove_bullet
-(0390)                            || 
-(0391)  CS-0x0B5  0x28901         || 				ADD R9, 0x01
-(0392)  CS-0x0B6  0x049C3         || 				ST R9, (R24) 
-(0393)  CS-0x0B7  0x04669         || 				MOV R6, R13
-(0394)  CS-0x0B8  0x085F1         || 				call draw_bullet
-(0395)  CS-0x0B9  0x085E8         || 				brn end_move_bullet
-(0396)                            || 
-(0397)                     0x0BA  || move_remove_bullet:
-(0398)  CS-0x0BA  0x369FF         || 				MOV R9, 0xFF
-(0399)  CS-0x0BB  0x049C3         || 				ST R9, (R24)
-(0400)  CS-0x0BC  0x049CB         || 				ST R9, (R25)
-(0401)                     0x0BD  || end_move_bullet:
-(0402)  CS-0x0BD  0x18002         || 				ret
-(0403)                            || 
-(0404)                            || 
-(0405)                            || ;---------------------------------------------------------------------
-(0406)                            || ;							Draw Bullet
-(0407)                            || ;---------------------------------------------------------------------
-(0408)                     0x0BE  || draw_bullet:
-(0409)  CS-0x0BE  0x04669         || 				MOV R6, R13
-(0410)  CS-0x0BF  0x044C2         || 				LD R4, (R24)
-(0411)  CS-0x0C0  0x045CA         || 				LD R5, (R25)
-(0412)  CS-0x0C1  0x08759         || 				call draw_dot
-(0413)  CS-0x0C2  0x18002         || 				ret
-(0414)                            || 
-(0415)                            || ;---------------------------------------------------------------------
-(0416)                            || ;							Clear Bullet
-(0417)                            || ;---------------------------------------------------------------------
+(0384)                     0x0B1  || hit_player:		
+(0385)                            || 
+(0386)  CS-0x0B1  0x085F9         || 				call collision_player
+(0387)                            || 
+(0388)                            || 
+(0389)                     0x0B2  || hit_ship:
+(0390)  CS-0x0B2  0x08679         || 				call clear_bullet
+(0391)  CS-0x0B3  0x049C2         || 				LD R9, (R24)
+(0392)  CS-0x0B4  0x3091D         || 				CMP R9, END_COL
+(0393)  CS-0x0B5  0x085DA         || 				BREQ move_remove_bullet
+(0394)                            || 
+(0395)  CS-0x0B6  0x28901         || 				ADD R9, 0x01
+(0396)  CS-0x0B7  0x049C3         || 				ST R9, (R24) 
+(0397)  CS-0x0B8  0x04669         || 				MOV R6, R13
+(0398)  CS-0x0B9  0x08651         || 				call draw_bullet
+(0399)  CS-0x0BA  0x085F0         || 				brn end_move_bullet
+(0400)                            || 
+(0401)                     0x0BB  || move_remove_bullet:
+(0402)  CS-0x0BB  0x369FF         || 				MOV R9, 0xFF
+(0403)  CS-0x0BC  0x049C3         || 				ST R9, (R24)
+(0404)  CS-0x0BD  0x049CB         || 				ST R9, (R25)
+(0405)                     0x0BE  || end_move_bullet:
+(0406)  CS-0x0BE  0x18002         || 				ret
+(0407)                            || 
+(0408)                            || ;---------------------------------------------------------------------
+(0409)                            || ;							Collision 
+(0410)                            || ;---------------------------------------------------------------------
+(0411)                     0x0BF  || collision_player:
+(0412)  CS-0x0BF  0x36710         || 				MOV R7, PLAYER_X_LOC
+(0413)  CS-0x0C0  0x3681D         || 				MOV R8, END_COL
+(0414)  CS-0x0C1  0x04941         || 				MOV R9, R8
+(0415)  CS-0x0C2  0x056C2         || 				LD R22, (R24)
+(0416)  CS-0x0C3  0x049B0         || 				CMP R9, R22
+(0417)  CS-0x0C4  0x087F2         || 				BREQ lose
 (0418)                            || 
-(0419)                     0x0C3  || clear_bullet: 
-(0420)                            || 				;R0, 0xFF
-(0421)  CS-0x0C3  0x36600         || 				MOV R6, 0x00
-(0422)                            || 
-(0423)  CS-0x0C4  0x044C2         || 				LD R4, (R24)
-(0424)  CS-0x0C5  0x045CA         || 				LD R5, (R25)
-(0425)  CS-0x0C6  0x08759         || 				call draw_dot
+(0419)  CS-0x0C5  0x0493A         || 				LD R9, (R7)
+(0420)  CS-0x0C6  0x056CA         || 				LD R22, (R25)
+(0421)  CS-0x0C7  0x049B0         || 				CMP R9, R22
+(0422)  CS-0x0C8  0x087F2         || 				BREQ lose
+(0423)                            || 
+(0424)  CS-0x0C9  0x18002         || 				ret
+(0425)                            || 				
 (0426)                            || 
-(0427)                            || 				;ST R0, (R24)
-(0428)                            || 				;ST R0, (R25)
-(0429)  CS-0x0C7  0x18002         || 				ret
-(0430)                            || 
-(0431)                            || 
-(0432)                            || ;---------------------------------------------------------------------
-(0433)                            || ;							Draw Ship Bullets
-(0434)                            || ;---------------------------------------------------------------------
-(0435)                            || 
-(0436)                     0x0C8  || draw_ship_bullets:
-(0437)  CS-0x0C8  0x37920         || 				MOV R25, SHIP_BULLETS_LOC
-(0438)  CS-0x0C9  0x36D03         || 				MOV R13, SHIP_BULLET_COLOR
-(0439)  CS-0x0CA  0x058C9         || 				MOV R24, R25
-(0440)  CS-0x0CB  0x29801         || 				ADD R24, 0x01
-(0441)                            || 
-(0442)  CS-0x0CC  0x36F00         || 				MOV R15, 0x00
-(0443)                            || 
-(0444)                     0x0CD  || draw_ship_bullets_loop:
-(0445)  CS-0x0CD  0x08589         || 				call move_bullet
+(0427)                            || 
+(0428)                            || 
+(0429)                            || ;---------------------------------------------------------------------
+(0430)                            || ;							Draw Bullet
+(0431)                            || ;---------------------------------------------------------------------
+(0432)                     0x0CA  || draw_bullet:
+(0433)  CS-0x0CA  0x04669         || 				MOV R6, R13
+(0434)  CS-0x0CB  0x044C2         || 				LD R4, (R24)
+(0435)  CS-0x0CC  0x045CA         || 				LD R5, (R25)
+(0436)  CS-0x0CD  0x087B9         || 				call draw_dot
+(0437)  CS-0x0CE  0x18002         || 				ret
+(0438)                            || 
+(0439)                            || ;---------------------------------------------------------------------
+(0440)                            || ;							Clear Bullet
+(0441)                            || ;---------------------------------------------------------------------
+(0442)                            || 
+(0443)                     0x0CF  || clear_bullet: 
+(0444)                            || 				;R0, 0xFF
+(0445)  CS-0x0CF  0x36600         || 				MOV R6, 0x00
 (0446)                            || 
-(0447)  CS-0x0CE  0x29902         || 				ADD R25, 0x02
-(0448)  CS-0x0CF  0x29802         || 				ADD R24, 0x02
-(0449)  CS-0x0D0  0x28F02         || 				ADD R15, 0x02
-(0450)  CS-0x0D1  0x30F0A         || 				CMP R15, 0x0A
-(0451)  CS-0x0D2  0x0866B         || 				BRNE draw_ship_bullets_loop
-(0452)                            || 					
-(0453)                     0x0D3  || draw_ship_bullets_check:
-(0454)  CS-0x0D3  0x2DE01         || 				SUB R30, 0x01
-(0455)  CS-0x0D4  0x086BB         || 				BRNE draw_ship_bullets_end
-(0456)                            || 
-(0457)  CS-0x0D5  0x37E0B         || 				MOV R30, SHIP_BULLET_RATE
-(0458)  CS-0x0D6  0x086C1         || 				call start_ship_bullet
-(0459)                     0x0D7  || draw_ship_bullets_end:
-(0460)  CS-0x0D7  0x18002         || 				ret
-(0461)                            || 
-(0462)                            || 
-(0463)                            || ;---------------------------------------------------------------------
-(0464)                            || ;							Start Ship Bullet
-(0465)                            || ;---------------------------------------------------------------------
-(0466)                     0x0D8  || start_ship_bullet:
-(0467)  CS-0x0D8  0x37920         || 				MOV R25, SHIP_BULLETS_LOC
-(0468)  CS-0x0D9  0x039D0         || 				ADD R25, R26
-(0469)                            || 
-(0470)  CS-0x0DA  0x058C9         || 				MOV R24, R25
-(0471)  CS-0x0DB  0x29801         || 				ADD R24, 0x01
-(0472)                            || 
-(0473)  CS-0x0DC  0x08619         || 				call clear_bullet
-(0474)                            || 
-(0475)                     0x0DD  || start_ship_bullet_main:
-(0476)  CS-0x0DD  0x3690C         || 				MOV R9, SHIP_X_LOC
-(0477)  CS-0x0DE  0x28901         || 				ADD R9, 0x01
-(0478)  CS-0x0DF  0x0484A         || 			    LD R8, (R9)
-(0479)  CS-0x0E0  0x048CB         || 				ST R8, (R25)
+(0447)  CS-0x0D0  0x044C2         || 				LD R4, (R24)
+(0448)  CS-0x0D1  0x045CA         || 				LD R5, (R25)
+(0449)  CS-0x0D2  0x087B9         || 				call draw_dot
+(0450)                            || 
+(0451)                            || 				;ST R0, (R24)
+(0452)                            || 				;ST R0, (R25)
+(0453)  CS-0x0D3  0x18002         || 				ret
+(0454)                            || 
+(0455)                            || 
+(0456)                            || ;---------------------------------------------------------------------
+(0457)                            || ;							Draw Ship Bullets
+(0458)                            || ;---------------------------------------------------------------------
+(0459)                            || 
+(0460)                     0x0D4  || draw_ship_bullets:
+(0461)  CS-0x0D4  0x37920         || 				MOV R25, SHIP_BULLETS_LOC
+(0462)  CS-0x0D5  0x36D03         || 				MOV R13, SHIP_BULLET_COLOR
+(0463)  CS-0x0D6  0x058C9         || 				MOV R24, R25
+(0464)  CS-0x0D7  0x29801         || 				ADD R24, 0x01
+(0465)                            || 
+(0466)  CS-0x0D8  0x36F00         || 				MOV R15, 0x00
+(0467)                            || 
+(0468)                     0x0D9  || draw_ship_bullets_loop:
+(0469)  CS-0x0D9  0x08589         || 				call move_bullet
+(0470)                            || 
+(0471)  CS-0x0DA  0x29902         || 				ADD R25, 0x02
+(0472)  CS-0x0DB  0x29802         || 				ADD R24, 0x02
+(0473)  CS-0x0DC  0x28F02         || 				ADD R15, 0x02
+(0474)  CS-0x0DD  0x30F0A         || 				CMP R15, 0x0A
+(0475)  CS-0x0DE  0x086CB         || 				BRNE draw_ship_bullets_loop
+(0476)                            || 					
+(0477)                     0x0DF  || draw_ship_bullets_check:
+(0478)  CS-0x0DF  0x2DE01         || 				SUB R30, 0x01
+(0479)  CS-0x0E0  0x0871B         || 				BRNE draw_ship_bullets_end
 (0480)                            || 
-(0481)  CS-0x0E1  0x3870A         || 				LD R7, SHIP_Y_LOC
-(0482)  CS-0x0E2  0x28701         || 				ADD R7, 0x01
-(0483)  CS-0x0E3  0x047C3         || 				ST R7, (R24)
-(0484)                            || 				
-(0485)  CS-0x0E4  0x36D03         || 				MOV R13, SHIP_BULLET_COLOR
-(0486)  CS-0x0E5  0x085F1         || 				call draw_bullet
-(0487)                            || 
-(0488)  CS-0x0E6  0x29A02         || 				ADD R26, 0x02
-(0489)                            || 			
-(0490)  CS-0x0E7  0x31A0A         || 				CMP R26, 0x0A
-(0491)  CS-0x0E8  0x08753         || 				BRNE end_start_ship_bullet
-(0492)                            || 
-(0493)  CS-0x0E9  0x37A00         || 				MOV R26, 0x00
-(0494)                     0x0EA  || end_start_ship_bullet:
-(0495)  CS-0x0EA  0x18002         || 				ret
+(0481)  CS-0x0E1  0x37E0B         || 				MOV R30, SHIP_BULLET_RATE
+(0482)  CS-0x0E2  0x08721         || 				call start_ship_bullet
+(0483)                     0x0E3  || draw_ship_bullets_end:
+(0484)  CS-0x0E3  0x18002         || 				ret
+(0485)                            || 
+(0486)                            || 
+(0487)                            || ;---------------------------------------------------------------------
+(0488)                            || ;							Start Ship Bullet
+(0489)                            || ;---------------------------------------------------------------------
+(0490)                     0x0E4  || start_ship_bullet:
+(0491)  CS-0x0E4  0x37920         || 				MOV R25, SHIP_BULLETS_LOC
+(0492)  CS-0x0E5  0x039D0         || 				ADD R25, R26
+(0493)                            || 
+(0494)  CS-0x0E6  0x058C9         || 				MOV R24, R25
+(0495)  CS-0x0E7  0x29801         || 				ADD R24, 0x01
 (0496)                            || 
-(0497)                            || 
+(0497)  CS-0x0E8  0x08679         || 				call clear_bullet
 (0498)                            || 
-(0499)                            || ;---------------------------------------------------------------------
-(0500)                            || ;							Draw Dot
-(0501)                            || ;---------------------------------------------------------------------
-(0502)                            || 
-(0503)                     0x0EB  || draw_dot: 
-(0504)  CS-0x0EB  0x2053F         ||         AND r5, 0x3F ; make sure top 2 bits cleared
-(0505)  CS-0x0EC  0x2041F         ||         AND r4, 0x1F ; make sure top 3 bits cleared
-(0506)                            || 
-(0507)  CS-0x0ED  0x34591  0x0ED  || dd_out: OUT r5, VGA_LADD ; write bot 8 address bits to register
-(0508)  CS-0x0EE  0x34490         ||         OUT r4, VGA_HADD ; write top 3 address bits to register
-(0509)  CS-0x0EF  0x34692         ||         OUT r6, VGA_COLOR ; write data to frame buffer
-(0510)  CS-0x0F0  0x18002         ||         RET
-(0511)                            || 	   
-(0512)                            || 
-(0513)                            || ;---------------------------------------------------------------------
-(0514)                            || ;							Done
-(0515)                            || ;
-(0516)                            || ; 	Don't do anything anymore
-(0517)                            || ;---------------------------------------------------------------------
-(0518)                            || 
-(0519)  CS-0x0F1  0x08788  0x0F1  || DONE:        BRN DONE
+(0499)                     0x0E9  || start_ship_bullet_main:
+(0500)  CS-0x0E9  0x3690C         || 				MOV R9, SHIP_X_LOC
+(0501)  CS-0x0EA  0x28901         || 				ADD R9, 0x01
+(0502)  CS-0x0EB  0x0484A         || 			    LD R8, (R9)
+(0503)  CS-0x0EC  0x048CB         || 				ST R8, (R25)
+(0504)                            || 
+(0505)  CS-0x0ED  0x3870A         || 				LD R7, SHIP_Y_LOC
+(0506)  CS-0x0EE  0x28701         || 				ADD R7, 0x01
+(0507)  CS-0x0EF  0x047C3         || 				ST R7, (R24)
+(0508)                            || 				
+(0509)  CS-0x0F0  0x36D03         || 				MOV R13, SHIP_BULLET_COLOR
+(0510)  CS-0x0F1  0x08651         || 				call draw_bullet
+(0511)                            || 
+(0512)  CS-0x0F2  0x29A02         || 				ADD R26, 0x02
+(0513)                            || 			
+(0514)  CS-0x0F3  0x31A0A         || 				CMP R26, 0x0A
+(0515)  CS-0x0F4  0x087B3         || 				BRNE end_start_ship_bullet
+(0516)                            || 
+(0517)  CS-0x0F5  0x37A00         || 				MOV R26, 0x00
+(0518)                     0x0F6  || end_start_ship_bullet:
+(0519)  CS-0x0F6  0x18002         || 				ret
 (0520)                            || 
-(0521)                            || ;---------------------------------------------------------------------
-(0522)                            || ;							Lose
-(0523)                            || ;
-(0524)                            || ; 	Turn the screen red
+(0521)                            || 
+(0522)                            || 
+(0523)                            || ;---------------------------------------------------------------------
+(0524)                            || ;							Draw Dot
 (0525)                            || ;---------------------------------------------------------------------
 (0526)                            || 
-(0527)                     0x0F2  || lose:     
-(0528)  CS-0x0F2  0x08819         || 		call pause
-(0529)  CS-0x0F3  0x36827         || 		MOV R8, 0x27
-(0530)  CS-0x0F4  0x3671D         || 		MOV R7, END_COL
-(0531)  CS-0x0F5  0x28801         || 		ADD R8, 0x01
-(0532)  CS-0x0F6  0x366E0         || 		MOV R6, 0xE0 ;RED SCREEN
-(0533)                            || 
-(0534)                     0x0F7  || lose_loop:
-(0535)                            || 
-(0536)  CS-0x0F7  0x04439         || 		MOV R4, R7
-(0537)  CS-0x0F8  0x04541         || 		MOV R5, R8
-(0538)  CS-0x0F9  0x08759         || 		call draw_dot
-(0539)  CS-0x0FA  0x2C801         || 		SUB R8, 0x01
-(0540)  CS-0x0FB  0x087BB         || 		BRNE lose_loop
-(0541)                            || 
-(0542)  CS-0x0FC  0x04439         || 		MOV R4, R7
-(0543)  CS-0x0FD  0x04541         || 		MOV R5, R8
-(0544)  CS-0x0FE  0x08759         || 		call draw_dot
-(0545)  CS-0x0FF  0x2C701         || 		SUB R7, 0x01
-(0546)  CS-0x100  0x307FF         || 		CMP R7, 0xFF
-(0547)  CS-0x101  0x087BB         || 		BRNE lose_loop
-(0548)  CS-0x102  0x08788         || 		brn done
-(0549)                            || 
+(0527)                     0x0F7  || draw_dot: 
+(0528)  CS-0x0F7  0x2053F         ||         AND r5, 0x3F ; make sure top 2 bits cleared
+(0529)  CS-0x0F8  0x2041F         ||         AND r4, 0x1F ; make sure top 3 bits cleared
+(0530)                            || 
+(0531)  CS-0x0F9  0x34591  0x0F9  || dd_out: OUT r5, VGA_LADD ; write bot 8 address bits to register
+(0532)  CS-0x0FA  0x34490         ||         OUT r4, VGA_HADD ; write top 3 address bits to register
+(0533)  CS-0x0FB  0x34692         ||         OUT r6, VGA_COLOR ; write data to frame buffer
+(0534)  CS-0x0FC  0x18002         ||         RET
+(0535)                            || 	   
+(0536)                            || 
+(0537)                            || ;---------------------------------------------------------------------
+(0538)                            || ;							Done
+(0539)                            || ;
+(0540)                            || ; 	Don't do anything anymore
+(0541)                            || ;---------------------------------------------------------------------
+(0542)                            || 
+(0543)  CS-0x0FD  0x087E8  0x0FD  || DONE:        BRN DONE
+(0544)                            || 
+(0545)                            || ;---------------------------------------------------------------------
+(0546)                            || ;							Lose
+(0547)                            || ;
+(0548)                            || ; 	Turn the screen red
+(0549)                            || ;---------------------------------------------------------------------
 (0550)                            || 
-(0551)                            || 
-(0552)                            || ;---------------------------------------------------------------------
-(0553)                            || ;							Pause
-(0554)                            || ;
-(0555)                            || ;	a long pause
-(0556)                            || ;---------------------------------------------------------------------
+(0551)                     0x0FE  || lose:     
+(0552)  CS-0x0FE  0x08879         || 		call pause
+(0553)  CS-0x0FF  0x36827         || 		MOV R8, 0x27
+(0554)  CS-0x100  0x3671D         || 		MOV R7, END_COL
+(0555)  CS-0x101  0x28801         || 		ADD R8, 0x01
+(0556)  CS-0x102  0x366E0         || 		MOV R6, 0xE0 ;RED SCREEN
 (0557)                            || 
-(0558)  CS-0x103  0x3712F  0x103  || pause:	    	MOV     R17, OUTSIDE_FOR_COUNT  
-(0559)  CS-0x104  0x2D101  0x104  || outside_for0: 	SUB     R17, 0x01
-(0560)                            || 
-(0561)  CS-0x105  0x3722F         ||              	MOV     R18, MIDDLE_FOR_COUNT   
-(0562)  CS-0x106  0x2D201  0x106  || middle_for0:  	SUB     R18, 0x01
-(0563)                            ||              
-(0564)  CS-0x107  0x3732F         ||              	MOV     R19, INSIDE_FOR_COUNT   
-(0565)  CS-0x108  0x2D301  0x108  || inside_for0:  	SUB     R19, 0x01
-(0566)  CS-0x109  0x08843         ||              	BRNE    inside_for0
-(0567)                            ||              
-(0568)  CS-0x10A  0x23200         ||              	OR      R18, 0x00              
-(0569)  CS-0x10B  0x08833         ||              	BRNE    middle_for0
-(0570)                            ||              
-(0571)  CS-0x10C  0x23100         ||              	OR      R17, 0x00               
-(0572)  CS-0x10D  0x08823         ||              	BRNE    outside_for0
-(0573)  CS-0x10E  0x18002         || 				ret
+(0558)                     0x103  || lose_loop:
+(0559)                            || 
+(0560)  CS-0x103  0x04439         || 		MOV R4, R7
+(0561)  CS-0x104  0x04541         || 		MOV R5, R8
+(0562)  CS-0x105  0x087B9         || 		call draw_dot
+(0563)  CS-0x106  0x2C801         || 		SUB R8, 0x01
+(0564)  CS-0x107  0x0881B         || 		BRNE lose_loop
+(0565)                            || 
+(0566)  CS-0x108  0x04439         || 		MOV R4, R7
+(0567)  CS-0x109  0x04541         || 		MOV R5, R8
+(0568)  CS-0x10A  0x087B9         || 		call draw_dot
+(0569)  CS-0x10B  0x2C701         || 		SUB R7, 0x01
+(0570)  CS-0x10C  0x307FF         || 		CMP R7, 0xFF
+(0571)  CS-0x10D  0x0881B         || 		BRNE lose_loop
+(0572)  CS-0x10E  0x087E8         || 		brn done
+(0573)                            || 
 (0574)                            || 
-(0575)                            || ;---------------------------------------------------------------------
-(0576)                            || ;							Pause2
-(0577)                            || ;
-(0578)                            || ;	a shorter pause
-(0579)                            || ;---------------------------------------------------------------------
-(0580)                            || 
+(0575)                            || 
+(0576)                            || ;---------------------------------------------------------------------
+(0577)                            || ;							Pause
+(0578)                            || ;
+(0579)                            || ;	a long pause
+(0580)                            || ;---------------------------------------------------------------------
 (0581)                            || 
-(0582)  CS-0x10F  0x3711F  0x10F  || pause2:	    	MOV     R17, OUTSIDE_FOR_COUNT2  
-(0583)  CS-0x110  0x2D101  0x110  || outside_for: 	SUB     R17, 0x01
+(0582)  CS-0x10F  0x3712F  0x10F  || pause:	    	MOV     R17, OUTSIDE_FOR_COUNT  
+(0583)  CS-0x110  0x2D101  0x110  || outside_for0: 	SUB     R17, 0x01
 (0584)                            || 
-(0585)  CS-0x111  0x3721F         ||              	MOV     R18, MIDDLE_FOR_COUNT2   
-(0586)  CS-0x112  0x2D201  0x112  || middle_for:  	SUB     R18, 0x01
+(0585)  CS-0x111  0x3722F         ||              	MOV     R18, MIDDLE_FOR_COUNT   
+(0586)  CS-0x112  0x2D201  0x112  || middle_for0:  	SUB     R18, 0x01
 (0587)                            ||              
-(0588)  CS-0x113  0x3731F         ||              	MOV     R19, INSIDE_FOR_COUNT2   
-(0589)  CS-0x114  0x2D301  0x114  || inside_for:  	SUB     R19, 0x01
-(0590)  CS-0x115  0x088A3         ||              	BRNE    inside_for
+(0588)  CS-0x113  0x3732F         ||              	MOV     R19, INSIDE_FOR_COUNT   
+(0589)  CS-0x114  0x2D301  0x114  || inside_for0:  	SUB     R19, 0x01
+(0590)  CS-0x115  0x088A3         ||              	BRNE    inside_for0
 (0591)                            ||              
-(0592)  CS-0x116  0x23200         ||              	or     R18, 0x00              
-(0593)  CS-0x117  0x08893         ||              	BRNE    middle_for
+(0592)  CS-0x116  0x23200         ||              	OR      R18, 0x00              
+(0593)  CS-0x117  0x08893         ||              	BRNE    middle_for0
 (0594)                            ||              
-(0595)  CS-0x118  0x31100         ||              	CMP      R17, 0x00               
-(0596)  CS-0x119  0x08883         ||              	BRNE    outside_for
+(0595)  CS-0x118  0x23100         ||              	OR      R17, 0x00               
+(0596)  CS-0x119  0x08883         ||              	BRNE    outside_for0
 (0597)  CS-0x11A  0x18002         || 				ret
 (0598)                            || 
 (0599)                            || ;---------------------------------------------------------------------
-(0600)                            || ;							INTERRUPTS
-(0601)                            || ;---------------------------------------------------------------------
-(0602)                            || 
-(0603)                            || 
-(0604)                     0x11B  || ISR: 
+(0600)                            || ;							Pause2
+(0601)                            || ;
+(0602)                            || ;	a shorter pause
+(0603)                            || ;---------------------------------------------------------------------
+(0604)                            || 
 (0605)                            || 
-(0606)  CS-0x11B  0x33420         ||    	IN R20, INTERRUPT_ID
-(0607)  CS-0x11C  0x35480         || 	OUT  R20, SSEG_VAL_ID
-(0608)                            || 	
-(0609)  CS-0x11D  0x31400         || 	CMP R20, 0x00
-(0610)  CS-0x11E  0x08932         ||     breq testing0
-(0611)                            || 
-(0612)  CS-0x11F  0x11401         ||    LSR R20
-(0613)  CS-0x120  0x0AAA0         ||    BRCS moveRight
-(0614)                            || 
-(0615)  CS-0x121  0x11401         ||    LSR R20
-(0616)  CS-0x122  0x0A970         ||    BRCS shoot   
-(0617)                            || 
-(0618)  CS-0x123  0x11401         ||    LSR R20  
-(0619)  CS-0x124  0x08A8A         ||    BREQ moveLeft
-(0620)                            || 
-(0621)  CS-0x125  0x08AB8         ||    brn ISR_END
+(0606)  CS-0x11B  0x3711F  0x11B  || pause2:	    	MOV     R17, OUTSIDE_FOR_COUNT2  
+(0607)  CS-0x11C  0x2D101  0x11C  || outside_for: 	SUB     R17, 0x01
+(0608)                            || 
+(0609)  CS-0x11D  0x3721F         ||              	MOV     R18, MIDDLE_FOR_COUNT2   
+(0610)  CS-0x11E  0x2D201  0x11E  || middle_for:  	SUB     R18, 0x01
+(0611)                            ||              
+(0612)  CS-0x11F  0x3731F         ||              	MOV     R19, INSIDE_FOR_COUNT2   
+(0613)  CS-0x120  0x2D301  0x120  || inside_for:  	SUB     R19, 0x01
+(0614)  CS-0x121  0x08903         ||              	BRNE    inside_for
+(0615)                            ||              
+(0616)  CS-0x122  0x23200         ||              	or     R18, 0x00              
+(0617)  CS-0x123  0x088F3         ||              	BRNE    middle_for
+(0618)                            ||              
+(0619)  CS-0x124  0x31100         ||              	CMP      R17, 0x00               
+(0620)  CS-0x125  0x088E3         ||              	BRNE    outside_for
+(0621)  CS-0x126  0x18002         || 				ret
 (0622)                            || 
-(0623)                     0x126  || testing0: 
-(0624)  CS-0x126  0x044D9         ||    MOV  R4, R27   ;y coordin
-(0625)  CS-0x127  0x045E1         ||    MOV  R5, R28   ;x coordin
+(0623)                            || ;---------------------------------------------------------------------
+(0624)                            || ;							INTERRUPTS
+(0625)                            || ;---------------------------------------------------------------------
 (0626)                            || 
-(0627)  CS-0x128  0x36603         || 	mov r6, 0x03
-(0628)  CS-0x129  0x08759         ||     call draw_dot
-(0629)  CS-0x12A  0x08819         || 	call pause
-(0630)  CS-0x12B  0x366FF         || 	mov r6, 0xff
-(0631)  CS-0x12C  0x08759         || 	call draw_dot
-(0632)  CS-0x12D  0x08AB8         ||     brn isr_end
-(0633)                            || 
-(0634)                     0x12E  || shoot: 
-(0635)                            ||    
-(0636)  CS-0x12E  0x31001         || 	CMP R16, 0x01
-(0637)  CS-0x12F  0x089EA         || 	BREQ second_bullet
+(0627)                            || 
+(0628)                     0x127  || ISR: 
+(0629)                            || 
+(0630)  CS-0x127  0x33420         ||    	IN R20, INTERRUPT_ID
+(0631)  CS-0x128  0x35480         || 	OUT  R20, SSEG_VAL_ID
+(0632)                            || 	
+(0633)  CS-0x129  0x31400         || 	CMP R20, 0x00
+(0634)  CS-0x12A  0x08992         ||     breq testing0
+(0635)                            || 
+(0636)  CS-0x12B  0x11401         ||    LSR R20
+(0637)  CS-0x12C  0x0AB00         ||    BRCS moveRight
 (0638)                            || 
-(0639)  CS-0x130  0x04469         || 	MOV R4, R13
-(0640)  CS-0x131  0x04561         || 	MOV R5, R12
-(0641)  CS-0x132  0x36600         || 	MOV R6, 0x00
-(0642)  CS-0x133  0x08759         || 	call draw_dot
-(0643)                            || 
-(0644)  CS-0x134  0x04DD9         ||    Mov R13, R27
-(0645)  CS-0x135  0x2CD01         ||    SUB R13, 0x01
+(0639)  CS-0x12D  0x11401         ||    LSR R20
+(0640)  CS-0x12E  0x0A9D0         ||    BRCS shoot   
+(0641)                            || 
+(0642)  CS-0x12F  0x11401         ||    LSR R20  
+(0643)  CS-0x130  0x08AEA         ||    BREQ moveLeft
+(0644)                            || 
+(0645)  CS-0x131  0x08B18         ||    brn ISR_END
 (0646)                            || 
-(0647)  CS-0x136  0x04CE1         ||    MOV R12, R28
-(0648)                            || 
-(0649)  CS-0x137  0x04469         ||    MOV R4, R13
-(0650)  CS-0x138  0x04561         ||    MOV R5, R12
-(0651)  CS-0x139  0x366FC         ||    MOV R6, PLAYER_BULLET_COLOR
-(0652)  CS-0x13A  0x08759         ||    call draw_dot
-(0653)                            || 
-(0654)  CS-0x13B  0x29001         ||    ADD R16, 0x01
-(0655)                            ||    
-(0656)  CS-0x13C  0x08A48         ||    BRN animation
+(0647)                     0x132  || testing0: 
+(0648)  CS-0x132  0x044D9         ||    MOV  R4, R27   ;y coordin
+(0649)  CS-0x133  0x045E1         ||    MOV  R5, R28   ;x coordin
+(0650)                            || 
+(0651)  CS-0x134  0x36603         || 	mov r6, 0x03
+(0652)  CS-0x135  0x087B9         ||     call draw_dot
+(0653)  CS-0x136  0x08879         || 	call pause
+(0654)  CS-0x137  0x366FF         || 	mov r6, 0xff
+(0655)  CS-0x138  0x087B9         || 	call draw_dot
+(0656)  CS-0x139  0x08B18         ||     brn isr_end
 (0657)                            || 
-(0658)                     0x13D  || second_bullet:		   
-(0659)  CS-0x13D  0x04479         || 	MOV R4, R15
-(0660)  CS-0x13E  0x04571         || 	MOV R5, R14
-(0661)  CS-0x13F  0x36600         || 	MOV R6, 0x00
-(0662)  CS-0x140  0x08759         || 	call draw_dot
-(0663)                            || 
-(0664)  CS-0x141  0x04FD9         || 	MOV R15, R27
-(0665)  CS-0x142  0x2CF01         || 	SUB R15, 0x01
-(0666)                            || 
-(0667)  CS-0x143  0x04EE1         || 	MOV R14, R28	
-(0668)                            || 
-(0669)  CS-0x144  0x04479         ||    MOV R4, R15
-(0670)  CS-0x145  0x04571         ||    MOV R5, R14
-(0671)  CS-0x146  0x366FC         ||    MOV R6, PLAYER_BULLET_COLOR
-(0672)  CS-0x147  0x08759         ||    call draw_dot
-(0673)                            || 
-(0674)  CS-0x148  0x2D001         ||    SUB R16, 0x01
-(0675)                            || 
-(0676)                     0x149  || animation:
-(0677)  CS-0x149  0x044D9         ||    MOV  R4, R27   ;y coordin
-(0678)  CS-0x14A  0x045E1         ||    MOV  R5, R28   ;x coordin
-(0679)                            || 
-(0680)  CS-0x14B  0x366E0         || 	  mov R6, 0xE0
-(0681)  CS-0x14C  0x08759         || 	  call draw_dot
-(0682)  CS-0x14D  0x08879         ||       call pause2
-(0683)  CS-0x14E  0x366FF         || 	  mov R6, 0xFF
-(0684)  CS-0x14F  0x08759         ||       call draw_dot
-(0685)  CS-0x150  0x08AB8         || 	  brn ISR_END
-(0686)                            || 
-(0687)                     0x151  || moveLeft:
-(0688)  CS-0x151  0x36CFF         ||     MOV R12, 0xFF
-(0689)  CS-0x152  0x08261         || 	call move_player
+(0658)                     0x13A  || shoot: 
+(0659)                            ||    
+(0660)  CS-0x13A  0x31001         || 	CMP R16, 0x01
+(0661)  CS-0x13B  0x08A4A         || 	BREQ second_bullet
+(0662)                            || 
+(0663)  CS-0x13C  0x04469         || 	MOV R4, R13
+(0664)  CS-0x13D  0x04561         || 	MOV R5, R12
+(0665)  CS-0x13E  0x36600         || 	MOV R6, 0x00
+(0666)  CS-0x13F  0x087B9         || 	call draw_dot
+(0667)                            || 
+(0668)  CS-0x140  0x04DD9         ||    Mov R13, R27
+(0669)  CS-0x141  0x2CD01         ||    SUB R13, 0x01
+(0670)                            || 
+(0671)  CS-0x142  0x04CE1         ||    MOV R12, R28
+(0672)                            || 
+(0673)  CS-0x143  0x04469         ||    MOV R4, R13
+(0674)  CS-0x144  0x04561         ||    MOV R5, R12
+(0675)  CS-0x145  0x366FC         ||    MOV R6, PLAYER_BULLET_COLOR
+(0676)  CS-0x146  0x087B9         ||    call draw_dot
+(0677)                            || 
+(0678)  CS-0x147  0x29001         ||    ADD R16, 0x01
+(0679)                            ||    
+(0680)  CS-0x148  0x08AA8         ||    BRN animation
+(0681)                            || 
+(0682)                     0x149  || second_bullet:		   
+(0683)  CS-0x149  0x04479         || 	MOV R4, R15
+(0684)  CS-0x14A  0x04571         || 	MOV R5, R14
+(0685)  CS-0x14B  0x36600         || 	MOV R6, 0x00
+(0686)  CS-0x14C  0x087B9         || 	call draw_dot
+(0687)                            || 
+(0688)  CS-0x14D  0x04FD9         || 	MOV R15, R27
+(0689)  CS-0x14E  0x2CF01         || 	SUB R15, 0x01
 (0690)                            || 
-(0691)  CS-0x153  0x08AB8         || 	brn ISR_END
+(0691)  CS-0x14F  0x04EE1         || 	MOV R14, R28	
 (0692)                            || 
-(0693)                     0x154  || moveRight:
-(0694)  CS-0x154  0x36C01         || 	MOV R12, 0x01
-(0695)                            || 	
-(0696)  CS-0x155  0x08261         || 	call move_player
+(0693)  CS-0x150  0x04479         ||    MOV R4, R15
+(0694)  CS-0x151  0x04571         ||    MOV R5, R14
+(0695)  CS-0x152  0x366FC         ||    MOV R6, PLAYER_BULLET_COLOR
+(0696)  CS-0x153  0x087B9         ||    call draw_dot
 (0697)                            || 
-(0698)  CS-0x156  0x08AB8         || 	brn ISR_END
-(0699)                     0x157  || ISR_END:
-(0700)  CS-0x157  0x1A003         || 		RETIE
-(0701)                            || 
-(0702)                            || 
-(0703)                            || ;---------------------------------------------------------------------
-(0704)                            || ;							INTERRUPT VECTOR
-(0705)                            || ;---------------------------------------------------------------------
-(0706)                            || 
-(0707)                            || .CSEG
-(0708)                       1023  || .ORG 0x3FF
-(0709)  CS-0x3FF  0x088D8  0x3FF  || VECTOR:      BRN ISR
+(0698)  CS-0x154  0x2D001         ||    SUB R16, 0x01
+(0699)                            || 
+(0700)                     0x155  || animation:
+(0701)  CS-0x155  0x044D9         ||    MOV  R4, R27   ;y coordin
+(0702)  CS-0x156  0x045E1         ||    MOV  R5, R28   ;x coordin
+(0703)                            || 
+(0704)  CS-0x157  0x366E0         || 	  mov R6, 0xE0
+(0705)  CS-0x158  0x087B9         || 	  call draw_dot
+(0706)  CS-0x159  0x088D9         ||       call pause2
+(0707)  CS-0x15A  0x366FF         || 	  mov R6, 0xFF
+(0708)  CS-0x15B  0x087B9         ||       call draw_dot
+(0709)  CS-0x15C  0x08B18         || 	  brn ISR_END
 (0710)                            || 
+(0711)                     0x15D  || moveLeft:
+(0712)  CS-0x15D  0x36CFF         ||     MOV R12, 0xFF
+(0713)  CS-0x15E  0x08261         || 	call move_player
+(0714)                            || 
+(0715)  CS-0x15F  0x08B18         || 	brn ISR_END
+(0716)                            || 
+(0717)                     0x160  || moveRight:
+(0718)  CS-0x160  0x36C01         || 	MOV R12, 0x01
+(0719)                            || 	
+(0720)  CS-0x161  0x08261         || 	call move_player
+(0721)                            || 
+(0722)  CS-0x162  0x08B18         || 	brn ISR_END
+(0723)                     0x163  || ISR_END:
+(0724)  CS-0x163  0x1A003         || 		RETIE
+(0725)                            || 
+(0726)                            || 
+(0727)                            || ;---------------------------------------------------------------------
+(0728)                            || ;							INTERRUPT VECTOR
+(0729)                            || ;---------------------------------------------------------------------
+(0730)                            || 
+(0731)                            || .CSEG
+(0732)                       1023  || .ORG 0x3FF
+(0733)  CS-0x3FF  0x08938  0x3FF  || VECTOR:      BRN ISR
+(0734)                            || 
 
 
 
@@ -742,56 +766,57 @@ C4+: source code line number of where symbol is referenced
 
 -- Labels
 ------------------------------------------------------------ 
-ANIMATION      0x149   (0676)  ||  0656 
-CLEAR_BULLET   0x0C3   (0419)  ||  0386 0473 
+ANIMATION      0x155   (0700)  ||  0680 
+CLEAR_BULLET   0x0CF   (0443)  ||  0390 0497 
 CLEAR_PLAYER   0x064   (0226)  ||  0185 
 CLEAR_PLAYER_LOOP 0x068   (0233)  ||  0239 
 CLEAR_SHIP     0x094   (0322)  ||  0252 0281 
 CLEAR_SHIP_LOOP 0x098   (0329)  ||  0336 
-DD_OUT         0x0ED   (0507)  ||  
-DONE           0x0F1   (0519)  ||  0519 0548 
+COLLISION_PLAYER 0x0BF   (0411)  ||  0386 
+DD_OUT         0x0F9   (0531)  ||  
+DONE           0x0FD   (0543)  ||  0543 0572 
 DOWN_SHIP      0x06E   (0251)  ||  0120 
-DRAW_BULLET    0x0BE   (0408)  ||  0394 0486 
-DRAW_DOT       0x0EB   (0503)  ||  0081 0087 0171 0210 0235 0310 0332 0412 0425 0538 
-                               ||  0544 0628 0631 0642 0652 0662 0672 0681 0684 
+DRAW_BULLET    0x0CA   (0432)  ||  0398 0510 
+DRAW_DOT       0x0F7   (0527)  ||  0081 0087 0171 0210 0235 0310 0332 0436 0449 0562 
+                               ||  0568 0652 0655 0666 0676 0686 0696 0705 0708 
 DRAW_PLAYER    0x042   (0163)  ||  0104 0217 
 DRAW_PLAYER_LOOP 0x046   (0169)  ||  0175 
 DRAW_SHIP      0x089   (0301)  ||  0105 0270 0293 
-DRAW_SHIP_BULLETS 0x0C8   (0436)  ||  0128 
-DRAW_SHIP_BULLETS_CHECK 0x0D3   (0453)  ||  
-DRAW_SHIP_BULLETS_END 0x0D7   (0459)  ||  0455 
-DRAW_SHIP_BULLETS_LOOP 0x0CD   (0444)  ||  0451 
+DRAW_SHIP_BULLETS 0x0D4   (0460)  ||  0128 
+DRAW_SHIP_BULLETS_CHECK 0x0DF   (0477)  ||  
+DRAW_SHIP_BULLETS_END 0x0E3   (0483)  ||  0479 
+DRAW_SHIP_BULLETS_LOOP 0x0D9   (0468)  ||  0475 
 DRAW_SHIP_LOOP 0x08D   (0307)  ||  0314 
 END_DOWN_SHIP  0x079   (0269)  ||  0265 
-END_MOVE_BULLET 0x0BD   (0401)  ||  0395 
+END_MOVE_BULLET 0x0BE   (0405)  ||  0399 
 END_MOVE_PLAYER 0x063   (0219)  ||  0215 
 END_MOVE_SHIP  0x088   (0294)  ||  0277 
 END_RESET_BULLETS 0x0B0   (0375)  ||  0369 
-END_START_SHIP_BULLET 0x0EA   (0494)  ||  0491 
+END_START_SHIP_BULLET 0x0F6   (0518)  ||  0515 
 HIT_PLAYER     0x0B1   (0384)  ||  
-HIT_SHIP       0x0B1   (0385)  ||  
-INSIDE_FOR     0x114   (0589)  ||  0590 
-INSIDE_FOR0    0x108   (0565)  ||  0566 
-ISR            0x11B   (0604)  ||  0709 
-ISR_END        0x157   (0699)  ||  0621 0632 0685 0691 0698 
-LOSE           0x0F2   (0527)  ||  0257 
-LOSE_LOOP      0x0F7   (0534)  ||  0540 0547 
-MIDDLE_FOR     0x112   (0586)  ||  0593 
-MIDDLE_FOR0    0x106   (0562)  ||  0569 
+HIT_SHIP       0x0B2   (0389)  ||  
+INSIDE_FOR     0x120   (0613)  ||  0614 
+INSIDE_FOR0    0x114   (0589)  ||  0590 
+ISR            0x127   (0628)  ||  0733 
+ISR_END        0x163   (0723)  ||  0645 0656 0709 0715 0722 
+LOSE           0x0FE   (0551)  ||  0257 0417 0422 
+LOSE_LOOP      0x103   (0558)  ||  0564 0571 
+MIDDLE_FOR     0x11E   (0610)  ||  0617 
+MIDDLE_FOR0    0x112   (0586)  ||  0593 
 MOVE           0x035   (0123)  ||  0117 
-MOVELEFT       0x151   (0687)  ||  0619 
-MOVERIGHT      0x154   (0693)  ||  0613 
-MOVE_BULLET    0x0B1   (0382)  ||  0445 
+MOVELEFT       0x15D   (0711)  ||  0643 
+MOVERIGHT      0x160   (0717)  ||  0637 
+MOVE_BULLET    0x0B1   (0382)  ||  0469 
 MOVE_BULLETS   0x037   (0127)  ||  0121 
-MOVE_PLAYER    0x04C   (0184)  ||  0689 0696 
+MOVE_PLAYER    0x04C   (0184)  ||  0713 0720 
 MOVE_PLAYER_LOOP 0x059   (0205)  ||  0198 0214 
-MOVE_REMOVE_BULLET 0x0BA   (0397)  ||  0389 
+MOVE_REMOVE_BULLET 0x0BB   (0401)  ||  0393 
 MOVE_SHIP      0x07B   (0275)  ||  0124 
 MOVE_SHIP_LOOP 0x081   (0285)  ||  0291 
-OUTSIDE_FOR    0x110   (0583)  ||  0596 
-OUTSIDE_FOR0   0x104   (0559)  ||  0572 
-PAUSE          0x103   (0558)  ||  0103 0528 0629 
-PAUSE2         0x10F   (0582)  ||  0114 0682 
+OUTSIDE_FOR    0x11C   (0607)  ||  0620 
+OUTSIDE_FOR0   0x110   (0583)  ||  0596 
+PAUSE          0x10F   (0582)  ||  0103 0552 0653 
+PAUSE2         0x11B   (0606)  ||  0114 0706 
 RESET          0x01A   (0073)  ||  
 RESET_BULLETS  0x0A9   (0363)  ||  0095 
 RESET_BULLETS_LOOP 0x0AB   (0367)  ||  0373 
@@ -801,16 +826,16 @@ RESET_PLAYER_LOOP 0x03C   (0149)  ||  0154
 RESET_SHIP     0x09F   (0344)  ||  0094 
 RESET_SHIP_LOOP 0x0A3   (0350)  ||  0355 
 RE_DRAW_PLAYER 0x062   (0217)  ||  0199 0203 
-SECOND_BULLET  0x13D   (0658)  ||  0637 
+SECOND_BULLET  0x149   (0682)  ||  0661 
 SET_NEG        0x078   (0267)  ||  0262 
-SHOOT          0x12E   (0634)  ||  0616 
+SHOOT          0x13A   (0658)  ||  0640 
 START          0x02F   (0113)  ||  0130 
-START_SHIP_BULLET 0x0D8   (0466)  ||  0458 
-START_SHIP_BULLET_MAIN 0x0DD   (0475)  ||  
-TESTING0       0x126   (0623)  ||  0610 
+START_SHIP_BULLET 0x0E4   (0490)  ||  0482 
+START_SHIP_BULLET_MAIN 0x0E9   (0499)  ||  
+TESTING0       0x132   (0647)  ||  0634 
 TEST_LEFT_PLAYER 0x057   (0201)  ||  0194 
 TEST_RIGHT_PLAYER 0x054   (0196)  ||  
-VECTOR         0x3FF   (0709)  ||  
+VECTOR         0x3FF   (0733)  ||  
 
 
 -- Directives: .BYTE
@@ -821,33 +846,33 @@ VECTOR         0x3FF   (0709)  ||
 -- Directives: .EQU
 ------------------------------------------------------------ 
 BULLETS_END_LOC 0x04A   (0041)  ||  0368 
-END_COL        0x01D   (0018)  ||  0075 0165 0188 0228 0256 0388 0530 
+END_COL        0x01D   (0018)  ||  0075 0165 0188 0228 0256 0392 0413 0554 
 END_ROW_PLAYER 0x025   (0017)  ||  0197 
 END_ROW_SHIP   0x04A   (0016)  ||  0063 0119 
-INSIDE_FOR_COUNT 0x02F   (0008)  ||  0564 
-INSIDE_FOR_COUNT2 0x01F   (0012)  ||  0588 
-INTERRUPT_ID   0x020   (0043)  ||  0606 
-MIDDLE_FOR_COUNT 0x02F   (0009)  ||  0561 
-MIDDLE_FOR_COUNT2 0x01F   (0013)  ||  0585 
-OUTSIDE_FOR_COUNT 0x02F   (0010)  ||  0558 
-OUTSIDE_FOR_COUNT2 0x01F   (0014)  ||  0582 
+INSIDE_FOR_COUNT 0x02F   (0008)  ||  0588 
+INSIDE_FOR_COUNT2 0x01F   (0012)  ||  0612 
+INTERRUPT_ID   0x020   (0043)  ||  0630 
+MIDDLE_FOR_COUNT 0x02F   (0009)  ||  0585 
+MIDDLE_FOR_COUNT2 0x01F   (0013)  ||  0609 
+OUTSIDE_FOR_COUNT 0x02F   (0010)  ||  0582 
+OUTSIDE_FOR_COUNT2 0x01F   (0014)  ||  0606 
 PLAYER_BULLETS_LOC 0x040   (0040)  ||  
-PLAYER_BULLET_COLOR 0x0FC   (0027)  ||  0651 0671 
+PLAYER_BULLET_COLOR 0x0FC   (0027)  ||  0675 0695 
 PLAYER_COLOR   0x0FF   (0025)  ||  0166 0189 
 PLAYER_COLOR_LOC 0x00F   (0037)  ||  
-PLAYER_X_LOC   0x010   (0036)  ||  0146 0164 0187 0227 
-SHIP_BULLETS_LOC 0x020   (0039)  ||  0365 0437 0467 
-SHIP_BULLET_COLOR 0x003   (0026)  ||  0438 0485 
-SHIP_BULLET_RATE 0x00B   (0029)  ||  0062 0457 
+PLAYER_X_LOC   0x010   (0036)  ||  0146 0164 0187 0227 0412 
+SHIP_BULLETS_LOC 0x020   (0039)  ||  0365 0461 0491 
+SHIP_BULLET_COLOR 0x003   (0026)  ||  0462 0509 
+SHIP_BULLET_RATE 0x00B   (0029)  ||  0062 0481 
 SHIP_COLOR     0x0E3   (0019)  ||  0304 
 SHIP_COLOR_LOC 0x00B   (0034)  ||  
-SHIP_X_LOC     0x00C   (0032)  ||  0282 0303 0324 0346 0476 
-SHIP_Y_LOC     0x00A   (0033)  ||  0253 0259 0302 0323 0347 0481 
+SHIP_X_LOC     0x00C   (0032)  ||  0282 0303 0324 0346 0500 
+SHIP_Y_LOC     0x00A   (0033)  ||  0253 0259 0302 0323 0347 0505 
 SSEG_CNTR_ID   0x060   (0044)  ||  0059 
-SSEG_VAL_ID    0x080   (0045)  ||  0607 
-VGA_COLOR      0x092   (0006)  ||  0509 
-VGA_HADD       0x090   (0004)  ||  0508 
-VGA_LADD       0x091   (0005)  ||  0507 
+SSEG_VAL_ID    0x080   (0045)  ||  0631 
+VGA_COLOR      0x092   (0006)  ||  0533 
+VGA_HADD       0x090   (0004)  ||  0532 
+VGA_LADD       0x091   (0005)  ||  0531 
 
 
 -- Directives: .DEF

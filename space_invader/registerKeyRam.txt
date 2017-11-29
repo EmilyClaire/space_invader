@@ -17,10 +17,10 @@ R10 - end of row place holder
 
 R11 - R11 adding bit for ship movement
 
-R12 - 
-R13 - 
+R12 - Adding bit for player movement
+R13 - bullet color
 R14 - 
-R15 - 
+R15 - bullet counter for draw bullets
 
 R16 - player bullet counter
 
@@ -31,11 +31,11 @@ R19 - counter for pause (do not use in interrupts)
 R20 - in port for interrupt values
 
 R21 - 
-R22 -  
+R22 - misc collision 
 R23 - 
 R24 - y register
 R25 - x register
-R26 - 
+R26 - ship bullet counter
 
 R27 - 
 R28 - 

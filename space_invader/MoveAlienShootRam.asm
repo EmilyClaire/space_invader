@@ -381,10 +381,9 @@ end_reset_bullets:
 ;---------------------------------------------------------------------
 move_bullet:	
 
-hit_player:		MOV R7, PLAYER_X_LOC
-				MOV R8, END_COL
+hit_player:		
 
-				call collision
+				call collision_player
 
 
 hit_ship:
@@ -405,6 +404,26 @@ move_remove_bullet:
 				ST R9, (R25)
 end_move_bullet:
 				ret
+
+;---------------------------------------------------------------------
+;							Collision 
+;---------------------------------------------------------------------
+collision_player:
+				MOV R7, PLAYER_X_LOC
+				MOV R8, END_COL
+				MOV R9, R8
+				LD R22, (R24)
+				CMP R9, R22
+				BREQ lose
+
+				LD R9, (R7)
+				LD R22, (R25)
+				CMP R9, R22
+				BREQ lose
+
+				ret
+				
+
 
 
 ;---------------------------------------------------------------------
