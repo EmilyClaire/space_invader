@@ -23,7 +23,7 @@
 						;0xFC ; yellow
 					;0x1F aqua
 .equ SHIP_BULLET_COLOR = 0x03
-.equ SHIP_BULLET_RATE = 0x1E
+.equ SHIP_BULLET_RATE = 0x16
 .equ PLAYER_BULLET_COLOR = 0xFC
 .EQU INTERRUPT_ID  = 0x20
 
@@ -189,12 +189,12 @@ start_bullet_2:
 
 			MOV R30, SHIP_BULLET_RATE
 			MOV R23, R8
-			ADD R23, R11
+			SUB R23, R11
 
 			MOV R24, R7
 			ADD R24, 0x01
 			
-			MOV R6, SHIP_BULLET_COLOR
+			MOV R6, 0xe0 ;SHIP_BULLET_COLOR
 			MOV R5, R24
 			MOV R4, R24
 			call draw_dot
@@ -210,12 +210,12 @@ start_bullet_3:
 
 			MOV R30, SHIP_BULLET_RATE
 			MOV R25, R8
-			ADD R25, R11
+			SUB R25, R11
 
 			MOV R26, R7
 			ADD R26, 0x01
 			
-			MOV R6, SHIP_BULLET_COLOR
+			MOV R6, 0x1C ;SHIP_BULLET_COLOR
 			MOV R5, R25
 			MOV R4, R26
 			call draw_dot
@@ -266,11 +266,11 @@ draw_s_bullet_2:
 			call draw_dot
 			
 			CMP R24, END_COL
-			BREQ clear_s_bullet_2
+			BREQ clear_s_bullet_3
+
 			ADD R24, 0x01
 			MOV R4, R24
-			MOV R5, R23
-			MOV R6, SHIP_BULLET_COLOR
+			MOV R6, 0xE1;SHIP_BULLET_COLOR
 			call draw_dot
 			brn s_bullet_3
 
@@ -281,7 +281,7 @@ s_bullet_3:
 			CMP R30, SHIP_BULLET_RATE
 			BRNE draw_s_bullet_3
 
-			CMP R9, 0x02
+			CMP R9, 0xFF
 			BREQ p_bullet_1
 
 draw_s_bullet_3:
@@ -296,7 +296,7 @@ draw_s_bullet_3:
 
 			ADD R26, 0x01
 			MOV R4, R26
-			MOV R6, SHIP_BULLET_COLOR
+			MOV R6, 0x1C;SHIP_BULLET_COLOR
 			call draw_dot
 			brn p_bullet_1
 

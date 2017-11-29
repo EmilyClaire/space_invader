@@ -266,12 +266,11 @@ draw_s_bullet_2:
 			call draw_dot
 			
 			CMP R24, END_COL
-			BREQ clear_s_bullet_2
+			BREQ clear_s_bullet_3
 
 			ADD R24, 0x01
 			MOV R4, R24
-			MOV R5, R23
-			MOV R6, 0xE0;SHIP_BULLET_COLOR
+			MOV R6, 0xE1;SHIP_BULLET_COLOR
 			call draw_dot
 			brn s_bullet_3
 
