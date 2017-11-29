@@ -46,19 +46,29 @@
 
 .CSEG
 .ORG 0x10
+;---------------------------------------------------------------------
+;							The Beginning
+; 
+;	The Beginning of the program
+;---------------------------------------------------------------------
 
    SEI
 
 
-MOV R2, 0x81
-OUT R2, SSEG_CNTR_ID
-	MOV R16, 0x00	
-    MOV R31, 0x02
-	MOV R30, SHIP_BULLET_RATE
-	MOV  R10, END_ROW_SHIP
-	MOV R11, 0x01   
-	MOV R3, 0x03
-	
+		MOV R2, 0x81
+		OUT R2, SSEG_CNTR_ID
+		MOV R16, 0x00	
+		MOV R31, 0x02
+		MOV R30, SHIP_BULLET_RATE
+		MOV  R10, END_ROW_SHIP
+		MOV R11, 0x01   
+		MOV R3, 0x03
+
+;---------------------------------------------------------------------
+;							Clearing the screen
+; 
+;---------------------------------------------------------------------
+		
 reset:
 		MOV R8, END_ROW_PLAYER
 		MOV R7, END_COL
@@ -82,17 +92,43 @@ reset_loop:
 		call reset_player
 		call reset_ship
 		call reset_bullets
+
+
+;---------------------------------------------------------------------
+;					Drawing the ship and the player
+; 
+;---------------------------------------------------------------------
 	
 		call pause
-
 		call draw_player
 		call draw_ship
 
-start:
-		call move_ship
-		call pause
 
-		brn done
+;---------------------------------------------------------------------
+;				The main code for the program
+;---------------------------------------------------------------------
+
+
+start:
+		CALL pause2
+
+		CMP R10, 0x00
+		BRNE move
+		
+		MOV R10, END_ROW_SHIP
+		CALL down_ship
+		BRN start
+
+move:
+		call move_ship
+		SUB R10, 0x01
+		brn start
+
+;---------------------------------------------------------------------
+;								FUNCTIONS 
+;---------------------------------------------------------------------
+
+
 ;---------------------------------------------------------------------
 ;							Reset Player
 ;
@@ -198,13 +234,40 @@ clear_player_loop:
 
 
 
+;---------------------------------------------------------------------
+;							Down Ship
+;
+;	Moves the ship down one row and changes the ships direction
+;---------------------------------------------------------------------
 
+down_ship:		
+				LD R9, SHIP_Y_LOC
+				
+				CMP R9, END_COL
+				BREQ lose
+
+				ADD R9, 0x01
+				ST R9, SHIP_Y_LOC
+
+				CMP R11, 0x01
+				BREQ set_neg
+		
+				MOV R11, 0x01
+				brn end_down_ship
+					
+set_neg:		MOV R11, 0xFF
+				
+end_down_ship:
+				ret
 ;---------------------------------------------------------------------
 ;							Move Ship
 ;---------------------------------------------------------------------
-
-
-move_ship: 
+move_ship:
+				SUB R31, 0x01
+				BRNE end_move_ship
+			
+				MOV R31, 0x02
+ 
 				call clear_ship
 				MOV R25, SHIP_X_LOC
 				MOV R3, 0x03
@@ -212,12 +275,13 @@ move_ship:
 move_ship_loop:
 				LD R9, (R25)
 				ADD R9, R11
-				ST R9, (25)
+				ST R9, (R25)
 				ADD R25, 0x01
 				SUB R3, 0x01
 				BRNE move_ship_loop
 
 				call draw_ship
+end_move_ship:
 				ret
 
 
@@ -324,6 +388,36 @@ dd_out: OUT r5, VGA_LADD ; write bot 8 address bits to register
 
 DONE:        BRN DONE
 
+;---------------------------------------------------------------------
+;							Lose
+;
+; 	Turn the screen red
+;---------------------------------------------------------------------
+
+lose:     
+		call pause
+		MOV R8, END_ROW_PLAYER
+		MOV R7, END_COL
+		ADD R8, 0x01
+		MOV R6, 0xE0 ;RED SCREEN
+
+lose_loop:
+
+		MOV R4, R7
+		MOV R5, R8
+		call draw_dot
+		SUB R8, 0x01
+		BRNE lose_loop
+
+		MOV R4, R7
+		MOV R5, R8
+		call draw_dot
+		SUB R7, 0x01
+		CMP R7, 0xFF
+		BRNE lose_loop
+		brn done
+
+
 
 ;---------------------------------------------------------------------
 ;							Pause
@@ -371,6 +465,10 @@ inside_for:  	SUB     R19, 0x01
              	CMP      R17, 0x00               
              	BRNE    outside_for
 				ret
+
+;---------------------------------------------------------------------
+;							INTERRUPTS
+;---------------------------------------------------------------------
 
 
 ISR: 
@@ -470,6 +568,11 @@ moveRight:
 	brn ISR_END
 ISR_END:
 		RETIE
+
+
+;---------------------------------------------------------------------
+;							INTERRUPT VECTOR
+;---------------------------------------------------------------------
 
 .CSEG
 .ORG 0x3FF
