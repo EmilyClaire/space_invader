@@ -488,7 +488,7 @@ start_ship_bullet_main:
 				ADD R26, 0x02
 			
 				CMP R26, 0x0A
-				BRCC end_start_ship_bullet
+				BRNE end_start_ship_bullet
 
 				MOV R26, 0x00
 end_start_ship_bullet:
