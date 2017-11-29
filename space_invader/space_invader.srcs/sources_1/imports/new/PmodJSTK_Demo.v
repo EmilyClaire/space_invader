@@ -47,7 +47,8 @@ module PmodJSTK_Demo(
 	 AN,
 	 SEG,
 	 x_data,
-	 y_data
+	 y_data,
+	 LED
     );
 
 	// ===========================================================================
@@ -63,6 +64,7 @@ module PmodJSTK_Demo(
 			output [7:0] SEG;			// Cathodes for Seven Segment Display
 			output [9:0] x_data;
 			output [9:0] y_data;
+			output [2:0] LED;
 
 	// ===========================================================================
 	// 							  Parameters, Regsiters, and Wires
@@ -70,7 +72,7 @@ module PmodJSTK_Demo(
 			wire SCLK;					// Serial clock that controls communication
 			wire [3:0] AN;				// Anodes for Seven Segment Display
 			wire [7:0] SEG;			// Cathodes for Seven Segment Display
-
+            reg  [2:0] LED;
 			// Signal to send/receive data to/from PmodJSTK
 			wire sndRec;
 
@@ -134,13 +136,13 @@ module PmodJSTK_Demo(
 
 			// Assign PmodJSTK button status to LED[2:0]
 			// Can be uncommented if button use is necessary
-//			always @(sndRec or RST or jstkData) begin
-//					if(RST == 1'b1) begin
-//							LED <= 3'b000;
-//					end
-//					else begin
-//							LED <= {jstkData[1], {jstkData[2], jstkData[0]}};
-//					end
-//			end
+			always @(sndRec or RST or jstkData) begin
+					if(RST == 1'b1) begin
+							LED <= 3'b000;
+					end
+					else begin
+							LED <= {jstkData[1], {jstkData[2], jstkData[0]}};
+					end
+			end
 
 endmodule

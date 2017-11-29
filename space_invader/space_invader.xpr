@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Product Version: Vivado v2017.2 (64-bit)              -->
+<!-- Product Version: Vivado v2016.2 (64-bit)              -->
 <!--                                                         -->
-<!-- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.   -->
+<!-- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="20" Path="C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader/space_invader.xpr">
+<Project Version="7" Minor="14" Path="C:/Users/Donald/Documents/space_invader/space_invader/space_invader.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="f7707750f42346308240f558bc80a749"/>
@@ -21,14 +21,12 @@
     <Option Name="BoardPart" Val=""/>
     <Option Name="ActiveSimSet" Val="sim_1"/>
     <Option Name="DefaultLib" Val="xil_defaultlib"/>
-    <Option Name="IPCachePermission" Val="disable"/>
     <Option Name="EnableCoreContainer" Val="FALSE"/>
     <Option Name="CreateRefXciForCoreContainers" Val="FALSE"/>
-    <Option Name="IPUserFilesDir" Val="$PIPUSERFILESDIR"/>
-    <Option Name="IPStaticSourceDir" Val="$PIPUSERFILESDIR/ipstatic"/>
+    <Option Name="IPUserFilesDir" Val="$PPRDIR/space_invader.ip_user_files"/>
+    <Option Name="IPStaticSourceDir" Val="$PPRDIR/space_invader.ip_user_files/ipstatic"/>
     <Option Name="EnableBDX" Val="FALSE"/>
-    <Option Name="DSANumComputeUnits" Val="16"/>
-    <Option Name="WTXSimLaunchSim" Val="54"/>
+    <Option Name="WTXSimLaunchSim" Val="25"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -42,86 +40,11 @@
     <Option Name="WTVcsExportSim" Val="0"/>
     <Option Name="WTRivieraExportSim" Val="0"/>
     <Option Name="WTActivehdlExportSim" Val="0"/>
-    <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
-    <Option Name="XSimRadix" Val="hex"/>
-    <Option Name="XSimTimeUnit" Val="ns"/>
-    <Option Name="XSimArrayDisplayLimit" Val="1024"/>
-    <Option Name="XSimTraceLimit" Val="65536"/>
   </Configuration>
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
       <Filter Type="Srcs"/>
-      <File Path="$PSRCDIR/sources_1/imports/new/Binary_To_BCD.v">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/ClkDiv_5Hz.v">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/ClkDiv_66_67kHz.v">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/PmodJSTK.v">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/PmodJSTK_Demo.v">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sources_1/imports/new/SPImode0.v">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/clock_div.v">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/jstk_data_decoder.v">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/jstksteptop.v">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/pmod_step_driver.v">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/pmod_step_interface.v">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
@@ -135,6 +58,20 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/ClkDiv_66_67kHz.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/Binary_To_BCD.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/imports/new/ssdCtrl.v">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -142,137 +79,23 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/7_Seg.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/new/pmod_step_driver.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/7_Seg.vhd"/>
-          <Attr Name="ImportTime" Val="1510165479"/>
           <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/ALU.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/new/PmodJSTK.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/ALU.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/ALU_MUX.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/new/pc.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/ALU_MUX.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/ControlUnit.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/ControlUnit.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/Flag_Reg_c.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/Flag_Reg_c.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/Flag_Reg_z.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/Flag_Reg_z.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/RATCPU.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/RATCPU.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/RegisterFile.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/RegisterFile.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/Scratch_Pad_Mux.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/Scratch_Pad_Mux.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/Scratch_RAM.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/Scratch_RAM.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/Stack_Pointer.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/Stack_Pointer.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/VGAdrive.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/VGAdrive.vhd"/>
-          <Attr Name="ImportTime" Val="1510164072"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/clk_div.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/clk_div.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/counter_for_one_shot.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/counter_for_one_shot.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/debounce_one_shot_FSM.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/debounce_one_shot_FSM.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/flag_mux.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/flag_mux.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/int_input.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/int_input.vhd"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/pc.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -286,10 +109,104 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/pc.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/new/clock_div.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/pc.vhd"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/ClkDiv_5Hz.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/vga_clk_div.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/vga_clk_div.vhd"/>
+          <Attr Name="ImportTime" Val="1510164073"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/VGAdrive.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/VGAdrive.vhd"/>
+          <Attr Name="ImportTime" Val="1510164072"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/Stack_Pointer.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/Stack_Pointer.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/shad_flag_reg_z.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/shad_flag_reg_z.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/shad_flag_reg_c.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/shad_flag_reg_c.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/scr_data_mux.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/scr_data_mux.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/Scratch_RAM.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/Scratch_RAM.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/Scratch_Pad_Mux.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/Scratch_Pad_Mux.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/reg_mux.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/reg_mux.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/RegisterFile.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/RegisterFile.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/ram2k_8.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/ram2k_8.vhd"/>
+          <Attr Name="ImportTime" Val="1510165387"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -308,41 +225,86 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/ram2k_8.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/new/pmod_step_interface.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/ram2k_8.vhd"/>
-          <Attr Name="ImportTime" Val="1510165387"/>
           <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/reg_mux.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/new/PmodJSTK_Demo.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/reg_mux.vhd"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/jstk_data_decoder.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/int_input.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/int_input.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/scr_data_mux.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/new/Flag_Reg_z.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/scr_data_mux.vhd"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/Flag_Reg_z.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/shad_flag_reg_c.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/new/Flag_Reg_c.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/shad_flag_reg_c.vhd"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/Flag_Reg_c.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/shad_flag_reg_z.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/new/flag_mux.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/shad_flag_reg_z.vhd"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/flag_mux.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/ControlUnit.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/ControlUnit.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/ALU_MUX.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/ALU_MUX.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/ALU.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/ALU.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/counter_for_one_shot.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/counter_for_one_shot.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -356,10 +318,41 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/vga_clk_div.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/new/RATCPU.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/vga_clk_div.vhd"/>
-          <Attr Name="ImportTime" Val="1510164073"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/RATCPU.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/jstksteptop.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/clk_div.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/clk_div.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/7_Seg.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/7_Seg.vhd"/>
+          <Attr Name="ImportTime" Val="1510165479"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/debounce_one_shot_FSM.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/debounce_one_shot_FSM.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -372,18 +365,11 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/8_wrapper_tb.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/space_invader/prog_rom.vhd">
         <FileInfo>
           <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/8_wrapper_tb.vhd"/>
-          <Attr Name="ImportTime" Val="1510165119"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/vga_driver.vhd">
-        <FileInfo>
-          <Attr Name="UserDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/prog_rom.vhd"/>
+          <Attr Name="ImportTime" Val="1511248036"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -399,7 +385,6 @@
       </File>
       <File Path="$PSRCDIR/sources_1/imports/new/testbench.vhd">
         <FileInfo>
-          <Attr Name="UserDisabled" Val="1"/>
           <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/testbench.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
@@ -418,8 +403,17 @@
       </File>
       <File Path="$PSRCDIR/sources_1/imports/new/debounce_one_shot_FSM_TB.vhd">
         <FileInfo>
-          <Attr Name="UserDisabled" Val="1"/>
+          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/debounce_one_shot_FSM_TB.vhd"/>
+          <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/8_wrapper_tb.vhd">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/8_wrapper_tb.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -430,6 +424,13 @@
           <Attr Name="UserDisabled" Val="1"/>
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/ScratchPAD.vhd"/>
           <Attr Name="ImportTime" Val="1510165119"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/vga_driver.vhd">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -481,6 +482,12 @@
     <Simulator Name="Questa">
       <Option Name="Description" Val="Questa Advanced Simulator"/>
     </Simulator>
+    <Simulator Name="IES">
+      <Option Name="Description" Val="Incisive Enterprise Simulator (IES)"/>
+    </Simulator>
+    <Simulator Name="VCS">
+      <Option Name="Description" Val="Verilog Compiler Simulator (VCS)"/>
+    </Simulator>
     <Simulator Name="Riviera">
       <Option Name="Description" Val="Riviera-PRO Simulator"/>
     </Simulator>
@@ -495,8 +502,6 @@
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
     <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-1" ConstrsSet="constrs_1" Description="Default settings for Implementation." State="current" Dir="$PRUNDIR/impl_1" SynthRun="synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
@@ -512,8 +517,6 @@
         <Step Id="write_bitstream"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
     </Run>
   </Runs>
 </Project>
