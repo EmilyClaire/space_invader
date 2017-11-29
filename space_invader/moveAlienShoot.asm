@@ -22,7 +22,8 @@
 					; 0xE3 ; pink
 						;0xFC ; yellow
 					;0x1F aqua
-
+.equ SHIP_BULLET_COLOR = 0x03
+.equ SHIP_BULLET_RATE = 0x16
 .equ PLAYER_BULLET_COLOR = 0xFC
 .EQU INTERRUPT_ID  = 0x20
 
@@ -43,6 +44,16 @@ OUT R2, SSEG_CNTR_ID
 	MOV R14, 0xFF
 	MOV R15, 0xFF
     MOV R31, 0x02
+
+	MOV R30, SHIP_BULLET_RATE
+	MOV R21, 0xFF
+	MOV R22, 0xFF
+	MOV R23, 0xFF
+	MOV R24, 0xFF
+	MOV R25, 0xFF
+	MOV R26, 0xFF
+	MOV R9, 0xFF
+
 reset:
 	    CALL clear_row
 		MOV R8, END_ROW_PLAYER
@@ -65,7 +76,6 @@ reset_loop:
 		call pause
 
    MOV  R27, END_COL
-	SUB R27, 0x01
    MOV  R28, 0x14
 	MOV R6, 0xFF
 	MOV R4, R27
@@ -132,15 +142,172 @@ main_ship:
             MOV  R4, R7   ;y coordin
 			MOV  R5, R8   ;x coordin
 			call draw_ship  
+
+s_bullets_start:
+			SUB R30, 0x01
+			BRNE s_bullet_1
 			
+			ADD R9, 0x01
+
+			CMP R9, 0x00
+			BREQ start_bullet_1
+
+			CMP R9, 0x01
+			BREQ start_bullet_2
+
+			CMP R9, 0x02
+			BREQ start_bullet_3
+			
+			brn s_bullet_1
+
+start_bullet_1:
+			MOV R4, R22
+			MOV R5, R21
+			MOV R6, 0x00
+			call draw_dot
+			 
+			MOV R30, SHIP_BULLET_RATE
+			MOV R21, R8
+			SUB R21, R11
+
+			MOV R22, R7
+			ADD R22, 0x01
+			
+			MOV R6, SHIP_BULLET_COLOR
+			MOV R5, R21
+			MOV R4, R22
+			call draw_dot
+			
+			brn s_bullet_1
+
+
+start_bullet_2: 
+			MOV R4, R24
+			MOV R5, R23
+			MOV R6, 0x00
+			call draw_dot
+
+			MOV R30, SHIP_BULLET_RATE
+			MOV R23, R8
+			SUB R23, R11
+
+			MOV R24, R7
+			ADD R24, 0x01
+			
+			MOV R6, 0xe0 ;SHIP_BULLET_COLOR
+			MOV R5, R23
+			MOV R4, R24
+			call draw_dot
+			
+			brn s_bullet_1
+
+
+start_bullet_3: 
+			MOV R4, R26
+			MOV R5, R25
+			MOV R6, 0x00
+			call draw_dot
+
+			MOV R30, SHIP_BULLET_RATE
+			MOV R25, R8
+			SUB R25, R11
+
+			MOV R26, R7
+			ADD R26, 0x01
+			
+			MOV R6, 0x1C ;SHIP_BULLET_COLOR
+			MOV R5, R25
+			MOV R4, R26
+			call draw_dot
+			
+			MOV R9, 0xFF
+			brn s_bullet_1
+
+
+s_bullet_1: 
+
+			CMP R30, SHIP_BULLET_RATE
+			BRNE draw_s_bullet_1
+
+			CMP R9, 0x00
+			BREQ s_bullet_2
+
+draw_s_bullet_1:
+			MOV R4, R22
+			MOV R5, R21
+			MOV R6, 0x00
+			call draw_dot
+			
+			CMP R22, END_COL
+			BREQ clear_s_bullet_1
+
+			ADD R22, 0x01
+			MOV R4, R22
+			MOV R5, R21
+			MOV R6, SHIP_BULLET_COLOR
+			call draw_dot
+			brn s_bullet_2
+
+clear_s_bullet_1: MOV R21, 0xFF
+				brn s_bullet_2
+
+s_bullet_2:	
+			CMP R30, SHIP_BULLET_RATE
+			BRNE draw_s_bullet_2
+
+			CMP R9, 0x01
+			BREQ s_bullet_3
+
+draw_s_bullet_2:
+
+			MOV R4, R24
+			MOV R5, R23
+			MOV R6, 0x00
+			call draw_dot
+			
+			CMP R24, END_COL
+			BREQ clear_s_bullet_2
+
+			ADD R24, 0x01
+			MOV R4, R24
+			MOV R6, 0xE1;SHIP_BULLET_COLOR
+			call draw_dot
+			brn s_bullet_3
+
+clear_s_bullet_2: MOV R23, 0xFF
+				brn s_bullet_3
+
+s_bullet_3:
+			CMP R30, SHIP_BULLET_RATE
+			BRNE draw_s_bullet_3
+
+			CMP R9, 0xFF
+			BREQ p_bullet_1
+
+draw_s_bullet_3:
+
+			MOV R4, R26
+			MOV R5, R25
+			MOV R6, 0x00
+			call draw_dot
+			
+			CMP R26, END_COL
+			BREQ clear_s_bullet_3
+
+			ADD R26, 0x01
+			MOV R4, R26
+			MOV R6, 0x1C;SHIP_BULLET_COLOR
+			call draw_dot
+			brn p_bullet_1
+
+clear_s_bullet_3: MOV R25, 0xFF
+				brn p_bullet_1
+
 p_bullet_1:
 			MOV R4, R13
 			MOV R5, R12
 			MOV R6, 0x00
 			call draw_dot
-
-			CMP R13, 0x00
-			BREQ clear_bullet_1
 
 			SUB R13, 0x01
 			MOV R4, R13
@@ -178,8 +345,6 @@ ret_pause:
 			BREQ col
 
 end_main:	
-			
-
 			SUB R31, 0x01
 			BRNE MAIN
 			
@@ -368,17 +533,12 @@ clear_square:
    RET
 
 ISR: 
-	MOV R30, 0x00
 
    	IN R20, INTERRUPT_ID
 	OUT  R20, SSEG_VAL_ID
 	
-	OR R30, R20
+	CMP R20, 0x00
     breq testing0
-
-;	MOV R30, 0x07
-;	OR R20, 0x07
-;	breq testing5
 
    LSR R20
    BRCS moveRight
@@ -396,17 +556,6 @@ testing0:
    MOV  R5, R28   ;x coordin
 
 	mov r6, 0x03
-    call draw_dot
-	call pause
-	mov r6, 0xff
-	call draw_dot
-    brn isr_end
-
-testing5: 
-   MOV  R4, R27   ;y coordin
-   MOV  R5, R28   ;x coordin
-
-	mov r6, 0x1c
     call draw_dot
 	call pause
 	mov r6, 0xff

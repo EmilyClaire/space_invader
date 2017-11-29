@@ -109,7 +109,7 @@ clear_row:
 
 col:		ADD R7, 0x01
 			MOV R10, END_ROW
-			CMP R7, END_COL
+			CMP R7, R27
 			BREQ DONE
 			
 			CMP R11, 0x01
