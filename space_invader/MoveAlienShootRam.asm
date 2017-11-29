@@ -409,18 +409,25 @@ end_move_bullet:
 ;							Collision 
 ;---------------------------------------------------------------------
 collision_player:
-				MOV R7, PLAYER_X_LOC
-				MOV R8, END_COL
+				MOV R3, 0x02
 				MOV R9, R8
 				LD R22, (R24)
 				CMP R9, R22
-				BREQ lose
+				BRNE end_collision_player
 
+
+				MOV R7, PLAYER_X_LOC
+				MOV R8, END_COL
+test_player:
 				LD R9, (R7)
 				LD R22, (R25)
 				CMP R9, R22
 				BREQ lose
+				ADD R7, 0x01
+				SUB R3, 0x01
+				BRNE test_player
 
+end_collision_player:
 				ret
 				
 
