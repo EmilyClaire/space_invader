@@ -381,7 +381,12 @@ end_reset_bullets:
 ;---------------------------------------------------------------------
 move_bullet:	
 
-hit_player:
+hit_player:		MOV R7, PLAYER_X_LOC
+				MOV R8, END_COL
+
+				call collision
+
+
 hit_ship:
 				call clear_bullet
 				LD R9, (R24)

@@ -277,7 +277,7 @@ s_right_int <= s_signal_y(0);
                                            A_DB => s_reset );
 
     my_db_L_INT : db_1shot_FSM 
-                                port map ( A    => s_left_int_3,
+                                port map ( A    => s_left_int,
                                            CLK  => s_clk,
                                            A_DB => s_l_int);
                                            
