@@ -22,11 +22,25 @@
 					; 0xE3 ; pink
 						;0xFC ; yellow
 					;0x1F aqua
+.EQU PLAYER_COLOR = 0xFF
 .equ SHIP_BULLET_COLOR = 0x03
-.equ SHIP_BULLET_RATE = 0x16
 .equ PLAYER_BULLET_COLOR = 0xFC
-.EQU INTERRUPT_ID  = 0x20
 
+.equ SHIP_BULLET_RATE = 0x12
+
+
+.EQU SHIP_X_LOC = 0x0C
+.EQU SHIP_Y_LOC = 0x0A
+.EQU SHIP_COLOR_LOC = 0x0B
+
+.EQU PLAYER_X_LOC = 0x10
+.EQU PLAYER_COLOR_LOC = 0x0F
+
+.EQU SHIP_BULLETS_LOC = 0x20
+.EQU PLAYER_BULLETS_LOC = 0x40
+.EQU BULLETS_END_LOC = 0x4A
+
+.EQU INTERRUPT_ID  = 0x20
 .equ SSEG_CNTR_ID = 0x60
 .equ SSEG_VAL_ID  = 0x80
 
@@ -39,26 +53,17 @@
 MOV R2, 0x81
 OUT R2, SSEG_CNTR_ID
 	MOV R16, 0x00	
-	MOV R12, 0xFF
-	MOV R13, 0xFF
-	MOV R14, 0xFF
-	MOV R15, 0xFF
     MOV R31, 0x02
-
 	MOV R30, SHIP_BULLET_RATE
-	MOV R21, 0xFF
-	MOV R22, 0xFF
-	MOV R23, 0xFF
-	MOV R24, 0xFF
-	MOV R25, 0xFF
-	MOV R26, 0xFF
-	MOV R9, 0xFF
-
+	MOV  R10, END_ROW_SHIP
+	MOV R11, 0x01   
+	MOV R3, 0x03
+	
 reset:
-	    CALL clear_row
 		MOV R8, END_ROW_PLAYER
 		MOV R7, END_COL
 		MOV R6, 0x00
+
 reset_loop:
 		MOV R4, R7
 		MOV R5, R8
@@ -69,354 +74,210 @@ reset_loop:
 		MOV R4, R7
 		MOV R5, R8
 		call draw_dot
+		MOV R8, END_ROW_PLAYER
 		SUB R7, 0x01
 		CMP R7, 0xFF
 		BRNE reset_loop
+
+		call reset_player
+		call reset_ship
+		call reset_bullets
 	
 		call pause
 
-   MOV  R27, END_COL
-   MOV  R28, 0x14
-	MOV R6, 0xFF
-	MOV R4, R27
-	MOV R5, R28
-	call draw_dot
+		call draw_player
+		call draw_ship
 
-   MOV  R7, 0x00
-   MOV  R8, 0x00 
-   MOV  R10, END_ROW_SHIP
-	MOV R11, 0x01
-	MOV R3, 0x03
-	
 start:
 
-	MOV R4, R7
-	MOV R5, R8
-	CALL draw_ship
-	ADD R8, R11
-	SUB R3, 0x01
-	BRNE start
+		brn done
+;---------------------------------------------------------------------
+;							Reset Player
+;
+;	Sets the player location to the middle of the bottom row
+;	does not draw the player
+;---------------------------------------------------------------------
 
-call pause
-MAIN:       
+reset_player:
+			MOV R9, 0x14
+			MOV R29, PLAYER_X_LOC
+			MOV R3, 0x03
 
-collision:
-			CMP R13, R7
-			BRNE collision2
-
-			MOV R29, R12
-			CMP R29, R8  ; check the front of the ship
-			BREQ win
-
-			ADD R29, R11
-			CMP R29, R8		; check the middle of the ship
-			BREQ win
-
-			ADD R29, R11
-			CMP R29, R8		; check the end of the ship
-			BREQ win
-
-collision2: CMP R15, R7
-			BRNE collision3
-
-			MOV R29, R14
-			CMP R29, R8  ; check the front of the ship
-			BREQ win2
-
-			ADD R29, R11
-			CMP R29, R8		; check the middle of the ship
-			BREQ win2
-
-			ADD R29, R11
-			CMP R29, R8		; check the end of the ship
-			BREQ win2
-collision3: 
-			CMP R27, R7
-			BRNE collision_end
-			
-			BRN lose
-			
-collision_end:
-
-main_ship:
-            MOV  R4, R7   ;y coordin
-			MOV  R5, R8   ;x coordin
-			call draw_ship  
-
-s_bullets_start:
-			SUB R30, 0x01
-			BRNE s_bullet_1
-			
+reset_player_loop:
+			ST R9, (R29)
 			ADD R9, 0x01
-
-			CMP R9, 0x00
-			BREQ start_bullet_1
-
-			CMP R9, 0x01
-			BREQ start_bullet_2
-
-			CMP R9, 0x02
-			BREQ start_bullet_3
-			
-			brn s_bullet_1
-
-start_bullet_1:
-			MOV R4, R22
-			MOV R5, R21
-			MOV R6, 0x00
-			call draw_dot
-			 
-			MOV R30, SHIP_BULLET_RATE
-			MOV R21, R8
-			SUB R21, R11
-
-			MOV R22, R7
-			ADD R22, 0x01
-			
-			MOV R6, SHIP_BULLET_COLOR
-			MOV R5, R21
-			MOV R4, R22
-			call draw_dot
-			
-			brn s_bullet_1
-
-
-start_bullet_2: 
-			MOV R4, R24
-			MOV R5, R23
-			MOV R6, 0x00
-			call draw_dot
-
-			MOV R30, SHIP_BULLET_RATE
-			MOV R23, R8
-			SUB R23, R11
-
-			MOV R24, R7
-			ADD R24, 0x01
-			
-			MOV R6, 0xe0 ;SHIP_BULLET_COLOR
-			MOV R5, R24
-			MOV R4, R24
-			call draw_dot
-			
-			brn s_bullet_1
-
-
-start_bullet_3: 
-			MOV R4, R26
-			MOV R5, R25
-			MOV R6, 0x00
-			call draw_dot
-
-			MOV R30, SHIP_BULLET_RATE
-			MOV R25, R8
-			SUB R25, R11
-
-			MOV R26, R7
-			ADD R26, 0x01
-			
-			MOV R6, 0x1C ;SHIP_BULLET_COLOR
-			MOV R5, R25
-			MOV R4, R26
-			call draw_dot
-			
-			MOV R9, 0xFF
-			brn s_bullet_1
-
-
-s_bullet_1: 
-
-			CMP R30, SHIP_BULLET_RATE
-			BRNE draw_s_bullet_1
-
-			CMP R9, 0x00
-			BREQ s_bullet_2
-
-draw_s_bullet_1:
-			MOV R4, R22
-			MOV R5, R21
-			MOV R6, 0x00
-			call draw_dot
-			
-			CMP R22, END_COL
-			BREQ clear_s_bullet_1
-
-			ADD R22, 0x01
-			MOV R4, R22
-			MOV R5, R21
-			MOV R6, SHIP_BULLET_COLOR
-			call draw_dot
-			brn s_bullet_2
-
-clear_s_bullet_1: MOV R21, 0xFF
-				brn s_bullet_2
-
-s_bullet_2:	
-			CMP R30, SHIP_BULLET_RATE
-			BRNE draw_s_bullet_2
-
-			CMP R9, 0x01
-			BREQ s_bullet_3
-
-draw_s_bullet_2:
-
-			MOV R4, R24
-			MOV R5, R23
-			MOV R6, 0x00
-			call draw_dot
-			
-			CMP R24, END_COL
-			BREQ clear_s_bullet_3
-
-			ADD R24, 0x01
-			MOV R4, R24
-			MOV R6, 0xE1;SHIP_BULLET_COLOR
-			call draw_dot
-			brn s_bullet_3
-
-clear_s_bullet_2: MOV R23, 0xFF
-				brn s_bullet_3
-
-s_bullet_3:
-			CMP R30, SHIP_BULLET_RATE
-			BRNE draw_s_bullet_3
-
-			CMP R9, 0xFF
-			BREQ p_bullet_1
-
-draw_s_bullet_3:
-
-			MOV R4, R26
-			MOV R5, R25
-			MOV R6, 0x00
-			call draw_dot
-			
-			CMP R26, END_COL
-			BREQ clear_s_bullet_3
-
-			ADD R26, 0x01
-			MOV R4, R26
-			MOV R6, 0x1C;SHIP_BULLET_COLOR
-			call draw_dot
-			brn p_bullet_1
-
-clear_s_bullet_3: MOV R25, 0xFF
-				brn p_bullet_1
-
-p_bullet_1:
-			MOV R4, R13
-			MOV R5, R12
-			MOV R6, 0x00
-			call draw_dot
-
-			SUB R13, 0x01
-			MOV R4, R13
-			MOV R6, PLAYER_BULLET_COLOR
-			call draw_dot
-			brn p_bullet_2
-
-clear_bullet_1: MOV R12, 0xFF
-
-p_bullet_2:
-			MOV R4, R15
-			MOV R5, R14
-			MOV R6, 0x00
-			call draw_dot
-
-			CMP R15, 0x00
-			BREQ clear_bullet_2
-
-			SUB R15, 0x01
-			MOV R5, R14
-			MOV R4, R15
-			MOV R6, PLAYER_BULLET_COLOR
-			call draw_dot
-		    brn main_pause
-
-clear_bullet_2:
-			MOV R14, 0xFF
-
-main_pause:	call pause2
-			
-
-ret_pause:	
-			SUB R10, 0x01
-			CMP R10, 0x00
-			BREQ col
-
-end_main:	
-			SUB R31, 0x01
-			BRNE MAIN
-			
-			MOV R31, 0x02
-			ADD R8, R11
-			BRN MAIN
-
-clear_row:
-   
-   CALL clear_square
-   SUB R8, 0x01
-   CMP R8, 0xFF
-   BRNE clear_row
-   RET
-
-col:		ADD R7, 0x01
-			MOV R10, END_ROW_SHIP
-			CMP R7, END_COL
-			BREQ DONE
-			
-			CMP R11, 0x01
-			BREQ set_neg
-	
-			MOV R11, 0x01
-			call clear_ship
-			MOV R8, 0x01
-			MOV R3, 0x03
-			BRN start
-
-set_neg:	MOV R11, 0xFF
-			CALL clear_ship
-			MOV R8, 0x27
-			MoV R3, 0x03
-			brn start
-
-clear_ship:
-			SUB R7, 0x01
-			MOV R3, 0x03
-			MOV R6, 0x00
-clear_loop: 
-			MOV R5, R8
-			MOV R4, R7
-			call draw_dot
-			ADD R8, R11
+			ADD R29, 0x01
 			SUB R3, 0x01
-			CMP R3, 0x03
-			BRNE clear_loop
-						
-			ADD R7, 0x01
+			BRNE reset_player_loop
+
 			ret
 
+
+;---------------------------------------------------------------------
+;							Draw Player
+;---------------------------------------------------------------------
+
+draw_player:
+			  	MOV R25, PLAYER_X_LOC
+				MOV R4,  END_COL
+				MOV R6, PLAYER_COLOR
+				MOV R3, 0x03
+
+draw_player_loop:
+				LD R5, (R25)
+				call draw_dot
+
+				ADD R25, 0x01
+				SUB R3, 0x01
+				BRNE draw_player_loop
+				
+				ret
+
+
+;---------------------------------------------------------------------
+;							Move Player
+;---------------------------------------------------------------------
+
+move_player:
+				call clear_player
+
+			  	MOV R25, PLAYER_X_LOC
+				MOV R4,  END_COL
+				MOV R6, PLAYER_COLOR
+				MOV R3, 0x03
+
+				LD R9, (R25)
+				CMP R12, 0x01
+				BRNE test_left_player
+
+test_right_player:
+				CMP R9, END_ROW_SHIP
+				BRNE move_player_loop
+				brn end_move_player
+
+test_left_player:
+				CMP R9, 0x00
+				BREQ end_move_player
+				
+move_player_loop:
+				LD R9, (R25)
+				ADD R9, R12
+				ST R9, (R25)
+				MOV R5, R9
+				call draw_dot
+
+				ADD R25, 0x01
+				SUB R3, 0x01
+				BRNE move_player_loop
+				
+end_move_player:
+				ret
+
+;---------------------------------------------------------------------
+;							Clear Player
+;---------------------------------------------------------------------
+
+clear_player: 
+				MOV R25, PLAYER_X_LOC
+				MOV R4, END_COL
+				MOV R6, 0x00
+
+				MOV R3, 0x03
+
+clear_player_loop:
+				LD R5, (R25)
+				call draw_dot
+
+				ADD R25, 0x01
+				SUB R3, 0x01
+				BRNE clear_player_loop
+				
+				ret
+
+;---------------------------------------------------------------------
+;							Draw Ship
+;---------------------------------------------------------------------
 draw_ship:
-			MOV R5, R8
-			MOV R4, R7
-			MOV R6, 0x00
+			  	MOV R24, SHIP_Y_LOC
+				MOV R25, SHIP_X_LOC
+				MOV R6, SHIP_COLOR
+				MOV R3, 0x03
+
+draw_ship_loop:
+				LD R4, (R24)
+				LD R5, (R25)
+				call draw_dot
+
+				ADD R25, 0x01
+				SUB R3, 0x01
+				BRNE draw_ship_loop
+				
+				ret
+
+;---------------------------------------------------------------------
+;							Clear Ship
+;---------------------------------------------------------------------
+
+clear_ship: 
+				MOV R24, SHIP_Y_LOC
+				MOV R25, SHIP_X_LOC
+				MOV R6, 0x00
+
+				MOV R3, 0x03
+
+clear_ship_loop:
+				LD R4, (R24)
+				LD R5, (R25)
+				call draw_dot
+
+				ADD R25, 0x01
+				SUB R3, 0x01
+				BRNE clear_ship_loop
+				
+				ret
+
+;---------------------------------------------------------------------
+;							Reset Ship
+;---------------------------------------------------------------------
+
+reset_ship: 
+				MOV R0, 0x00	
+				MOV R24, SHIP_X_LOC
+				ST R0, SHIP_Y_LOC
+				MOV R3, 0x03
+
+reset_ship_loop:
+				ST R0, (R24)
+				ADD R24, 0x01
+				ADD R0, 0x01
+				SUB R3, 0x01
+				BRNE reset_ship_loop
+				
+				ret
+
+;---------------------------------------------------------------------
+;							Reset Bullets
+;---------------------------------------------------------------------
+
+reset_bullets:  
+				MOV R0, 0xFF
+				MOV R24, SHIP_BULLETS_LOC
+
+reset_bullets_loop:
+				CMP R24, BULLETS_END_LOC
+				BREQ end_reset_bullets
+				
+				ST R0, (R24)
+				ADD R24, 0x01
+				BRN reset_bullets_loop
+				
+end_reset_bullets:
+				ret
 
 
-			CMP R11, 0xFF
-			BREQ draw_neg
-
-			SUB R5, 0x03
-			brn rest
-
-draw_neg:	ADD R5, 0x03
-
-rest:		call draw_dot
-
-			MOV R5, R8
-			MOV R4, R7
-			MOV R6, SHIP_COLOR
-			call draw_dot
-			ret
+;---------------------------------------------------------------------
+;							Draw Dot
+;---------------------------------------------------------------------
 
 draw_dot: 
         AND r5, 0x3F ; make sure top 2 bits cleared
@@ -427,8 +288,21 @@ dd_out: OUT r5, VGA_LADD ; write bot 8 address bits to register
         OUT r6, VGA_COLOR ; write data to frame buffer
         RET
 	   
-DONE:        BRN DONE                  ;ALL DONE, NO MORE INTERRUPTS!
 
+;---------------------------------------------------------------------
+;							Done
+;
+; 	Don't do anything anymore
+;---------------------------------------------------------------------
+
+DONE:        BRN DONE
+
+
+;---------------------------------------------------------------------
+;							Pause
+;
+;	a long pause
+;---------------------------------------------------------------------
 
 pause:	    	MOV     R17, OUTSIDE_FOR_COUNT  
 outside_for0: 	SUB     R17, 0x01
@@ -447,6 +321,13 @@ inside_for0:  	SUB     R19, 0x01
              	BRNE    outside_for0
 				ret
 
+;---------------------------------------------------------------------
+;							Pause2
+;
+;	a shorter pause
+;---------------------------------------------------------------------
+
+
 pause2:	    	MOV     R17, OUTSIDE_FOR_COUNT2  
 outside_for: 	SUB     R17, 0x01
 
@@ -464,73 +345,6 @@ inside_for:  	SUB     R19, 0x01
              	BRNE    outside_for
 				ret
 
-win:    call pause
-		MOV R8, END_ROW_PLAYER
-		MOV R7, END_COL
-		MOV R6, 0x1C ;GREEN SCREEN
-reset_loop2:
-		MOV R4, R7
-		MOV R5, R8
-		call draw_dot
-		SUB R8, 0x01
-		BRNE reset_loop2
-
-		MOV R4, R7
-		MOV R5, R8
-		call draw_dot
-		SUB R7, 0x01
-		CMP R7, 0xFF
-		BRNE reset_loop2
-	
-	    brn done
-win2:   call pause
-		MOV R8, END_ROW_PLAYER
-		MOV R7, END_COL
-		MOV R6, 0xFC ;YELLOW SCREEN
-reset_loop3:
-		MOV R4, R7
-		MOV R5, R8
-		call draw_dot
-		SUB R8, 0x01
-		BRNE reset_loop3
-
-		MOV R4, R7
-		MOV R5, R8
-		call draw_dot
-		SUB R7, 0x01
-		CMP R7, 0xFF
-		BRNE reset_loop3
-		brn done
-
-lose:     
-		call pause
-		MOV R8, END_ROW_PLAYER
-		MOV R7, END_COL
-		ADD R8, 0x01
-		MOV R6, 0xE0 ;RED SCREEN
-reset_loop4:
-		MOV R4, R7
-		MOV R5, R8
-		call draw_dot
-		SUB R8, 0x01
-		BRNE reset_loop4
-
-		MOV R4, R7
-		MOV R5, R8
-		call draw_dot
-		SUB R7, 0x01
-		CMP R7, 0xFF
-		BRNE reset_loop4
-
-		brn done
-
-clear_square:
-
-   MOV  R4, R27   ;y coordin
-   MOV  R5, R28   ;x coordin
-   MOV  R6, 0x00
-   CALL draw_dot   ;clears dot at the origin
-   RET
 
 ISR: 
 
@@ -616,33 +430,11 @@ animation:
 	  brn ISR_END
 
 moveLeft:
-	CMP R28, 0x00
-	BREQ ISR_END
-
-   CALL clear_square
-   
-   SUB  R28, 0x01  
-
-   MOV  R4, R27   ;y coordin
-   MOV  R5, R28   ;x coordin
-   MOV  R6, 0xFF
-   CALL draw_dot   ;draw red square at origin
-   brn ISR_END
+    MOV R12, 0xFF
+	brn ISR_END
 
 moveRight:
-	CMP R28, END_ROW_PLAYER
-	BREQ ISR_END
-
-   CALL clear_square
-
-   
-   ADD  R28, 0x01  
-
-
-   MOV  R4, R27   ;y coordin
-   MOV  R5, R28   ;x coordin
-   MOV  R6, 0xFF
-   CALL draw_dot   ;draw red square at origin
+	MOV R12, 0x01
    
 	brn ISR_END
 ISR_END:

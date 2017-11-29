@@ -11,7 +11,7 @@ R6 	- color value for draw dot
 R7 	- y temp value 
 R8 	- x temp value 
 
-R9 	- 
+R9 	- misc variable
 
 R10 - end of row place holder
 
@@ -33,8 +33,8 @@ R20 - in port for interrupt values
 R21 - 
 R22 -  
 R23 - 
-R24 - 
-R25 - 
+R24 - y register
+R25 - x register
 R26 - 
 
 R27 - 
