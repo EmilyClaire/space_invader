@@ -26,7 +26,7 @@
 .equ SHIP_BULLET_COLOR = 0x03
 .equ PLAYER_BULLET_COLOR = 0xFC
 
-.equ SHIP_BULLET_RATE = 0x12
+.equ SHIP_BULLET_RATE = 0x0B
 
 
 .EQU SHIP_X_LOC = 0x0C
@@ -63,6 +63,7 @@
 		MOV  R10, END_ROW_SHIP
 		MOV R11, 0x01   
 		MOV R3, 0x03
+		MOV R26, 0x00
 
 ;---------------------------------------------------------------------
 ;							Clearing the screen
@@ -117,11 +118,15 @@ start:
 		
 		MOV R10, END_ROW_SHIP
 		CALL down_ship
-		BRN start
+		BRN move_bullets
 
 move:
 		call move_ship
 		SUB R10, 0x01
+
+move_bullets:
+		call draw_ship_bullets
+
 		brn start
 
 ;---------------------------------------------------------------------
@@ -369,6 +374,126 @@ reset_bullets_loop:
 				
 end_reset_bullets:
 				ret
+
+
+;---------------------------------------------------------------------
+;							Move Bullet
+;---------------------------------------------------------------------
+move_bullet:	
+
+hit_player:
+hit_ship:
+				call clear_bullet
+				LD R9, (R24)
+				CMP R9, END_COL
+				BREQ move_remove_bullet
+
+				ADD R9, 0x01
+				ST R9, (R24) 
+				MOV R6, R13
+				call draw_bullet
+				brn end_move_bullet
+
+move_remove_bullet:
+				MOV R9, 0xFF
+				ST R9, (R24)
+				ST R9, (R25)
+end_move_bullet:
+				ret
+
+
+;---------------------------------------------------------------------
+;							Draw Bullet
+;---------------------------------------------------------------------
+draw_bullet:
+				MOV R6, R13
+				LD R4, (R24)
+				LD R5, (R25)
+				call draw_dot
+				ret
+
+;---------------------------------------------------------------------
+;							Clear Bullet
+;---------------------------------------------------------------------
+
+clear_bullet: 
+				;R0, 0xFF
+				MOV R6, 0x00
+
+				LD R4, (R24)
+				LD R5, (R25)
+				call draw_dot
+
+				;ST R0, (R24)
+				;ST R0, (R25)
+				ret
+
+
+;---------------------------------------------------------------------
+;							Draw Ship Bullets
+;---------------------------------------------------------------------
+
+draw_ship_bullets:
+				MOV R25, SHIP_BULLETS_LOC
+				MOV R13, SHIP_BULLET_COLOR
+				MOV R24, R25
+				ADD R24, 0x01
+
+				MOV R15, 0x00
+
+draw_ship_bullets_loop:
+				call move_bullet
+
+				ADD R25, 0x02
+				ADD R24, 0x02
+				ADD R15, 0x02
+				CMP R15, 0x0A
+				BRNE draw_ship_bullets_loop
+					
+draw_ship_bullets_check:
+				SUB R30, 0x01
+				BRNE draw_ship_bullets_end
+
+				MOV R30, SHIP_BULLET_RATE
+				call start_ship_bullet
+draw_ship_bullets_end:
+				ret
+
+
+;---------------------------------------------------------------------
+;							Start Ship Bullet
+;---------------------------------------------------------------------
+start_ship_bullet:
+				MOV R25, SHIP_BULLETS_LOC
+				ADD R25, R26
+
+				MOV R24, R25
+				ADD R24, 0x01
+
+				call clear_bullet
+
+start_ship_bullet_main:
+				MOV R9, SHIP_X_LOC
+				ADD R9, 0x01
+			    LD R8, (R9)
+				ST R8, (R25)
+
+				LD R7, SHIP_Y_LOC
+				ADD R7, 0x01
+				ST R7, (R24)
+				
+				MOV R13, SHIP_BULLET_COLOR
+				call draw_bullet
+
+				ADD R26, 0x02
+			
+				CMP R26, 0x0A
+				BRCC end_start_ship_bullet
+
+				MOV R26, 0x00
+end_start_ship_bullet:
+				ret
+
 
 
 ;---------------------------------------------------------------------
