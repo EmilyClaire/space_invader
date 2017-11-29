@@ -431,11 +431,15 @@ animation:
 
 moveLeft:
     MOV R12, 0xFF
+	call move_player
+
 	brn ISR_END
 
 moveRight:
 	MOV R12, 0x01
-   
+	
+	call move_player
+
 	brn ISR_END
 ISR_END:
 		RETIE

@@ -371,7 +371,7 @@ C5:  Raw line from source code.
 (0355)  CS-0x0AC  0x085A2         ||     breq testing0
 (0356)                            || 
 (0357)  CS-0x0AD  0x11401         ||    LSR R20
-(0358)  CS-0x0AE  0x0A708         ||    BRCS moveRight
+(0358)  CS-0x0AE  0x0A710         ||    BRCS moveRight
 (0359)                            || 
 (0360)  CS-0x0AF  0x11401         ||    LSR R20
 (0361)  CS-0x0B0  0x0A5E0         ||    BRCS shoot   
@@ -379,7 +379,7 @@ C5:  Raw line from source code.
 (0363)  CS-0x0B1  0x11401         ||    LSR R20  
 (0364)  CS-0x0B2  0x086FA         ||    BREQ moveLeft
 (0365)                            || 
-(0366)  CS-0x0B3  0x08718         ||    brn ISR_END
+(0366)  CS-0x0B3  0x08728         ||    brn ISR_END
 (0367)                            || 
 (0368)                     0x0B4  || testing0: 
 (0369)  CS-0x0B4  0x044D9         ||    MOV  R4, R27   ;y coordin
@@ -390,7 +390,7 @@ C5:  Raw line from source code.
 (0374)  CS-0x0B8  0x08489         || 	call pause
 (0375)  CS-0x0B9  0x366FF         || 	mov r6, 0xff
 (0376)  CS-0x0BA  0x08451         || 	call draw_dot
-(0377)  CS-0x0BB  0x08718         ||     brn isr_end
+(0377)  CS-0x0BB  0x08728         ||     brn isr_end
 (0378)                            || 
 (0379)                     0x0BC  || shoot: 
 (0380)                            ||    
@@ -443,23 +443,27 @@ C5:  Raw line from source code.
 (0427)  CS-0x0DB  0x084E9         ||       call pause2
 (0428)  CS-0x0DC  0x366FF         || 	  mov R6, 0xFF
 (0429)  CS-0x0DD  0x08451         ||       call draw_dot
-(0430)  CS-0x0DE  0x08718         || 	  brn ISR_END
+(0430)  CS-0x0DE  0x08728         || 	  brn ISR_END
 (0431)                            || 
 (0432)                     0x0DF  || moveLeft:
 (0433)  CS-0x0DF  0x36CFF         ||     MOV R12, 0xFF
-(0434)  CS-0x0E0  0x08718         || 	brn ISR_END
+(0434)  CS-0x0E0  0x08211         || 	call move_player
 (0435)                            || 
-(0436)                     0x0E1  || moveRight:
-(0437)  CS-0x0E1  0x36C01         || 	MOV R12, 0x01
-(0438)                            ||    
-(0439)  CS-0x0E2  0x08718         || 	brn ISR_END
-(0440)                     0x0E3  || ISR_END:
-(0441)  CS-0x0E3  0x1A003         || 		RETIE
+(0436)  CS-0x0E1  0x08728         || 	brn ISR_END
+(0437)                            || 
+(0438)                     0x0E2  || moveRight:
+(0439)  CS-0x0E2  0x36C01         || 	MOV R12, 0x01
+(0440)                            || 	
+(0441)  CS-0x0E3  0x08211         || 	call move_player
 (0442)                            || 
-(0443)                            || .CSEG
-(0444)                       1023  || .ORG 0x3FF
-(0445)  CS-0x3FF  0x08548  0x3FF  || VECTOR:      BRN ISR
+(0443)  CS-0x0E4  0x08728         || 	brn ISR_END
+(0444)                     0x0E5  || ISR_END:
+(0445)  CS-0x0E5  0x1A003         || 		RETIE
 (0446)                            || 
+(0447)                            || .CSEG
+(0448)                       1023  || .ORG 0x3FF
+(0449)  CS-0x3FF  0x08548  0x3FF  || VECTOR:      BRN ISR
+(0450)                            || 
 
 
 
@@ -495,13 +499,13 @@ END_MOVE_PLAYER 0x057   (0173)  ||  0156 0160
 END_RESET_BULLETS 0x089   (0274)  ||  0268 
 INSIDE_FOR     0x0A2   (0338)  ||  0339 
 INSIDE_FOR0    0x096   (0314)  ||  0315 
-ISR            0x0A9   (0349)  ||  0445 
-ISR_END        0x0E3   (0440)  ||  0366 0377 0430 0434 0439 
+ISR            0x0A9   (0349)  ||  0449 
+ISR_END        0x0E5   (0444)  ||  0366 0377 0430 0436 0443 
 MIDDLE_FOR     0x0A0   (0335)  ||  0342 
 MIDDLE_FOR0    0x094   (0311)  ||  0318 
 MOVELEFT       0x0DF   (0432)  ||  0364 
-MOVERIGHT      0x0E1   (0436)  ||  0358 
-MOVE_PLAYER    0x042   (0141)  ||  
+MOVERIGHT      0x0E2   (0438)  ||  0358 
+MOVE_PLAYER    0x042   (0141)  ||  0434 0441 
 MOVE_PLAYER_LOOP 0x04F   (0162)  ||  0155 0171 
 OUTSIDE_FOR    0x09E   (0332)  ||  0345 
 OUTSIDE_FOR0   0x092   (0308)  ||  0321 
@@ -521,7 +525,7 @@ START          0x02E   (0091)  ||
 TESTING0       0x0B4   (0368)  ||  0355 
 TEST_LEFT_PLAYER 0x04D   (0158)  ||  0151 
 TEST_RIGHT_PLAYER 0x04A   (0153)  ||  
-VECTOR         0x3FF   (0445)  ||  
+VECTOR         0x3FF   (0449)  ||  
 
 
 -- Directives: .BYTE
