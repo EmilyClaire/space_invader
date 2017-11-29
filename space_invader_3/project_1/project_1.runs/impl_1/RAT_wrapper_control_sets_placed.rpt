@@ -1,0 +1,93 @@
+Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2016.2 (win64) Build 1577090 Thu Jun  2 16:32:40 MDT 2016
+| Date         : Wed Nov 29 09:38:31 2017
+| Host         : DESKTOP-DHU5GO3 running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file RAT_wrapper_control_sets_placed.rpt
+| Design       : RAT_wrapper
+| Device       : xc7a35t
+----------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Flip-Flop Distribution
+3. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Number of unique control sets                            |    40 |
+| Unused register locations in slices containing registers |   140 |
++----------------------------------------------------------+-------+
+
+
+2. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              42 |           28 |
+| No           | No                    | Yes                    |              65 |           20 |
+| No           | Yes                   | No                     |             159 |           47 |
+| Yes          | No                    | No                     |              26 |            8 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |             128 |           49 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+3. Detailed Control Set Information
+-----------------------------------
+
++-------------------------------------------------+-----------------------------------------------------------------------+------------------------------------------------+------------------+----------------+
+|                   Clock Signal                  |                             Enable Signal                             |                Set/Reset Signal                | Slice Load Count | Bel Load Count |
++-------------------------------------------------+-----------------------------------------------------------------------+------------------------------------------------+------------------+----------------+
+|  my_db_L_INT/bounce_counter/s_l_int             |                                                                       | my_db_R_INT/bounce_counter/s_r_int             |                1 |              1 |
+|  my_db_L_INT/bounce_counter/s_l_int             |                                                                       | my_db_shoot/bounce_counter/s_int_port_reg[1]_P |                1 |              1 |
+|  my_db_L_INT/bounce_counter/s_l_int             |                                                                       | my_db_shoot/bounce_counter/s_int_port_reg[2]   |                1 |              1 |
+|  my_db_R_INT/bounce_counter/s_r_int             |                                                                       | my_db_shoot/bounce_counter/s_int_port_reg[1]_P |                1 |              1 |
+|  my_db_shoot/bounce_counter/s_int_port_reg[1]_P |                                                                       | my_db_R_INT/bounce_counter/s_r_int             |                1 |              1 |
+|  my_jstksteptop/x/clock_Div/CLK                 |                                                                       |                                                |                1 |              1 |
+|  my_jstksteptop/y/clock_Div/CLK                 |                                                                       |                                                |                1 |              1 |
+|  VGA/vga_clk/tmp_clkf                           |                                                                       | VGA/vga_out/H0                                 |                1 |              1 |
+|  VGA/vga_clk/tmp_clkf                           |                                                                       | VGA/vga_out/V0                                 |                1 |              1 |
+| ~joystick_input/PmodJSTK_Int/iSCLK              | my_jstksteptop/joystick_input/PmodJSTK_Int/SPI_Ctrl/SS_i_1_n_0        | RESET_IBUF                                     |                1 |              1 |
+|  CPU/my_prog_rom/OUT_FLAG_reg                   |                                                                       |                                                |                2 |              2 |
+|  my_sseg_dec_uni/my_clk/CLK                     |                                                                       |                                                |                2 |              2 |
+|  s_clk_BUFG                                     |                                                                       | my_db_reset/bounce_counter/AR[0]               |                2 |              2 |
+|  my_jstksteptop/x/clock_Div/CLK                 |                                                                       | RESET_IBUF                                     |                1 |              3 |
+|  my_jstksteptop/y/clock_Div/CLK                 |                                                                       | RESET_IBUF                                     |                1 |              3 |
+|  CLK_IBUF_BUFG                                  | CPU/my_prog_rom/r_vga_wa_reg[10][1]                                   |                                                |                1 |              5 |
+|  CLK_IBUF_BUFG                                  | CPU/my_prog_rom/r_vga_wa_reg[10][0]                                   |                                                |                2 |              6 |
+|  CLK_IBUF_BUFG                                  |                                                                       |                                                |                5 |              7 |
+|  CLK_IBUF_BUFG                                  | CPU/my_prog_rom/s_sseg_cntr_reg[0]_0[0]                               |                                                |                2 |              7 |
+|  s_clk_BUFG                                     | my_db_shoot/bounce_counter/s_count_inc                                | my_db_shoot/bounce_counter/s_count_rst         |                3 |              8 |
+|  CLK_IBUF_BUFG                                  | CPU/my_prog_rom/s_sseg_val_reg[0]                                     | CPU/my_prog_rom/s_sseg_val_reg[7]              |                1 |              8 |
+|  CLK_IBUF_BUFG                                  | CPU/my_prog_rom/E[0]                                                  |                                                |                3 |              8 |
+|  joystick_input/PmodJSTK_Int/iSCLK              | my_jstksteptop/joystick_input/PmodJSTK_Int/SPI_Int/rSR[7]_i_1_n_0     | RESET_IBUF                                     |                1 |              8 |
+|  s_clk_BUFG                                     | my_db_reset/bounce_counter/s_count_inc                                | my_db_reset/bounce_counter/s_count_rst         |                4 |              8 |
+|  s_clk_BUFG                                     | CPU/my_prog_rom/count_reg[7]_0[0]                                     | CPU/my_cu/SR[0]                                |                6 |              8 |
+|  s_clk_BUFG                                     | my_db_L_INT/bounce_counter/s_count_inc                                | my_db_L_INT/bounce_counter/s_count_rst         |                3 |              8 |
+|  s_clk_BUFG                                     | my_db_R_INT/bounce_counter/s_count_inc                                | my_db_R_INT/bounce_counter/s_count_rst         |                3 |              8 |
+|  VGA/vga_clk/tmp_clkf                           |                                                                       |                                                |                5 |             10 |
+|  VGA/vga_clk/tmp_clkf                           |                                                                       | VGA/vga_out/horizontal[9]_i_1_n_0              |                4 |             10 |
+|  s_clk_BUFG                                     | CPU/my_cu/E[0]                                                        | CPU/my_cu/SR[0]                                |                8 |             10 |
+|  s_clk_BUFG                                     | CPU/my_prog_rom/s_rf_wr                                               |                                                |                2 |             16 |
+| ~joystick_input/PmodJSTK_Int/iSCLK              |                                                                       | RESET_IBUF                                     |                6 |             16 |
+|  s_clk_BUFG                                     |                                                                       |                                                |               12 |             19 |
+| ~joystick_input/PmodJSTK_Int/iSCLK              | my_jstksteptop/joystick_input/PmodJSTK_Int/SPI_Ctrl/DOUT[39]_i_1_n_0  | RESET_IBUF                                     |                7 |             21 |
+|  CLK_IBUF_BUFG                                  |                                                                       | my_clk_div/tmp_clkf                            |                8 |             31 |
+|  CLK_IBUF_BUFG                                  |                                                                       | VGA/vga_clk/tmp_clkf_0                         |                8 |             31 |
+|  CLK_IBUF_BUFG                                  |                                                                       | my_sseg_dec_uni/my_clk/tmp_clk                 |                8 |             31 |
+| ~joystick_input/PmodJSTK_Int/iSCLK              | my_jstksteptop/joystick_input/PmodJSTK_Int/SPI_Ctrl/tmpSR[39]_i_1_n_0 | RESET_IBUF                                     |               12 |             40 |
+|  s_clk_BUFG                                     | CPU/my_cu/WE                                                          |                                                |               10 |             40 |
+|  CLK_IBUF_BUFG                                  |                                                                       | RESET_IBUF                                     |               22 |             90 |
++-------------------------------------------------+-----------------------------------------------------------------------+------------------------------------------------+------------------+----------------+
+
+

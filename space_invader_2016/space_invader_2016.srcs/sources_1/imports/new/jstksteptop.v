@@ -33,7 +33,8 @@ module jstksteptop(
     output [3:0] an,
     output [7:0] seg,
     output [3:0] signal_x,
-    output [3:0] signal_y
+    output [3:0] signal_y,
+    output [2:0] LEDS
     
     
     );
@@ -41,6 +42,7 @@ module jstksteptop(
     // wire to connect the joystick data bewtween the Joystick 
     // interface and the decoder
     wire [9:0] x_data_net, y_data_net;
+    //reg [2:0] LEDS;
     
     // wire to connect the direction from the decoder to the 
     // Servo controller
@@ -52,6 +54,7 @@ module jstksteptop(
     // to the seven segment display. Outputs the joystick 
     // data.
     PmodJSTK_Demo joystick_input(
+        .LED(LEDS),
         .CLK(clk),
         .RST(rst),
         .MISO(jstk_input_miso_2),

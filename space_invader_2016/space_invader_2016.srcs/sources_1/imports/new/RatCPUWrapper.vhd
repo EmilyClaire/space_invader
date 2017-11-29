@@ -14,8 +14,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity RAT_wrapper is
-    Port ( --LEDS     : out   STD_LOGIC_VECTOR (2 downto 0);
-           an     : out   STD_LOGIC_VECTOR (3 downto 0);
+    Port ( an     : out   STD_LOGIC_VECTOR (3 downto 0);
            seg    : out   STD_LOGIC_VECTOR (7 downto 0);
            --SWITCHES : in    STD_LOGIC_VECTOR (7 downto 0);
            RESET    : in    STD_LOGIC;
@@ -86,7 +85,7 @@ component jstksteptop
        jstk_input_sclk_3 : out std_logic;
        an : out std_logic_vector (3 downto 0);
        seg : out std_logic_vector (7 downto 0);
-       --LEDS : out std_logic_vector (2 downto 0);
+       LEDS : out std_logic_vector (2 downto 0);
        signal_x : out std_logic_vector (3 downto 0);
        signal_y : out std_logic_vector (3 downto 0));
  end component;
@@ -161,6 +160,10 @@ component jstksteptop
    signal s_r_int    : std_logic := '0';
    signal s_shoot_int : std_logic := '0';
    signal s_l_int    : std_logic := '0';
+   signal s_right_int    : std_logic := '0';
+   signal s_left_int    : std_logic := '0';
+   signal s_left_int_2    : std_logic := '0';
+   signal s_left_int_3    : std_logic := '0';
    signal s_posdata  :std_logic_vector (9 downto 0);
       signal r_vga_we   : std_logic;                       -- Write enable
    signal r_vga_wa   : std_logic_vector(10 downto 0);   -- The address to read from / write to  
@@ -174,6 +177,7 @@ component jstksteptop
    -- Register definitions for output devices ------------------------------------
    -- add signals for any added outputs
    signal r_LEDS        : std_logic_vector (7 downto 0);
+   signal s_pushbutton_shoot : std_logic_vector (2 downto 0);
    -------------------------------------------------------------------------------
 
 begin
@@ -253,9 +257,18 @@ begin
                                jstk_input_sclk_3 => SCLK,
                                --an => an,
                                --seg => seg,
-                               --LEDS => s_LEDS,
-                               signal_x => signal_x,
-                               signal_y => signal_y);
+                               LEDS => s_pushbutton_shoot,
+                               signal_x => s_signal_x,
+                               signal_y => s_signal_y);
+
+s_left_int <= s_signal_x(0);
+s_right_int <= s_signal_y(0);                  
+        
+
+
+
+
+                    
                          
                       
     my_db_reset : db_1shot_FSM 
@@ -264,17 +277,17 @@ begin
                                            A_DB => s_reset );
 
     my_db_L_INT : db_1shot_FSM 
-                                port map ( A    => L_INT,
+                                port map ( A    => s_left_int_3,
                                            CLK  => s_clk,
                                            A_DB => s_l_int);
                                            
                                            
     my_db_R_INT : db_1shot_FSM 
-                               port map ( A    => R_INT,
+                               port map ( A    => s_right_int,
                                           CLK  => s_clk,
                                           A_DB => s_r_int);
     my_db_shoot : db_1shot_FSM 
-                              port map ( A    => SHOOT_INT,
+                              port map ( A    => s_pushbutton_shoot(2),
                                          CLK  => s_clk,
                                          A_DB => s_shoot_int);
 
