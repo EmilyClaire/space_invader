@@ -98,17 +98,17 @@ begin
       rst_tb <= '0';     
       wait for 1000ns;
       shoot_int_tb <= '1';
-      wait for 10us;
+      wait for 510us;
       shoot_int_tb <= '0';
-      wait for 10us;
+      wait for 510us;
       r_int_tb <= '1';
-      wait for 10us;
+      wait for 510us;
       r_int_tb <= '0';
-      wait for 10us;
+      wait for 510us;
       l_int_tb <='1';
-      wait for 10us;
+      wait for 510us;
       l_int_tb <= '0';
-      wait for 10us;
+      wait for 510us;
       
 --      rst_tb <= '1';
 --      wait for 50ns;

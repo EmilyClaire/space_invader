@@ -329,24 +329,26 @@ begin
 --    end if;
 --end process;
 
+process (s_shoot_int, s_l_int, s_r_int)
+begin
+            if (s_r_int = '1') then
+                s_int_port <= x"01";
+            elsif (s_shoot_int = '1') then
+                s_int_port <= x"02";
+            elsif (rising_edge(s_l_int)) then
+                s_int_port <= x"04";
+            end if;
+            
+end process;
 
 
    -------------------------------------------------------------------------------
    -- MUX for selecting what input to read ---------------------------------------
    -- add conditions and connections for any added PORT IDs
    -------------------------------------------------------------------------------
-   inputs: process(s_port_id, s_r_int, s_shoot_int, s_l_int)
+   inputs: process(s_port_id, s_int_port)
    begin
       if (s_port_id  = INTERRUPT_ID) then
-            if (r_int = '1') then
-                s_int_port <= x"01";
-            elsif (shoot_int = '1') then
-                s_int_port <= x"02";
-            elsif (l_int = '1') then
-                s_int_port <= x"04";
-            else
-                s_int_port <= s_int_port;
-            end if;
             
           s_input_port <= s_int_port;
                           
@@ -374,7 +376,6 @@ begin
                 else
                    r_vga_we <= '0';
                 end if;
-
          if (s_load = '1') then
           
              --the register definition for the LEDS
@@ -390,13 +391,9 @@ begin
                    r_vga_wa(5 downto 0) <= s_output_port(5 downto 0);
             elsif (s_port_id = VGA_WRITE_ID) then
                    r_vga_wd <= s_output_port;
-            end if;  
-                
-                
+            end if;                  
            end if;
        end if;
-          
-        
         end process outputs;
    -------------------------------------------------------------------------------
 
