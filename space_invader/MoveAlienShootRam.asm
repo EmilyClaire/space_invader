@@ -89,6 +89,8 @@ reset_loop:
 		call draw_ship
 
 start:
+		call move_ship
+		call pause
 
 		brn done
 ;---------------------------------------------------------------------
@@ -193,6 +195,31 @@ clear_player_loop:
 				BRNE clear_player_loop
 				
 				ret
+
+
+
+
+;---------------------------------------------------------------------
+;							Move Ship
+;---------------------------------------------------------------------
+
+
+move_ship: 
+				call clear_ship
+				MOV R25, SHIP_X_LOC
+				MOV R3, 0x03
+
+move_ship_loop:
+				LD R9, (R25)
+				ADD R9, R11
+				ST R9, (25)
+				ADD R25, 0x01
+				SUB R3, 0x01
+				BRNE move_ship_loop
+
+				call draw_ship
+				ret
+
 
 ;---------------------------------------------------------------------
 ;							Draw Ship
