@@ -12,22 +12,8 @@ set_property webtalk.parent_dir {C:/Users/eclai/Desktop/cpe 233/space_invader/sp
 set_property parent.project_path {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.xpr} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
+set_property ip_output_repo {c:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.cache/ip} [current_project]
 set_property ip_cache_permissions {read write} [current_project]
-read_verilog -library xil_defaultlib {
-  {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/sources_1/imports/new/Binary_To_BCD.v}
-  {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/sources_1/imports/new/ClkDiv_5Hz.v}
-  {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/sources_1/imports/new/ClkDiv_66_67kHz.v}
-  {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/sources_1/imports/new/PmodJSTK.v}
-  {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/sources_1/imports/new/PmodJSTK_Demo.v}
-  {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/sources_1/imports/new/SPImode0.v}
-  {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/sources_1/imports/new/clock_div.v}
-  {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/sources_1/imports/new/jstk_data_decoder.v}
-  {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/sources_1/imports/new/jstksteptop.v}
-  {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/sources_1/imports/new/pmod_step_driver.v}
-  {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/sources_1/imports/new/pmod_step_interface.v}
-  {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/sources_1/imports/new/spiCtrl.v}
-  {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/sources_1/imports/new/ssdCtrl.v}
-}
 read_vhdl -library xil_defaultlib {
   {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/sources_1/imports/new/7_Seg.vhd}
   {C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader2/space_invader2.srcs/sources_1/imports/new/ALU.vhd}

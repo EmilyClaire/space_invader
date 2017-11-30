@@ -64,6 +64,7 @@
 		MOV R11, 0x01   
 		MOV R3, 0x03
 		MOV R26, 0x00
+		MOV R16, 0x00
 
 ;---------------------------------------------------------------------
 ;							Clearing the screen
@@ -524,6 +525,49 @@ end_start_ship_bullet:
 				ret
 
 
+;---------------------------------------------------------------------
+;						Start Player Bullet
+;---------------------------------------------------------------------
+start_player_bullet:
+				MOV R25, PLAYER_BULLETS_LOC
+				ADD R25, R16
+
+				MOV R24, R25
+				ADD R24, 0x01
+
+				call clear_bullet
+
+start_player_bullet_main:
+				MOV R9, PLAYER_X_LOC
+				ADD R9, 0x01
+			    LD R8, (R9)
+				ST R8, (R25)
+
+				MOV R7, END_COL
+				SUB R7, 0x01
+				ST R7, (R24)
+				
+				MOV R13, PLAYER_BULLET_COLOR
+				call draw_bullet
+
+				ADD R16, 0x02
+			
+animation:
+				MOV  R4, END_COL
+				MOV  R5, R8   
+
+				mov R6, 0xE0
+				call draw_dot
+				call pause2
+				mov R6, 0xFF
+				call draw_dot
+
+				CMP R16, 0x0A
+				BRNE end_start_player_bullet
+
+				MOV R16, 0x00
+end_start_player_bullet:
+				ret
 
 ;---------------------------------------------------------------------
 ;							Draw Dot
@@ -661,56 +705,8 @@ testing0:
     brn isr_end
 
 shoot: 
-   
-	CMP R16, 0x01
-	BREQ second_bullet
-
-	MOV R4, R13
-	MOV R5, R12
-	MOV R6, 0x00
-	call draw_dot
-
-   Mov R13, R27
-   SUB R13, 0x01
-
-   MOV R12, R28
-
-   MOV R4, R13
-   MOV R5, R12
-   MOV R6, PLAYER_BULLET_COLOR
-   call draw_dot
-
-   ADD R16, 0x01
-   
-   BRN animation
-
-second_bullet:		   
-	MOV R4, R15
-	MOV R5, R14
-	MOV R6, 0x00
-	call draw_dot
-
-	MOV R15, R27
-	SUB R15, 0x01
-
-	MOV R14, R28	
-
-   MOV R4, R15
-   MOV R5, R14
-   MOV R6, PLAYER_BULLET_COLOR
-   call draw_dot
-
-   SUB R16, 0x01
-
-animation:
-   MOV  R4, R27   ;y coordin
-   MOV  R5, R28   ;x coordin
-
-	  mov R6, 0xE0
-	  call draw_dot
-      call pause2
-	  mov R6, 0xFF
-      call draw_dot
+	
+	  call start_player_bullet	
 	  brn ISR_END
 
 moveLeft:

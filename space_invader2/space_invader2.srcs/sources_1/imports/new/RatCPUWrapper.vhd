@@ -74,21 +74,21 @@ architecture Behavioral of RAT_wrapper is
    end component RAT_CPU;
    
    
-component jstksteptop
- Port(
-       clk : in std_logic;
-       rst : in std_logic;
-       --sw_en : in std_logic_vector (1 downto 0);
-       sw : in std_logic;
-       jstk_input_ss_0 : out std_logic;
-       jstk_input_miso_2 : in std_logic;
-       jstk_input_sclk_3 : out std_logic;
-       an : out std_logic_vector (3 downto 0);
-       seg : out std_logic_vector (7 downto 0);
-       LEDS : out std_logic_vector (2 downto 0);
-       signal_x : out std_logic_vector (3 downto 0);
-       signal_y : out std_logic_vector (3 downto 0));
- end component;
+--component jstksteptop
+-- Port(
+--       clk : in std_logic;
+--       rst : in std_logic;
+--       --sw_en : in std_logic_vector (1 downto 0);
+--       sw : in std_logic;
+--       jstk_input_ss_0 : out std_logic;
+--       jstk_input_miso_2 : in std_logic;
+--       jstk_input_sclk_3 : out std_logic;
+--       an : out std_logic_vector (3 downto 0);
+--       seg : out std_logic_vector (7 downto 0);
+--       LEDS : out std_logic_vector (2 downto 0);
+--       signal_x : out std_logic_vector (3 downto 0);
+--       signal_y : out std_logic_vector (3 downto 0));
+-- end component;
    
    
    
@@ -246,30 +246,24 @@ begin
 --                        SEG => seg);
                         
                         
-  my_jstksteptop : jstksteptop
-                         port map(
-                               clk => CLK,
-                               rst => RESET,
-                               --sw_en =>,
-                               sw => SW,
-                               jstk_input_ss_0 => SS,
-                               jstk_input_miso_2 => MISO,
-                               jstk_input_sclk_3 => SCLK,
-                               --an => an,
-                               --seg => seg,
-                               LEDS => s_pushbutton_shoot,
-                               signal_x => s_signal_x,
-                               signal_y => s_signal_y);
+--  my_jstksteptop : jstksteptop
+--                         port map(
+--                               clk => CLK,
+--                               rst => RESET,
+--                               --sw_en =>,
+--                               sw => SW,
+--                               jstk_input_ss_0 => SS,
+--                               jstk_input_miso_2 => MISO,
+--                               jstk_input_sclk_3 => SCLK,
+--                               --an => an,
+--                               --seg => seg,
+--                               LEDS => s_pushbutton_shoot,
+--                               signal_x => s_signal_x,
+--                               signal_y => s_signal_y);
 
-s_left_int <= s_signal_x(0);
-s_right_int <= s_signal_y(0);                  
-        
-
-
-
-
-                    
-                         
+--s_left_int <= s_signal_x(0);
+--s_right_int <= s_signal_y(0);                  
+                                
                       
     my_db_reset : db_1shot_FSM 
                                 port map ( A    => RESET,
@@ -277,17 +271,17 @@ s_right_int <= s_signal_y(0);
                                            A_DB => s_reset );
 
     my_db_L_INT : db_1shot_FSM 
-                                port map ( A    => s_left_int_3,
+                                port map ( A    => l_int,
                                            CLK  => s_clk,
                                            A_DB => s_l_int);
                                            
                                            
     my_db_R_INT : db_1shot_FSM 
-                               port map ( A    => s_right_int,
+                               port map ( A    => r_int,
                                           CLK  => s_clk,
                                           A_DB => s_r_int);
     my_db_shoot : db_1shot_FSM 
-                              port map ( A    => s_pushbutton_shoot(2),
+                              port map ( A    => shoot_int,
                                          CLK  => s_clk,
                                          A_DB => s_shoot_int);
 
