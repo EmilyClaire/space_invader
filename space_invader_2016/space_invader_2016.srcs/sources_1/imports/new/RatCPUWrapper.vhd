@@ -34,6 +34,8 @@ entity RAT_wrapper is
            VGA_VS   : out std_logic;
            signal_x : out std_logic_vector (3 downto 0);
            signal_y : out std_logic_vector (3 downto 0));
+           --direction_x : out std_logic_vector (1 downto 0));
+           --direction_y : out std_logic_vector (1 downto 0));
 end RAT_wrapper;
 
 architecture Behavioral of RAT_wrapper is
@@ -87,7 +89,9 @@ component jstksteptop
        seg : out std_logic_vector (7 downto 0);
        LEDS : out std_logic_vector (2 downto 0);
        signal_x : out std_logic_vector (3 downto 0);
-       signal_y : out std_logic_vector (3 downto 0));
+       signal_y : out std_logic_vector (3 downto 0);
+       direction_x : out std_logic_vector (1 downto 0);
+       direction_y : out std_logic_vector (1 downto 0));
  end component;
    
    
@@ -172,7 +176,8 @@ component jstksteptop
    
    signal s_signal_x : std_logic_vector (3 downto 0);
    signal s_signal_y : std_logic_vector (3 downto 0);
-   
+   signal s_direction_y : std_logic_vector (1 downto 0);
+   signal s_direction_x : std_logic_vector (1 downto 0);
    
    -- Register definitions for output devices ------------------------------------
    -- add signals for any added outputs
@@ -259,15 +264,24 @@ begin
                                --seg => seg,
                                LEDS => s_pushbutton_shoot,
                                signal_x => s_signal_x,
-                               signal_y => s_signal_y);
+                               signal_y => s_signal_y,
+                               direction_x => s_direction_x,
+                               direction_y => s_direction_y);
 
-s_left_int <= s_signal_x(0);
-s_right_int <= s_signal_y(0);                  
+--s_left_int <= s_signal_x(0);
+--s_right_int <= s_signal_y(0);                  
         
-
-
-
-
+process(s_direction_y)
+begin
+if (s_direction_y ="01") then
+    s_left_int <= '1';
+elsif (s_direction_y ="10") then
+    s_right_int <= '1';
+else
+    s_left_int <= '0';
+    s_right_int <= '0';
+end if;
+end process;
                     
                          
                       

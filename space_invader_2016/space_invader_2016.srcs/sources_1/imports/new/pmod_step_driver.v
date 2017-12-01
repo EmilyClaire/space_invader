@@ -27,7 +27,8 @@ module pmod_step_driver(
     input [1:0]dir,
     input clk,
     //input en,
-    output reg [3:0] signal
+    output reg [3:0] signal,
+    output reg [1:0] direction
     );
     
     // local parameters that hold the values of
@@ -42,11 +43,12 @@ module pmod_step_driver(
     // register values to hold the values
     // of the present and next states. 
     reg [2:0] present_state, next_state;
-    
+
     // run when the present state, direction
     // or enable signals change.
     always @ (present_state, dir)
     begin
+        direction = dir;
         // Based on the present state
         // do something.
         case(present_state)
@@ -155,4 +157,6 @@ module pmod_step_driver(
         else
             signal = 4'b0000;
     end
+    
+    
 endmodule

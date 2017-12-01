@@ -34,6 +34,8 @@ module jstksteptop(
     output [7:0] seg,
     output [3:0] signal_x,
     output [3:0] signal_y,
+    output [1:0] direction_x,
+    output [1:0] direction_y,
     output [2:0] LEDS
     
     
@@ -84,7 +86,8 @@ module jstksteptop(
         .rst(rst),
         .direction(x_direction_net),
         //.en(sw_en[0]),
-        .signal_out(signal_x)
+        .signal_out(signal_x),
+        .dir(direction_x)
         );
     
     // Pmod step interface for the Y direction.
@@ -95,6 +98,7 @@ module jstksteptop(
         .rst(rst),
         .direction(y_direction_net),
         //.en(sw_en[1]),
-        .signal_out(signal_y)
+        .signal_out(signal_y),
+        .dir(direction_y)
         );      
 endmodule

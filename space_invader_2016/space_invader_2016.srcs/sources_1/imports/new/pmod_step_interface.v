@@ -28,7 +28,8 @@ module pmod_step_interface(
     input rst,
     input [1:0] direction,
     //input en,
-    output [3:0] signal_out
+    output [3:0] signal_out,
+    output [1:0] dir
     );
     
     // Wire to connect the clock signal 
@@ -52,7 +53,8 @@ module pmod_step_interface(
         .dir(direction),
         .clk(new_clk_net),
         //.en(en),
-        .signal(signal_out)
+        .signal(signal_out),
+        .direction(dir)
         );    
     
 endmodule

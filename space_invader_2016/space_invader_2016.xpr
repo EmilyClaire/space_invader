@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="14" Path="C:/Users/eclai/Desktop/cpe 233/space_invader/space_invader_2016/space_invader_2016.xpr">
+<Project Version="7" Minor="14" Path="C:/Users/Donald/Documents/space_invader/space_invader_2016/space_invader_2016.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="5ca20c75a25e43659d2381b8ff587cfa"/>
