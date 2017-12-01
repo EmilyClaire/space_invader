@@ -104,6 +104,7 @@ reset_loop:
 		call pause
 		call draw_player
 		call draw_ship
+		call pause
 
 
 ;---------------------------------------------------------------------
@@ -112,22 +113,20 @@ reset_loop:
 
 
 start:
-		CALL pause2
+		call draw_player_bullets
 
 		CMP R10, 0x00
 		BRNE move
 		
 		MOV R10, END_ROW_SHIP
 		CALL down_ship
-		BRN move_bullets
 
 move:
 		call move_ship
+		call draw_ship_bullets
 		SUB R10, 0x01
 
-move_bullets:
-		call draw_ship_bullets
-
+		CALL pause2
 		brn start
 
 ;---------------------------------------------------------------------
@@ -382,18 +381,21 @@ end_reset_bullets:
 ;---------------------------------------------------------------------
 move_bullet:	
 
+hit_ship:		call collision_ship
+
 hit_player:		
 
 				call collision_player
 
-
-hit_ship:
 				call clear_bullet
 				LD R9, (R24)
 				CMP R9, END_COL
 				BREQ move_remove_bullet
 
-				ADD R9, 0x01
+				CMP R9, 0x00
+				BREQ move_remove_bullet
+
+				ADD R9, R21
 				ST R9, (R24) 
 				MOV R6, R13
 				call draw_bullet
@@ -407,7 +409,7 @@ end_move_bullet:
 				ret
 
 ;---------------------------------------------------------------------
-;							Collision 
+;							Collision Player
 ;---------------------------------------------------------------------
 collision_player:
 				MOV R7, PLAYER_X_LOC
@@ -429,6 +431,30 @@ test_player:
 end_collision_player:
 				ret
 				
+;---------------------------------------------------------------------
+;							Collision Ship
+;---------------------------------------------------------------------
+collision_Ship:
+				MOV R7, SHIP_X_LOC
+				MOV R8, SHIP_Y_LOC
+				MOV R3, 0x03
+				LD R9, (R8)
+				LD R22, (R24)
+				CMP R9, R22
+				BRNE end_collision_ship
+test_ship:
+				LD R9, (R7)
+				LD R22, (R25)
+				CMP R9, R22
+				BREQ win
+				ADD R7, 0x01
+				SUB R3, 0x01
+				BRNE test_ship
+
+end_collision_ship:
+				ret
+				
+
 
 
 
@@ -468,7 +494,7 @@ draw_ship_bullets:
 				MOV R13, SHIP_BULLET_COLOR
 				MOV R24, R25
 				ADD R24, 0x01
-
+				MOV R21, 0x01
 				MOV R15, 0x00
 
 draw_ship_bullets_loop:
@@ -488,6 +514,31 @@ draw_ship_bullets_check:
 				call start_ship_bullet
 draw_ship_bullets_end:
 				ret
+
+;---------------------------------------------------------------------
+;							Draw Player Bullets
+;---------------------------------------------------------------------
+
+draw_player_bullets:
+				MOV R25, PLAYER_BULLETS_LOC
+				MOV R13, PLAYER_BULLET_COLOR
+				MOV R24, R25
+				ADD R24, 0x01
+				MOV R21, 0xff
+				MOV R15, 0x00
+
+draw_player_bullets_loop:
+				call move_bullet
+
+				ADD R25, 0x02
+				ADD R24, 0x02
+				ADD R15, 0x02
+				CMP R15, 0x0A
+				BRNE draw_player_bullets_loop
+					
+draw_player_bullets_end:
+				ret
+
 
 
 ;---------------------------------------------------------------------
@@ -590,6 +641,34 @@ dd_out: OUT r5, VGA_LADD ; write bot 8 address bits to register
 ;---------------------------------------------------------------------
 
 DONE:        BRN DONE
+
+
+;---------------------------------------------------------------------
+;							Win
+;
+; 	Turn the screen Green
+;---------------------------------------------------------------------
+
+win:    call pause
+		MOV R8, 0x27
+		MOV R7, END_COL
+		MOV R6, 0x1C ;GREEN SCREEN
+win_loop:
+		MOV R4, R7
+		MOV R5, R8
+		call draw_dot
+		SUB R8, 0x01
+		BRNE win_loop
+
+		MOV R4, R7
+		MOV R5, R8
+		call draw_dot
+		SUB R7, 0x01
+		CMP R7, 0xFF
+		BRNE win_loop
+	
+	    brn done
+
 
 ;---------------------------------------------------------------------
 ;							Lose

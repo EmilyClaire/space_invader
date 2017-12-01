@@ -11,7 +11,7 @@ R6 	- color value for draw dot
 R7 	- y temp value 
 R8 	- x temp value 
 
-R9 	- 
+R9 	- ship bullets
 
 R10 - end of row place holder
 
@@ -40,5 +40,5 @@ R26 - 3 ship bullet y
 R27 - y temp value player draw dot
 R28 - x temp value player draw dot
 R29 - Comparision for collision
-R30 - 
-R31 - 
+R30 - Ship bullet rate
+R31 - Ship Counter
